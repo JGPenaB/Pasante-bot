@@ -1,4 +1,5 @@
 const Discord = require('discord.io');
+const dotenv = require('dotenv').config();
 const logger = require('winston');
 const https = require('https');
 const PNGImage = require('pngjs-image');

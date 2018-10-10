@@ -1,14 +1,15 @@
 {
   "name": "Pasante",
   "version": "1.0.0",
-  "description": "Bot para hacer estupideces",
+  "description": "Discord para hacer estupideces",
   "main": "bot.js",
   "author": "Autz64",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node main/bot.js"
   },
   "dependencies": {
     "discord.io": "github:woor/discord.io#gateway_v6",
+    "dotenv": "^6.1.0",
     "image-data-uri": "^2.0.0",
     "pg": "^7.4.3",
     "pngjs-image": "^0.11.7",
