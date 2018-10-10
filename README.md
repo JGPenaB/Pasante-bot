@@ -17,6 +17,13 @@
 # <div align="center">Instalación</div> 
 
 * Requiere Node.js >= 8.9
+
+Para instalar las dependencias, usa el siguiente comando en la terminal:
+
+```
+npm install
+```
+
 Para ejecutarlo, se usa el siguiente comando en la terminal:
 
 ```
