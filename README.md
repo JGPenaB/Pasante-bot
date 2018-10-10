@@ -1,5 +1,5 @@
 # <div align="center">Pasante bot</div> 
-<div align="center">­Peque¤o bot para Discord!</div>
+<div align="center">Â¡PequeÃ±o bot para Discord!</div><br>
 
 <div align="center">
 
@@ -10,14 +10,13 @@
 
 --------
 
-<p style="text-align:justify;">Es un bot para el server Web Development Vzla. Naci¢ con la funci¢n de consultar criptomonedas, pero se incluyeron otras funciones igual de £tiles.</p>
+<p style="text-align:justify;">Es un bot para el server Web Development Vzla. NaciÂ¢ con la funciÂ¢n de consultar criptomonedas, pero se incluyeron otras funciones igual de Â£tiles.</p>
 
 ----------
 
-# <div align="center">Instalaci¢n</div> 
+# <div align="center">InstalaciÃ³n</div> 
 
 * Requiere Node.js >= 8.9
-
 Para ejecutarlo, se usa el siguiente comando en la terminal:
 
 ```
