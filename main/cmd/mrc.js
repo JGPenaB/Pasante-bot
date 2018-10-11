@@ -5,7 +5,7 @@ function def(cmd, users, bot, channelID, evt){
 		switch(Math.floor(Math.random()*9)+1){
 					
 			case 1:
-				marico="¡**"+users[ind]+"** es ROLO'E MARICO!";
+				marico="¡**"+users[ind]+"** es ***ROLO'E MARICO!***";
 			break;
 					
 			case 2:
@@ -13,7 +13,7 @@ function def(cmd, users, bot, channelID, evt){
 			break;
 					
 			case 3:
-				marico="¿Sabían que a **"+users[ind]+"** le gusta los hombres?";
+				marico="¿Sabían que a **"+users[ind]+"** le gustan los hombres?";
 			break;
 					
 			case 4:
@@ -38,6 +38,10 @@ function def(cmd, users, bot, channelID, evt){
 
 			case 9:
 				marico="**"+users[ind]+"** piaso e puta.";
+			break;
+
+			case 10:
+				marico="**"+users[ind]+"** muchacho marico.";
 			break;
 		}
 				
