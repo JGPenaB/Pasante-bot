@@ -1,8 +1,8 @@
 function def(cmd, users, bot, channelID, evt){
 	// Funcion para mostrar la fecha correcamente
-	
+
 	function dateFormat(d) {
-		return d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+		return d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
 	}
  
 	let dateNow = new Date();
@@ -23,11 +23,11 @@ function def(cmd, users, bot, channelID, evt){
 	dateUTC.setTime(dateUTC.getTime() + seconds);
  
 	let timeZone = "TimeZone => " + tz;
-	let fechaUTC_timeZone = "Fecha UTC+TimeZone => " + dateFormat(dateUTC);
+	let fechaUTC_timeZone = "La fecha y hora actuales en Venezuela son => " + dateFormat(dateUTC);
 
 	bot.sendMessage({
         to: channelID,
-        message: `${fechaActual}\n${fechaUTC}\n${timeZone}\n${fechaUTC_timeZone}`
+        message: `${fechaUTC_timeZone}`
     });
 };
 
