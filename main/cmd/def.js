@@ -36,6 +36,8 @@ function def(cmd, users, bot, channelID, evt){
 											extract = exjsondata.query.pages[k].extract.toString();
 										}
 										
+										if(extract.length > 700){extract=extract.substring(0,700)+"...";}
+										
 										bot.sendMessage({
 											to: channelID,
 											message: 'Mano, esto fue lo primero que me apareció en el gugul:',
