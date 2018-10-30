@@ -1,4 +1,8 @@
 function def(cmd, users, bot, channelID, evt) {
+  bot.sendMessage({
+    to: channelID,
+    message: `Se activo el autodolar, se imprimira el precio cada 20 minutos`
+  });
   setInterval(function() {
     // Funcion para mostrar la fecha correcamente
     function dateFormat(d) {
