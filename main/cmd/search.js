@@ -5,7 +5,7 @@ var request = require("request");
 // AIzaSyDXRDiDFiVs4kX-O3SZijMmZ6CriEWrbN0
 // AIzaSyAeQz6NFOKJB53Z8LqCXp5x0OxAp36FD14
 
-function def(cmd) {
+function def(cmd, users, bot, channelID, evt) {
   const query = cmd.substring(8);
   // const query = "MiaKhalifa";
   const key = "AIzaSyAeQz6NFOKJB53Z8LqCXp5x0OxAp36FD14";
