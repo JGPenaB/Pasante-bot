@@ -35,6 +35,11 @@ function def(cmd, users, bot, channelID, evt) {
             link = item.pagemap.cse_image[0].src;
           }
           console.log(link);
+          bot.sendMessage({
+            to: channelID,
+            message:
+              `El link de la imagen para la busqueda: ${query} es: ${link}`
+          });
         }
       }
     }
