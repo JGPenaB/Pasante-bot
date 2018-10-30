@@ -1,6 +1,5 @@
 function def(cmd, users, bot, channelID, evt){
 	// Funcion para mostrar la fecha correcamente
-
 	function dateFormat(d) {
 		return d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
 	}
@@ -15,14 +14,10 @@ function def(cmd, users, bot, channelID, evt){
 	// Calculamos los segundos de la zona horaria
 	let seconds = (tz * 60 * 60) * 1000;
  
-	let fechaActual = "Fecha actual => " + dateFormat(dateNow);
-	let fechaUTC = "Fecha UTC => " + dateFormat(dateUTC);
- 
 	// Aplicamos la diferencia horaria añadiendo los segundos al timestamp de la
 	// fecha UTC
-	dateUTC.setTime(dateUTC.getTime() + seconds);
- 
-	let timeZone = "TimeZone => " + tz;
+  dateUTC.setTime(dateUTC.getTime() + seconds);
+  
 	let fechaUTC_timeZone = "La fecha y hora actuales en Venezuela son => " + dateFormat(dateUTC);
 
 	bot.sendMessage({

@@ -1,6 +1,44 @@
 function def(cmd, users, bot, channelID, evt) {
   setInterval(function() {
-    // autodolar();
+    // Funcion para mostrar la fecha correcamente
+    function dateFormat(d) {
+      return (
+        d.getDate() +
+        "/" +
+        (d.getMonth() + 1) +
+        "/" +
+        d.getFullYear() +
+        " " +
+        d.getHours() +
+        ":" +
+        d.getMinutes() +
+        ":" +
+        d.getSeconds()
+      );
+    }
+
+    let dateNow = new Date();
+    // cogemos la fecha utc
+    let dateUTC = new Date(
+      dateNow.getUTCFullYear(),
+      dateNow.getUTCMonth(),
+      dateNow.getUTCDate(),
+      dateNow.getUTCHours(),
+      dateNow.getUTCMinutes(),
+      dateNow.getUTCSeconds()
+    );
+
+    // Definimos la diferencia en horas del time zone
+    // Para la diferencia horaria de dos horas y media seria 2.5
+    let tz = -4;
+    // Calculamos los segundos de la zona horaria
+    let seconds = tz * 60 * 60 * 1000;
+
+    // Aplicamos la diferencia horaria añadiendo los segundos al timestamp de la
+    // fecha UTC
+    dateUTC.setTime(dateUTC.getTime() + seconds);
+
+    let fechaUTC_timeZone = "La fecha y hora actuales en Venezuela son => " + dateFormat(dateUTC);
 
     const https = require("https");
     https
@@ -35,7 +73,7 @@ function def(cmd, users, bot, channelID, evt) {
               bot.sendMessage({
                 to: channelID,
                 message:
-                  "Mano, tuve que usar VPN y todo para ver esta vaina:\n ```cs\n Tasa DolarToday:\n $1 => " +
+                  fechaUTC_timeZone + "\nMano, tuve que usar VPN y todo para ver esta vaina:\n ```cs\n Tasa DolarToday:\n $1 => " +
                   jsondata.USD.transferencia +
                   " VES\n €1 => " +
                   jsondata.EUR.transferencia +
@@ -55,7 +93,7 @@ function def(cmd, users, bot, channelID, evt) {
             "Lo siento mano, yo no me voy a arriesgar a que me quiten el internet solo por esa vaina."
         });
       });
-  }, 10000);
+  }, 1.2e6);
 }
 
 module.exports.def = def;
