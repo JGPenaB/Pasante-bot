@@ -24,7 +24,7 @@ function def(cmd, users, bot, channelID, evt) {
         if (body.error) {
           bot.sendMessage({
             to: channelID,
-            message: `Por culpa tuya se acabaron los querys`
+            message: `Chamo, estaba haciendo eso y la PC se colgó. Que chimbo.`
           });
         }
       }
@@ -45,10 +45,28 @@ function def(cmd, users, bot, channelID, evt) {
             link = item.pagemap.hcard[0].photo;
           }
           // console.log(link);
-          bot.sendMessage({
-            to: channelID,
-            message: `El link de la imagen para la busqueda: ${query} es: ${link}`
-          });
+		  
+		  if(link != "no image"){
+			bot.sendMessage({
+				to: channelID,
+				message: 'Una imagen',
+				embed:{
+					color: 6826080,	
+					footer: { 
+						text: 'Powered by Gugul.'
+					},
+					image: {
+						url: link
+					}
+					title: query,
+				}
+			}, function(error, response){console.log(error);});
+		  }else{
+			bot.sendMessage({
+				to: channelID,
+				message: `Mano, no conseguí la imagen. Estaba ocupado con la geva... Tú sabes.`
+			});
+		  }
         }
       }
     }

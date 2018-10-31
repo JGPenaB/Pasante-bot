@@ -42,7 +42,7 @@ function def(cmd, users, bot, channelID, evt) {
     // fecha UTC
     dateUTC.setTime(dateUTC.getTime() + seconds);
 
-    let fechaUTC_timeZone = "La fecha y hora actuales en Venezuela son => " + dateFormat(dateUTC);
+    let fechaUTC_timeZone = "Fecha y Hora en Venezuela: " + dateFormat(dateUTC);
 
     const https = require("https");
     https
@@ -77,7 +77,7 @@ function def(cmd, users, bot, channelID, evt) {
               bot.sendMessage({
                 to: channelID,
                 message:
-                  fechaUTC_timeZone + "\nMano, tuve que usar VPN y todo para ver esta vaina:\n ```cs\n Tasa DolarToday:\n $1 => " +
+                  fechaUTC_timeZone + "\nTasa de cambio actual:\n ```cs\n Tasa DolarToday:\n $1 => " +
                   jsondata.USD.transferencia +
                   " VES\n €1 => " +
                   jsondata.EUR.transferencia +
