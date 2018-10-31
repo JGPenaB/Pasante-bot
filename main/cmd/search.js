@@ -57,8 +57,7 @@ function def(cmd, users, bot, channelID, evt) {
 					},
 					image: {
 						url: link
-					},
-					title: query
+					}
 				}
 			}, function(error, response){console.log(error);});
 		  }else{
