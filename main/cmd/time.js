@@ -1,4 +1,4 @@
-function def(cmd, users, bot, channelID, evt){
+function def(cmd, user, users, bot, channelID, evt){
 	// Funcion para mostrar la fecha correcamente
 	function dateFormat(d) {
 		return d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();

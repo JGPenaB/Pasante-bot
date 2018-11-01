@@ -1,4 +1,4 @@
-function def(cmd, users, bot, channelID, evt){
+function def(cmd, user, users, bot, channelID, evt){
 	const https = require('https');
 	https.get('https://s3.amazonaws.com/dolartoday/data.json', (resp) => {
 		let data = '';
