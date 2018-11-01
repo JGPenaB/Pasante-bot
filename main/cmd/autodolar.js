@@ -1,4 +1,4 @@
-function def(cmd, users, bot, channelID, evt) {
+function def(cmd, user, users, bot, channelID, evt) {
   bot.sendMessage({
     to: channelID,
     message: `Se activo el autodolar, se imprimira el precio cada 20 minutos`

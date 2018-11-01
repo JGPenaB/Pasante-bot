@@ -1,4 +1,4 @@
-function def(cmd, users, bot, channelID, evt){
+function def(cmd, user, users, bot, channelID, evt){
 	const https = require('https');
 	let args = cmd.substring(1).split(' ');
     let mcmd = args[0];

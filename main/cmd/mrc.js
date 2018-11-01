@@ -1,4 +1,4 @@
-function def(cmd, users, bot, channelID, evt){
+function def(cmd, user, users, bot, channelID, evt){
 	
 	let marico = "";
 	let ind = Math.floor(Math.random()*(users.length));

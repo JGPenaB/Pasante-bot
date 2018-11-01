@@ -46,7 +46,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		//Carga un archivo que contiene la lógica del comando y ejecuta su función.
 		try{
 			let exec = require("./cmd/"+cmd+".js");
-			exec.def(message, users, bot, channelID, evt);
+			exec.def(message, user, users, bot, channelID, evt);
 		}catch(err){
 			console.log(err);
 			bot.sendMessage({
