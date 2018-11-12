@@ -51,7 +51,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 			console.log(err);
 			bot.sendMessage({
                 to: channelID,
-                message: '¿Perdón? No te entendí muy bien. Intenta esto:```cs\n !h ```'
+                message: '¿Perdón? No te entendí muy bien. Intenta esto:```cs\n !ayuda ```'
             });
 		}
 		
