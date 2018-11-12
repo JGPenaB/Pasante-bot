@@ -1,6 +1,6 @@
 function def(cmd, user, users, bot, channelID, evt){
 	const https = require('https');
-	https.get('https://en.wikipedia.org/w/api.php?action=opensearch&search='+cmd.substring(5)+'&limit=1&namespace=0&format=json', (resp) => {
+	https.get('https://en.wikipedia.org/w/api.php?action=opensearch&search='+cmd.substring(8)+'&limit=1&namespace=0&format=json', (resp) => {
 					let data = '';
 					let exdata = '';
 					let extract = '';
