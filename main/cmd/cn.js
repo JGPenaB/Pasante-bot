@@ -3,7 +3,7 @@ function def(cmd, user, users, bot, channelID, evt){
 	const https = require('https');
 	let message = cmd.substring(1).split(' ');
 	let modo = message[1].toUpperCase();
-	let cantidad = parseInt(message[2]);
+	let cantidad = parseFloat(message[2]);
 	let fin = "Aquí está la conversión:\n ```cs\n";
 	
 	if((modo == "D" || modo == "B") && !isNaN(cantidad)){
