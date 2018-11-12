@@ -1,6 +1,6 @@
 function def(cmd, user, users, bot, channelID, evt){
 	let args = cmd.substring(1).split(' ');
-	let command = args[0];
+	let command = args[1];
 	let response = "";
 	let content = "";
 	
