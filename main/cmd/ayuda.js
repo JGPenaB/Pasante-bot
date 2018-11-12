@@ -4,7 +4,7 @@ function def(cmd, user, users, bot, channelID, evt){
 	let response = "";
 	let content = "";
 	
-	if (command == 'undefined'){
+	if (command == null){
 		bot.sendMessage({
 			to: channelID,
 			message: 'Buenos días a todos, soy pasante en este server porque necesito la experiencia para el currículum. Cualquier duda:',
