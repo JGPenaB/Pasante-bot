@@ -41,7 +41,7 @@ function def(cmd, user, users, bot, channelID, evt){
 							message: "Tuve que usar una calculadora, porque esto es demasiada matemática para mí",
 							embed{
 								color: 3141900,	
-								title: ":currency_exchange:",
+								title: "Cambio de USD a VES",
 								fields: [
 									{
 										name: "Tasa DolarToday("+tasa_dolar+" VES):",
@@ -62,7 +62,7 @@ function def(cmd, user, users, bot, channelID, evt){
 							message: "Tuve que usar una calculadora, porque esto es demasiada matemática para mí",
 							embed{
 								color: 3141900,	
-								title: ":currency_exchange:",
+								title: "Cambio de VES a USD",
 								fields: [
 									{
 										name: "Tasa DolarToday("+tasa_dolar+" VES):",
