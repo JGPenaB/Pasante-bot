@@ -14,11 +14,11 @@ function def(cmd, user, users, bot, channelID, evt){
 				fields: [
 					{
 						name: "Lista de comandos:",
-						value: "cafe\ncn\ncr\ndef\ndolar\nh\nmrc\nsearch\ntime\n"
+						value: "cafe\nccambio\ncrypto\ndefine\ndolar\nayuda\nmarico\nsearch\ntime\n"
 					},
 					{
 						name: "¿Ayuda más específica?",
-						value: "Usa el comando **!h** seguido del nombre del comando que vayas a usar:\n\n!h dolar\n!h def\n..."
+						value: "Usa el comando **!ayuda** seguido del nombre del comando que vayas a usar:\n\n!ayuda dolar\n!ayuda def\n..."
 					}
 				],
 						
