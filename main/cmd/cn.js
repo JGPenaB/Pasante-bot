@@ -39,17 +39,17 @@ function def(cmd, user, users, bot, channelID, evt){
 						bot.sendMessage({
 							to: channelID,
 							message: "Tuve que usar una calculadora, porque esto es demasiada matemática para mí",
-							embed{
+							embed:{
 								color: 3141900,	
 								title: "Cambio de USD a VES",
 								fields: [
 									{
 										name: "Tasa DolarToday("+tasa_dolar+" VES):",
-										value: "$"+cantidad+" => "+(cantidad*tasa_dolar)+" VES"
+										value: "$**"+cantidad+"** => **"+(cantidad*tasa_dolar)+"** VES"
 									},
 									{
 										name: "Tasa AirTM("+tasa_air+" VES):",
-										value: "$"+cantidad+" => "+(cantidad*tasa_air)+" VES"
+										value: "$**"+cantidad+"** => **"+(cantidad*tasa_air)+"** VES"
 									}
 								],
 							}
@@ -60,17 +60,17 @@ function def(cmd, user, users, bot, channelID, evt){
 						bot.sendMessage({
 							to: channelID,
 							message: "Tuve que usar una calculadora, porque esto es demasiada matemática para mí",
-							embed{
+							embed:{
 								color: 3141900,	
 								title: "Cambio de VES a USD",
 								fields: [
 									{
 										name: "Tasa DolarToday("+tasa_dolar+" VES):",
-										value: cantidad+" VES => $"+(cantidad/tasa_dolar)
+										value: "**"+cantidad+"** VES => $**"+(cantidad/tasa_dolar)+"**"
 									},
 									{
 										name: "Tasa AirTM("+tasa_air+" VES):",
-										value: cantidad+" VES => $"+(cantidad/tasa_air)
+										value: "**"+cantidad+"** VES => $**"+(cantidad/tasa_air)+"**"
 									}
 								],
 							}

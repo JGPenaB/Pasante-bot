@@ -136,7 +136,7 @@ function def(cmd, user, users, bot, channelID, evt){
 							},
 							{
 								name: "Ejemplos:",
-								value: "Si quiero convertir $10 a Bolívares Soberanos (VES):\n!cn d 10\n\nSi quiero convertir 500 Bolívares Soberános a Dólar (USD):\n!cn b 500"
+								value: "Si quiero convertir $10 a Bolívares Soberanos (VES):\n!cn d 10\n\nSi quiero convertir 500 Bolívares Soberanos a Dólar (USD):\n!cn b 500"
 							}
 						],
 						
