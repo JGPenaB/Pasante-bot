@@ -36,15 +36,48 @@ function def(cmd, user, users, bot, channelID, evt){
 					let tasa_dolar = parseFloat(jsondata.USD.transferencia);
 					
 					if(modo == 'D'){
-						fin=fin+"#USD => VES\n\nTasa DolarToday("+tasa_dolar+" VES):\n $"+cantidad+" => "+(cantidad*tasa_dolar)+" VES\n\nTasa AirTM("+tasa_air+" VES):\n $"+cantidad+" => "+(cantidad*tasa_air)+" VES";
+						bot.sendMessage({
+							to: channelID,
+							message: "Tuve que usar una calculadora, porque esto es demasiada matemática para mí",
+							embed{
+								color: 3141900,	
+								title: ":currency_exchange:",
+								fields: [
+									{
+										name: "Tasa DolarToday("+tasa_dolar+" VES):",
+										value: "$"+cantidad+" => "+(cantidad*tasa_dolar)+" VES"
+									},
+									{
+										name: "Tasa AirTM("+tasa_air+" VES):",
+										value: "$"+cantidad+" => "+(cantidad*tasa_air)+" VES"
+									}
+								],
+							}
+						}, function(error, response){console.log(error);});
+						
 					}else if(modo == 'B'){
-						fin=fin+"#VES => USD\n\nTasa DolarToday("+tasa_dolar+" VES):\n "+cantidad+" VES => $"+(cantidad/tasa_dolar)+"\n\nTasa AirTM("+tasa_air+" VES):\n "+cantidad+" VES => $"+(cantidad/tasa_air);
+						
+						bot.sendMessage({
+							to: channelID,
+							message: "Tuve que usar una calculadora, porque esto es demasiada matemática para mí",
+							embed{
+								color: 3141900,	
+								title: ":currency_exchange:",
+								fields: [
+									{
+										name: "Tasa DolarToday("+tasa_dolar+" VES):",
+										value: cantidad+" VES => $"+(cantidad/tasa_dolar)
+									},
+									{
+										name: "Tasa AirTM("+tasa_air+" VES):",
+										value: cantidad+" VES => $"+(cantidad/tasa_air)
+									}
+								],
+							}
+						}, function(error, response){console.log(error);});
+						
+						//fin=fin+"#VES => USD\n\nTasa DolarToday("+tasa_dolar+" VES):\n "+cantidad+" VES => $"+(cantidad/tasa_dolar)+"\n\nTasa AirTM("+tasa_air+" VES):\n "+cantidad+" VES => $"+(cantidad/tasa_air);
 					}
-					
-					bot.sendMessage({
-						to: channelID,
-						message: fin+"```"
-					});
 					
 				});
 			});	

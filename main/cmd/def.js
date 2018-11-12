@@ -36,13 +36,13 @@ function def(cmd, user, users, bot, channelID, evt){
 											extract = exjsondata.query.pages[k].extract.toString();
 										}
 										
-										if(extract.length > 700){extract=extract.substring(0,700)+"...";}
+										if(extract.length > 1020){extract=extract.substring(0,1020)+"...";}
 										
 										bot.sendMessage({
 											to: channelID,
 											message: 'Mano, esto fue lo primero que me apareció en el gugul:',
 											embed:{
-												color: 6826080,	
+												color: 13030341,	
 												footer: { 
 													text: 'Powered by Wikimedia.'
 												},
@@ -67,7 +67,7 @@ function def(cmd, user, users, bot, channelID, evt){
 								to: channelID,
 								message: 'Mano, esto fue lo primero que me apareció en el gugul:',
 								embed:{
-									color: 6826080,	
+									color: 13030341,	
 									footer: { 
 										text: 'Powered by Wikimedia.'
 									},
