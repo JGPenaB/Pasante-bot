@@ -49,7 +49,7 @@ function def(cmd, user, users, bot, channelID, evt) {
       bot.sendMessage(
         {
           to: channelID,
-          message: "Tu maldito video:" + length + "\n " + link
+          message: "Tu maldito video: \n " + link
         }
       );
     }
