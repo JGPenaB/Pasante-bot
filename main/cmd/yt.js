@@ -45,5 +45,5 @@ function def(cmd, user, users, bot, channelID, evt) {
   });
 }
 
-def("!yt ali primera");
+// def("!yt ali primera");
 module.exports.def = def;
