@@ -1,6 +1,7 @@
 function def(cmd, user, users, bot, channelID, evt){
 	const https = require('https');
 	let pos = cmd.search(" ");
+	console.log(cmd.substring(pos+1));
 	https.get('https://en.wikipedia.org/w/api.php?action=opensearch&search='+cmd.substring(pos+1)+'&limit=1&namespace=0&format=json', (resp) => {
 					let data = '';
 					let exdata = '';
