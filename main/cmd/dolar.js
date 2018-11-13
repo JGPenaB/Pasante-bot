@@ -23,7 +23,7 @@ function def(cmd, user, users, bot, channelID, evt){
 				resp2.on('end', () => {
 					pos=data2.search('VES');
 					arr=data2.substring(pos,pos+70).split('\n')[0].split(',');
-					if(arr[4] == 'undefined'){arr[4]="OFFLINE";}			
+					if(arr[4] == null){arr[4]="OFFLINE";}			
 								
 					//\n ```cs\n Tasa DolarToday:\n $1 => "+jsondata.USD.transferencia+" VES\n €1 => "+jsondata.EUR.transferencia+" VES\n\n Tasa AirTM:\n $1 => "+arr[4]+" VES```
 					bot.sendMessage({
