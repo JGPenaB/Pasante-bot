@@ -42,7 +42,7 @@ function def(cmd, user, users, bot, channelID, evt) {
             footer: {
               text: "Powered by Lloutube."
             },
-            image: {
+            video: {
               url: link
             }
           }
