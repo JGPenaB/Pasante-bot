@@ -27,11 +27,10 @@ function def(cmd, user, users, bot, channelID, evt) {
     if (!err && res.statusCode == 200) {
       console.log("good");
       let $ = cheerio.load(body);
-      let all = $("a")
-      // console.log(all.length)
-      // let link = $("a")[49].attribs.href;
-      // let length = $("a").length;
-      // link = `https://www.youtube.com${link}`;
+      let all = $("a");
+      // all.each( (i, e) => {
+      //   console.log(i, e.attribs.href)
+      // })
 
       // console.log(link);
 
@@ -39,12 +38,12 @@ function def(cmd, user, users, bot, channelID, evt) {
       bot.sendMessage(
         {
           to: channelID,
-          message: all.length
+          message: all[70].attribs.href
         }
       );
     }
   });
 }
 
-// def("!yt ali primera");
+def("!yt ali primera");
 module.exports.def = def;
