@@ -27,18 +27,14 @@ function def(cmd, user, users, bot, channelID, evt) {
     if (!err && res.statusCode == 200) {
       console.log("good");
       let $ = cheerio.load(body);
-      let all = $("a");
-      // all.each( (i, e) => {
-      //   console.log(i, e.attribs.href)
-      // })
-
+      let link = $("a")[70].attribs.href;
       // console.log(link);
 
       // Si entra acá todo bien al mandar el msg a discord
       bot.sendMessage(
         {
           to: channelID,
-          message: all[70].attribs.href
+          message: `https://www.youtube.com${link}`
         }
       );
     }
