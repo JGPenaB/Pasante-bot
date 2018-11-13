@@ -30,7 +30,8 @@ function def(cmd, user, users, bot, channelID, evt) {
       // let all = $("a").each( (i, e) => {
       //   console.log(i, e.attribs.href);
       // })
-      let link = $("a")[42].attribs.href;
+      let link = $("a")[43].attribs.href;
+      let length = $("a").length;
       link = `https://www.youtube.com${link}`;
 
       // console.log(link);
@@ -39,7 +40,7 @@ function def(cmd, user, users, bot, channelID, evt) {
       bot.sendMessage(
         {
           to: channelID,
-          message: "Tu maldito video: \n " + link
+          message: "Tu maldito video:" + length + "\n " + link
         }
       );
     }
