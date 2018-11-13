@@ -77,7 +77,8 @@ function def(cmd, user, users, bot, channelID, evt) {
               bot.sendMessage({
                 to: channelID,
                 message:
-                  fechaUTC_timeZone + "\nTasa de cambio actual:\n ```cs\n Tasa DolarToday:\n $1 => " +
+                  fechaUTC_timeZone +
+                  "\nTasa de cambio actual:\n ```cs\n Tasa DolarToday:\n $1 => " +
                   jsondata.USD.transferencia +
                   " VES\n €1 => " +
                   jsondata.EUR.transferencia +

@@ -45,27 +45,32 @@ function def(cmd, user, users, bot, channelID, evt) {
             link = item.pagemap.hcard[0].photo;
           }
           // console.log(link);
-		  
-		  if(link != "no image"){
-			bot.sendMessage({
-				to: channelID,
-				message: 'Una imagen',
-				embed:{
-					color: 6826080,	
-					footer: { 
-						text: 'Powered by Gugul.'
-					},
-					image: {
-						url: link
-					}
-				}
-			}, function(error, response){console.log(error);});
-		  }else{
-			bot.sendMessage({
-				to: channelID,
-				message: `Mano, no conseguí la imagen. Estaba ocupado con la geva... Tú sabes.`
-			});
-		  }
+
+          if (link != "no image") {
+            bot.sendMessage(
+              {
+                to: channelID,
+                message: "Una imagen",
+                embed: {
+                  color: 6826080,
+                  footer: {
+                    text: "Powered by Gugul."
+                  },
+                  image: {
+                    url: link
+                  }
+                }
+              },
+              function(error, response) {
+                console.log(error);
+              }
+            );
+          } else {
+            bot.sendMessage({
+              to: channelID,
+              message: `Mano, no conseguí la imagen. Estaba ocupado con la geva... Tú sabes.`
+            });
+          }
         }
       }
     }
