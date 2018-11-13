@@ -30,7 +30,7 @@ function def(cmd, user, users, bot, channelID, evt) {
       // let all = $("a").each( (i, e) => {
       //   console.log(i, e.attribs.href);
       // })
-      let link = $("a")[46].attribs.href;
+      let link = $("a")[49].attribs.href;
       let length = $("a").length;
       link = `https://www.youtube.com${link}`;
 
