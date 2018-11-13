@@ -27,37 +27,24 @@ function def(cmd, user, users, bot, channelID, evt) {
     if (!err && res.statusCode == 200) {
       // console.log("good");
       let $ = cheerio.load(body);
-      let link = $("a")[39].attribs.href;
+      // let all = $("a").each( (i, e) => {
+      //   console.log(i, e.attribs.href);
+      // })
+      let link = $("a")[40].attribs.href;
       link = `https://www.youtube.com${link}`;
 
-      // console.log(`https://www.youtube.com${link}`);
+      // console.log(link);
 
       // Si entra acá todo bien al mandar el msg a discord
       bot.sendMessage(
         {
           to: channelID,
           message: link
-        },
-        function(err, res) {
-          // Si entra acá hubo un error para mandar el msg a discord
-          bot.sendMessage({
-            to: channelID,
-            message: "El Autz no sabe programar",
-            embed: {
-              color: 6826080,
-              footer: {
-                text: "Dificultades tecnicas brother"
-              },
-              image: {
-                url: "https://i.ytimg.com/vi/a3rmgGoibsE/maxresdefault.jpg"
-              }
-            }
-          });
         }
       );
     }
   });
 }
 
-// def();
+// def("!yt ali primera");
 module.exports.def = def;
