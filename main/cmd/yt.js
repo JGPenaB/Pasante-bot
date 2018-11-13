@@ -25,31 +25,21 @@ function def(cmd, user, users, bot, channelID, evt) {
     }
 
     if (!err && res.statusCode == 200) {
-      // console.log("good");
+      console.log("good");
       let $ = cheerio.load(body);
-      // let all = $("a").each( (i, e) => {
-      //   console.log(i, e.attribs.href);
-      // })
-      let link = $("a")[49].attribs.href;
-      let length = $("a").length;
-      link = `https://www.youtube.com${link}`;
+      let all = $("a")
+      // console.log(all.length)
+      // let link = $("a")[49].attribs.href;
+      // let length = $("a").length;
+      // link = `https://www.youtube.com${link}`;
 
       // console.log(link);
-
-      // $("a").each( (i, e) => {
-      //   bot.sendMessage(
-      //     {
-      //       to: channelID,
-      //       message: i + " " + e.attribs.href
-      //     }
-      //   );
-      // })
 
       // Si entra acá todo bien al mandar el msg a discord
       bot.sendMessage(
         {
           to: channelID,
-          message: "Tu maldito video: \n " + link
+          message: all.length
         }
       );
     }
