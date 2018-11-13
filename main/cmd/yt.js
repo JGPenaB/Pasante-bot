@@ -30,19 +30,28 @@ function def(cmd, user, users, bot, channelID, evt) {
       // let all = $("a").each( (i, e) => {
       //   console.log(i, e.attribs.href);
       // })
-      let link = $("a")[43].attribs.href;
-      let length = $("a").length;
-      link = `https://www.youtube.com${link}`;
+      // let link = $("a")[43].attribs.href;
+      // let length = $("a").length;
+      // link = `https://www.youtube.com${link}`;
 
       // console.log(link);
 
+      $("a").each( (i, e) => {
+        bot.sendMessage(
+          {
+            to: channelID,
+            message: i + " " + e
+          }
+        );
+      })
+
       // Si entra acá todo bien al mandar el msg a discord
-      bot.sendMessage(
-        {
-          to: channelID,
-          message: "Tu maldito video:" + length + "\n " + link
-        }
-      );
+      // bot.sendMessage(
+      //   {
+      //     to: channelID,
+      //     message: "Tu maldito video:" + length + "\n " + link
+      //   }
+      // );
     }
   });
 }
