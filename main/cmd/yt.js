@@ -36,16 +36,7 @@ function def(cmd, user, users, bot, channelID, evt) {
       bot.sendMessage(
         {
           to: channelID,
-          message: "Un video",
-          embed: {
-            color: 6826080,
-            footer: {
-              text: "Powered by Lloutube."
-            },
-            video: {
-              url: link
-            }
-          }
+          message: link
         },
         function(err, res) {
           // Si entra acá hubo un error para mandar el msg a discord
