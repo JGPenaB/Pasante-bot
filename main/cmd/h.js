@@ -355,7 +355,7 @@ function def(cmd, user, users, bot, channelID, evt){
 						fields: [
 							{
 								name: "Descripción:",
-								value: "Busca una imagen en Bing usando un query, y lo postea en el chat. **Safe search off, be careful**."
+								value: "Busca una imagen en Bing usando un query, y lo postea en el chat. **El SafeSearch está deshabilitado. Cuidado.**."
 							},
 							{
 								name: "Uso:",

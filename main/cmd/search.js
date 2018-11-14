@@ -5,7 +5,7 @@ function def(cmd, user, users, bot, channelID, evt) {
   const query = encodeURI(cmd.substring(8));
   // const query = encodeURI("Mia Khalifa");
   const url = `https://www.bing.com/images/search?q=${query}&safesearch=off`;
-
+  let finalmsg = "";
   // Si entra acá todo bien
   request(url, (err, res, body) => {
     if (!err && res.statusCode === 200) {
@@ -14,14 +14,32 @@ function def(cmd, user, users, bot, channelID, evt) {
 
       // Quita los parametros que recortan la img
       link = link.substr(0, 61);
-
+		
+	  switch(Math.floor(Math.random()*3)+1)
+	  {
+		case 1:
+			finalmsg = "Esta es la imagen que encontré.";
+		break;
+		
+		case 2:
+			finalmsg = "Esto fue lo primero que me salió en el gugul pirata.";
+		break;
+		
+		case 3:
+			finalmsg = "Aquí tiene la imagen que pidió.";
+		break;
+		
+		case 4:
+			finalmsg = "El primer resultado en Bing es este.";
+		break;
+	  }
       // Si entra acá todo bien al mandar el msg a discord
       bot.sendMessage(
         {
           to: channelID,
-          message: "Una imagen",
+          message: finalmsg,
           embed: {
-            color: 6826080,
+            color: 5396735,
             footer: {
               text: "Powered by Bing."
             },
@@ -32,18 +50,16 @@ function def(cmd, user, users, bot, channelID, evt) {
         }
       );
       // console.log(link);
-    }
-
-    if (err || res.statusCode != 200) {
+    }else if (err || res.statusCode != 200) {
       // Si entra acá hubo un error al hacer el request, posible mal URL
 
       bot.sendMessage({
         to: channelID,
-        message: "El Autz no sabe programar",
+        message: "",
         embed: {
-          color: 6826080,
+          color: 5396735,
           footer: {
-            text: "Dificultades tecnicas brother"
+            text: "Dificultades técnicas brother"
           },
           image: {
             url: "https://i.ytimg.com/vi/a3rmgGoibsE/maxresdefault.jpg"

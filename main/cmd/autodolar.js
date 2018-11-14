@@ -1,7 +1,7 @@
 function def(cmd, user, users, bot, channelID, evt) {
   bot.sendMessage({
     to: channelID,
-    message: `Se activo el autodolar, se imprimira el precio cada 20 minutos`
+    message: `Se activo el autodolar, se imprimirá la tasa de cambio cada 20 minutos en este canal.`
   });
   setInterval(function() {
     // Funcion para mostrar la fecha correcamente
@@ -42,7 +42,7 @@ function def(cmd, user, users, bot, channelID, evt) {
     // fecha UTC
     dateUTC.setTime(dateUTC.getTime() + seconds);
 
-    let fechaUTC_timeZone = "Fecha y Hora en Venezuela: " + dateFormat(dateUTC);
+    let fechaUTC_timeZone = dateFormat(dateUTC);
 
     const https = require("https");
     https
@@ -70,10 +70,34 @@ function def(cmd, user, users, bot, channelID, evt) {
                 .substring(pos, pos + 70)
                 .split("\n")[0]
                 .split(",");
-              if (arr[4] == "undefined") {
+              if (arr[4] == null) {
                 arr[4] = "OFFLINE";
               }
-
+              
+			  bot.sendMessage({
+				to: channelID,
+				embed:{    
+					color: 3141900,	
+					title: "Tasa de conversión actual",
+					fields: [
+						{
+							name: "Fecha y Hora Actual",
+							value: fechaUTC_timeZone
+						},
+						{
+							name: "Tasa DolarToday",
+							value: "$1 => **"+jsondata.USD.transferencia+"** VES\n€1 => **"+jsondata.EUR.transferencia+"** VES"
+						},
+						{
+							name: "Tasa AirTM",
+							value: "$1 => **"+arr[4]+"** VES"
+						}
+					],
+							
+				}
+		     }, function(error, response){console.log(error);});
+			  
+			  /*
               bot.sendMessage({
                 to: channelID,
                 message:
@@ -86,6 +110,7 @@ function def(cmd, user, users, bot, channelID, evt) {
                   arr[4] +
                   " VES```"
               });
+			  */
             });
           });
         });
