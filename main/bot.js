@@ -4,6 +4,7 @@ const logger = require("winston");
 const https = require("https");
 const PNGImage = require("pngjs-image");
 const imageDataURI = require("image-data-uri");
+const fs = require('fs');
 
 //Prefijo
 const pfix = "!";
@@ -35,7 +36,7 @@ bot.on("message", function(user, userID, channelID, message, evt) {
     let args = message.substring(1).split(" ");
     let cmd = args[0];
     let nd = bot.servers[bot.channels[channelID].guild_id].members;
-
+	
     //Extraer el username de los usuarios a un array
     let users = [];
     for (let key in nd) {
@@ -62,4 +63,38 @@ bot.on("message", function(user, userID, channelID, message, evt) {
       });
     }
   }
+});
+
+
+//Evento personalizado
+bot.on('any', function(event) {
+	//console.log(event);
+	//if(bot.servers[event.d.guild_id] != undefined){console.log(bot.servers[event.d.guild_id].roles);}
+	
+	//Si un usuario se une al server
+	if(event.t == "GUILD_MEMBER_ADD"){
+		
+		//event.d.user.{username, id, discriminator, avatar}
+		//event.d.roles
+		//event.d.nick
+		//event.d.mute
+		
+		bot.sendMessage({
+			to: bot.servers[event.d.guild_id].system_channel_id,
+			message: "Bienvenido <@!"+event.d.user.id+">, al server de **Web Development Venezuela**. Ve al canal <#502873450432692224> y saluda a la comunidad."
+		});
+		
+		for(let key in bot.servers[event.d.guild_id].roles){
+			if(bot.servers[event.d.guild_id].roles[key].name == "Member"){
+				
+				bot.addToRole({
+					serverID: event.d.guild_id,
+					userID: event.d.user.id,
+					roleID: key
+				}, function(error, response){console.log(error);});
+				break;
+			}
+		}
+		
+	}
 });
