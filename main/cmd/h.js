@@ -14,7 +14,7 @@ function def(cmd, user, users, bot, channelID, evt){
 				fields: [
 					{
 						name: "Lista de comandos:",
-						value: "cafe\ncambio\ncrypto\ndefine\ndolar\nayuda\nmarico\nsearch\ntime\n"
+						value: "cafe\ncambio\ncrypto\ndefine\ndolar\nayuda\nmarico\nsearch\ntime\nyt"
 					},
 					{
 						name: "¿Ayuda más específica?",
