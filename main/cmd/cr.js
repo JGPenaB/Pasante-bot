@@ -3,7 +3,7 @@ function def(cmd, user, users, bot, channelID, evt){
 	let args = cmd.substring(1).split(' ');
     let mcmd = args[0];
 	let other = args[1];
-	let top5 = "```cs\n";
+	let top5 = [];
 	
 	//Moneda específica
 	if (typeof other != 'undefined'){
@@ -33,7 +33,17 @@ function def(cmd, user, users, bot, channelID, evt){
 					if(lista[i].symbol == other.toUpperCase()){
 						bot.sendMessage({
 							to: channelID,
-							message: "Pana, al fín encontré info sobre esa moneda que me dijiste: \n ```cs\n #"+(i+1)+". "+lista[i].name+" \n"+lista[i].symbol+" => $"+lista[i].quotes.USD.price+"\n```"
+							message: "Pana, al fín encontré info sobre esa moneda que me dijiste:",
+							embed:{
+								color: 3141900,	
+								title: "#"+(i+1)+". "+lista[i].name,
+								fields: [
+									{
+										name: "1 "+lista[i].symbol+" equivale a:",
+										value: "$"+lista[i].quotes.USD.price
+									}
+								],
+							}
 						});
 						break;
 					}
@@ -74,12 +84,18 @@ function def(cmd, user, users, bot, channelID, evt){
 							
 				//concatenación de toda la info
 				for(let i=0; i<lista.length;i++){
-					top5+="#"+(i+1)+". "+lista[i].name+" \n"+lista[i].symbol+" => $"+lista[i].quotes.USD.price+"\n\n";
+					top5.push({name:"#"+(i+1)+". "+lista[i].name,value:"**$"+lista[i].quotes.USD.price+"**"});
+					//top5+="#"+(i+1)+". "+lista[i].name+" \n"+lista[i].symbol+" => $"+lista[i].quotes.USD.price+"\n\n";
 				}
 							
 				bot.sendMessage({
 				to: channelID,
-				message: 'Buenas, estuve investigando y la vaina está así: \n'+top5+"```"
+				message: "Buenas, estuve investigando y la vaina está así:",
+				embed:{
+					color: 3141900,	
+					title: "Top 10 criptomonedas",
+					fields:top5
+				}
 				});
 		});
 

@@ -101,6 +101,32 @@ function def(cmd, user, users, bot, channelID, evt){
 				}, function(error, response){console.log(error);});
 			break;
 			
+			case "YT":
+				bot.sendMessage({
+					to: channelID,
+					message: response,
+					embed:{    
+						color: 16749596,	
+						title: "!yt",
+						fields: [
+							{
+								name: "Descripción:",
+								value: "Busca un vídeo en Youtube y coloca el link."
+							},
+							{
+								name: "Uso:",
+								value: "!yt [query]"
+							},
+							{
+								name: "Ejemplos:",
+								value: "Buscar un vídeo de programación:\n!yt programacion"
+							}
+						],
+						
+					}
+				}, function(error, response){console.log(error);});
+			break;
+			
 			case "MRC":
 				bot.sendMessage({
 					to: channelID,

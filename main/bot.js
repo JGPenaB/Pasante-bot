@@ -11,7 +11,7 @@ const pfix = "!";
 
 const port = process.env.PORT || 8080;
 
-// Configure logger settings
+//Configuración del logger
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console(), {
   colorize: true
@@ -19,7 +19,7 @@ logger.add(new logger.transports.Console(), {
 
 logger.level = "debug";
 
-// Initialize Discord Bot
+//Inicializar el cliente de Discord (bot)
 var bot = new Discord.Client({
   token: process.env.TOKEN,
   autorun: true
@@ -51,7 +51,7 @@ bot.on("message", function(user, userID, channelID, message, evt) {
 
     //Carga un archivo que contiene la lógica del comando y ejecuta su función.
     try {
-      let exec = require("./cmd/" + cmd + ".js");
+      let exec = require("./cmd/" + cmd.toLowerCase() + ".js");
 	  //console.log(exec);
       exec.def(message, user, users, bot, channelID, evt);
     } catch (err) {
