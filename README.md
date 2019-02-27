@@ -10,7 +10,7 @@
 
 --------
 
-<p style="text-align:justify;">Es un bot para el server <a href="https://discord.gg/FZbvJvu">Web Development Vzla</a> . Nació con la función de consultar criptomonedas, pero se incluyeron otras funciones igual de útiles.</p>
+<p style="text-align:justify;">Es un bot para el server <a href="https://discord.gg/AvHvMz9">Web Development Vzla</a> . Nació con la función de consultar criptomonedas, pero se incluyeron otras funciones igual de útiles.</p>
 
 ----------
 
