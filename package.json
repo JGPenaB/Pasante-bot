@@ -1,9 +1,9 @@
 {
-  "name": "Pasante",
+  "name": "pasante-bot",
   "version": "1.0.0",
-  "description": "Discord para hacer estupideces",
+  "description": "Bot de Discord para hacer estupideces",
   "main": "bot.js",
-  "author": "Autz64",
+  "author": "Autz64, Darioxlz",
   "scripts": {
     "start": "node main/bot.js"
   },

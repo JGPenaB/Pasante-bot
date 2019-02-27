@@ -25,10 +25,18 @@ function def(cmd, user, users, bot, channelID, evt) {
     }
 
     if (!err && res.statusCode == 200) {
-      console.log("good");
       let $ = cheerio.load(body);
-      let link = $("a")[70].attribs.href;
-      // console.log(link);
+      let links = [];
+      const regexp = new RegExp(/^(https?\:\/\/)?(www\.youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)$/);
+
+      $("a").each((index, el) => {
+        links.push(el.attribs.href + "\n");
+      });
+
+      let link = links.find(el => {
+        let test = `https://www.youtube.com${el}`;
+        return regexp.test(test);
+      });
 
       // Si entra acá todo bien al mandar el msg a discord
       bot.sendMessage(
