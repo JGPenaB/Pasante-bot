@@ -30,7 +30,7 @@ function def(cmd, user, users, bot, channelID, evt) {
       const regexp = new RegExp(/^(https?\:\/\/)?(www\.youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)$/);
 
       $("a").each((index, el) => {
-        links.push(el.attribs.href + "\n");
+        links.push(el.attribs.href);
       });
 
       let link = links.find(el => {
