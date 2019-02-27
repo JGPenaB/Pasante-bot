@@ -84,7 +84,7 @@ function def(cmd, user, users, bot, channelID, evt){
 							
 				//concatenación de toda la info
 				for(let i=0; i<lista.length;i++){
-					top5.push({name:"#"+(i+1)+". "+lista[i].name,value:"**$"+lista[i].quotes.USD.price+"**"});
+					top5.push({name:"#"+(i+1)+". "+lista[i].name+" ("+lista[i].symbol+")",value:"$"+lista[i].quotes.USD.price});
 					//top5+="#"+(i+1)+". "+lista[i].name+" \n"+lista[i].symbol+" => $"+lista[i].quotes.USD.price+"\n\n";
 				}
 							
@@ -97,7 +97,7 @@ function def(cmd, user, users, bot, channelID, evt){
 					fields:top5
 				}
 				});
-		});
+			});
 
 		}).on("error", (err) => {
 			console.log("Error: " + err.message);

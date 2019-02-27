@@ -37,6 +37,9 @@ bot.on("message", function(user, userID, channelID, message, evt) {
     let cmd = args[0];
     let nd = bot.servers[bot.channels[channelID].guild_id].members;
 	
+	//Archivo que contiene los posibles comandos y los archivos a ejecutar.
+	let cmdlist = require("./cmd_list.js");
+	
     //Extraer el username de los usuarios a un array
     let users = [];
     for (let key in nd) {
@@ -49,13 +52,15 @@ bot.on("message", function(user, userID, channelID, message, evt) {
       }
     }
 
-    //Carga un archivo que contiene la lógica del comando y ejecuta su función.
-    try {
-      let exec = require("./cmd/" + cmd.toLowerCase() + ".js");
+	/*
+	 Executa un archivo en base al comando proporcionado. Si el comando existe como propiedad de la lista de comandos,
+	 llama al archivo que tiene como valor y ejecuta su función.
+	*/
+	if(cmdlist.binds.hasOwnProperty(cmd)){
+      let exec = require("./cmd/" + cmdlist.binds[cmd]);
 	  //console.log(exec);
       exec.def(message, user, users, bot, channelID, evt);
-    } catch (err) {
-      console.log(err);
+    } else {
       bot.sendMessage({
         to: channelID,
         message:
