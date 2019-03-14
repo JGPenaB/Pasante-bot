@@ -4,7 +4,14 @@ const cheerio = require("cheerio");
 function def(cmd, user, users, bot, channelID, evt) {
   const query = encodeURI(cmd.substring(8));
   // const query = encodeURI("Mia Khalifa");
-  const url = `https://www.bing.com/images/search?q=${query}&safesearch=off`;
+  
+  let url = `https://www.bing.com/images/search?q=${query}&safesearch=off`;
+  
+  //Si el comando fue ejecutado en un canal que no es NSFW
+  if(!bot.servers[evt.d.guild_id].channels[channelID].nsfw){
+	url = `https://www.bing.com/images/search?q=${query}`;
+  }
+  
   let finalmsg = "";
   // Si entra acá todo bien
   request(url, (err, res, body) => {
@@ -14,7 +21,7 @@ function def(cmd, user, users, bot, channelID, evt) {
 
       // Quita los parametros que recortan la img
       link = link.substr(0, 61);
-		
+	
 	  switch(Math.floor(Math.random()*3)+1)
 	  {
 		case 1:
@@ -33,6 +40,7 @@ function def(cmd, user, users, bot, channelID, evt) {
 			finalmsg = "El primer resultado en Bing es este.";
 		break;
 	  }
+	  
       // Si entra acá todo bien al mandar el msg a discord
       bot.sendMessage(
         {
@@ -47,8 +55,16 @@ function def(cmd, user, users, bot, channelID, evt) {
               url: link
             }
           }
-        }
-      );
+        }, function(error, response){
+				if(error){
+					console.log(error);
+					bot.sendMessage({
+						to: channelID,
+						message: "No pude encontrar la imagen que me pediste.",
+					});
+				}
+	   });
+	  
       // console.log(link);
     }else if (err || res.statusCode != 200) {
       // Si entra acá hubo un error al hacer el request, posible mal URL

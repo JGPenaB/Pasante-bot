@@ -1,21 +1,19 @@
+const fs = require('fs');
+const { createCanvas, loadImage } = require('canvas');
+
 function def(cmd, user, users, bot, channelID, evt){
 	/*
 	| Si quieren saber como manejar la API, revisen la documentación del canvas API de Firefox:
 	| https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
 	*/
-	let directory = './temp.png';
+	let directory = './main/temp/temp.png';
 	
-	const { createCanvas, loadImage } = require('canvas');
 	const canvas = createCanvas(400, 400);
 	const ctx = canvas.getContext('2d');
-	const fs = require('fs');
 	const out = fs.createWriteStream(directory);
 	const stream = canvas.createPNGStream();
 	
-	console.log(__dirname);
-	
 	let message = cmd.substring(cmd.search(" ")+1);
-	var text = ctx.measureText(message);
  
     //Fondo de la imagen
 	ctx.fillRect(0, 0, 400, 400)
