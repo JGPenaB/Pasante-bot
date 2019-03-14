@@ -54,7 +54,7 @@ function def(cmd, user, users, bot, channelID, evt) {
   return bot.sendMessage(
     {
       to: channelID,
-      message: `${answers[index - 1]}`
+      message: "`"+query+"`\n"+answers[index - 1]+", **"+user+"**."
     }
   );
 }
