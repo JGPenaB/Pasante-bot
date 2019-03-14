@@ -14,7 +14,7 @@ function def(cmd, user, users, bot, channelID, evt){
 				fields: [
 					{
 						name: "Lista de comandos:",
-						value: "cafe\ncambio\ncrypto\ndefine\ndolar\nayuda\nmarico\nsearch\ntime\nyt"
+						value: "cafe\ncambio\ncrypto\ndefine\ndolar\nayuda\nmarico\nsearch\ntime\nyt\n8ball"
 					},
 					{
 						name: "¿Ayuda más específica?",
@@ -115,7 +115,7 @@ function def(cmd, user, users, bot, channelID, evt){
 							},
 							{
 								name: "Uso:",
-								value: "!yt [query]"
+								value: "!yt {query}"
 							},
 							{
 								name: "Ejemplos:",
@@ -207,7 +207,7 @@ function def(cmd, user, users, bot, channelID, evt){
 							},
 							{
 								name: "Uso:",
-								value: "!cambio [B o D] [monto]"
+								value: "!cambio {B o D} {monto}"
 							},
 							{
 								name: "Ejemplos:",
@@ -233,7 +233,7 @@ function def(cmd, user, users, bot, channelID, evt){
 							},
 							{
 								name: "Uso:",
-								value: "!cambio [B o D] [monto]"
+								value: "!cambio {B o D} {monto}"
 							},
 							{
 								name: "Ejemplos:",
@@ -259,7 +259,7 @@ function def(cmd, user, users, bot, channelID, evt){
 							},
 							{
 								name: "Uso:",
-								value: "!define [palabra o frase]"
+								value: "!define {palabra o frase}"
 							},
 							{
 								name: "Ejemplos:",
@@ -285,7 +285,7 @@ function def(cmd, user, users, bot, channelID, evt){
 							},
 							{
 								name: "Uso:",
-								value: "!define [palabra o frase]"
+								value: "!define {palabra o frase}"
 							},
 							{
 								name: "Ejemplos:",
@@ -385,7 +385,7 @@ function def(cmd, user, users, bot, channelID, evt){
 							},
 							{
 								name: "Uso:",
-								value: "!search [query]"
+								value: "!search {query}"
 							},
 							{
 								name: "Ejemplos:",
@@ -412,6 +412,58 @@ function def(cmd, user, users, bot, channelID, evt){
 							{
 								name: "Uso:",
 								value: "!cafe"
+							}
+						],
+						
+					}
+				}, function(error, response){console.log(error);});
+			break;
+			
+			case "8BALL":
+				bot.sendMessage({
+					to: channelID,
+					message: response,
+					embed:{    
+						color: 16749596,	
+						title: "!8ball",
+						fields: [
+							{
+								name: "Descripción:",
+								value: "Te responde una pregunta que hagas."
+							},
+							{
+								name: "Uso:",
+								value: "!8ball {pregunta}"
+							},
+							{
+								name: "Ejemplos",
+								value: "!8ball ¿programar es fácil?"
+							}
+						],
+						
+					}
+				}, function(error, response){console.log(error);});
+			break;
+			
+			case "8B":
+				bot.sendMessage({
+					to: channelID,
+					message: response,
+					embed:{    
+						color: 16749596,	
+						title: "!8ball",
+						fields: [
+							{
+								name: "Descripción:",
+								value: "Te responde una pregunta que hagas."
+							},
+							{
+								name: "Uso:",
+								value: "!8ball {pregunta}"
+							},
+							{
+								name: "Ejemplos",
+								value: "!8ball ¿programar es fácil?"
 							}
 						],
 						

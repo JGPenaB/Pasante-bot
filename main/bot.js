@@ -4,7 +4,6 @@ const logger = require("winston");
 const https = require("https");
 const PNGImage = require("pngjs-image");
 const imageDataURI = require("image-data-uri");
-const fs = require('fs');
 
 //Prefijo
 const pfix = "!";

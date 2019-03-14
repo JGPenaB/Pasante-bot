@@ -1,15 +1,23 @@
 function def(cmd, user, users, bot, channelID, evt) {
-  const query = cmd.substring(4);
-
-  if (!query) {
+  let pos = cmd.search(" ");
+  const query = cmd.substring(pos+1);
+  
+  if (!query || pos==-1) {
     return bot.sendMessage({
       to: channelID,
-      message: "Querido usuario, lamento informarle que usted debe ingresar una pregunta para poder usar el comando !8b. Uselo de esta forma !8b {pregunta}",
+      message: "",
       embed: {
         color: 5396735,
-        footer: {
-          text: ""
-        },
+		fields: [
+			{
+				name: "Querido usuario",
+				value: "Lamento informarle que usted debe ingresar una pregunta para poder usar el comando !8ball."
+			},
+			{
+				name: "Uso",
+				value: "!8ball {pregunta}"
+			}
+	    ],
         image: {
           url: "https://www.bkconnection.com/system/refinery/blog/posts/thumbnails/000/003/323/post_detail/family-friendly-app-store.gif?1432824720"
         }
@@ -46,7 +54,7 @@ function def(cmd, user, users, bot, channelID, evt) {
   return bot.sendMessage(
     {
       to: channelID,
-      message: `Pregunta: ${query}\n\nRespuesta: ${answers[index - 1]}`
+      message: `${answers[index - 1]}`
     }
   );
 }
