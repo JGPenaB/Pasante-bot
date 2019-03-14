@@ -1,13 +1,20 @@
 function def(cmd, user, users, bot, channelID, evt) {
-  const query = encodeURI(cmd.substring(4));
+  const query = cmd.substring(4);
 
   if (!query) {
-    return bot.sendMessage(
-      {
-        to: channelID,
-        message: `No puedes mandar una pregunta vacia coño e tu madre`
+    return bot.sendMessage({
+      to: channelID,
+      message: "",
+      embed: {
+        color: 5396735,
+        footer: {
+          text: `Querido usuario, lamento informarle que usted debe ingresar una pregunta para poder usar el comando !8b. Uselo de esta forma !8b {pregunta}`
+        },
+        image: {
+          url: "https://www.bkconnection.com/system/refinery/blog/posts/thumbnails/000/003/323/post_detail/family-friendly-app-store.gif?1432824720"
+        }
       }
-    );
+    });
   }
   
   const answers = [
