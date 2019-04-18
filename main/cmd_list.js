@@ -36,7 +36,9 @@ const cmds = {
   img: "imagen.js",
   
   "8b": "8b.js", 
-  "8ball": "8b.js"
+  "8ball": "8b.js",
+
+  meme: "meme.js"
 };
 
 module.exports.binds = cmds;

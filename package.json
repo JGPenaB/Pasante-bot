@@ -5,7 +5,8 @@
   "main": "bot.js",
   "author": "Autz64, Darioxlz",
   "scripts": {
-    "start": "node main/bot.js"
+    "start": "node main/bot.js",
+    "dev": "nodemon main/bot.js"
   },
   "dependencies": {
     "canvas": "^2.3.1",
@@ -13,6 +14,7 @@
     "discord.io": "github:woor/discord.io#gateway_v6",
     "dotenv": "^6.1.0",
     "image-data-uri": "^2.0.0",
+    "meme-maker": "^2.1.2",
     "osmosis": "^1.1.8",
     "pg": "^7.4.3",
     "pngjs-image": "^0.11.7",
@@ -21,5 +23,8 @@
   },
   "engines": {
     "node": "8.9.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
   }
 }
