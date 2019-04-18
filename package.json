@@ -5,7 +5,8 @@
   "main": "bot.js",
   "author": "Autz64, Darioxlz",
   "scripts": {
-    "start": "node main/bot.js"
+    "start": "node main/bot.js",
+    "dev": "nodemon main/bot.js"
   },
   "dependencies": {
     "canvas": "^2.3.1",
@@ -22,5 +23,8 @@
   },
   "engines": {
     "node": "8.9.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
   }
 }

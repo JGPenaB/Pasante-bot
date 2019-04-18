@@ -9,7 +9,7 @@ function def(cmd, user, users, bot, channelID, evt) {
   const topText = pos[2];
   const bottomText = pos[3] || "";
 
-  if(imageURL.search(/\.(jpg|jpeg|png)$/i) == -1 || typeof imageURL != "string") {
+  if(imageURL.search(/\.(jpg|jpeg|png)/i) == -1 || typeof imageURL != "string") {
     return bot.sendMessage({
       to: channelID,
       message: "El Autz no sabe programar, mira menor, esa URL de la imagen es invalida llave"
@@ -18,7 +18,7 @@ function def(cmd, user, users, bot, channelID, evt) {
 
   const time = new Date().getTime();
 
-  function download (uri, filename, callback){
+  function download (uri, filename, callback) {
     request.head(uri, function(err, res, body){
       console.log('content-type:', res.headers['content-type']);
       console.log('content-length:', res.headers['content-length']);
@@ -65,15 +65,15 @@ function def(cmd, user, users, bot, channelID, evt) {
         console.log('Image saved: ' + options.outfile);
 
         exec(`rm -f ./main/temp/${time}-meme.jpg`, (err, stdout, stderr) => {
-          console.log(err);
-          console.log(stdout);
-          console.log(stderr);
+          if (err) console.log(err);
+          /* console.log(stdout);
+          console.log(stderr); */
         });
 
         exec(`rm -f ./main/temp/${time}.jpg`, (err, stdout, stderr) => {
-          console.log(err);
-          console.log(stdout);
-          console.log(stderr);
+          if (err) console.log(err);
+          /* console.log(stdout);
+          console.log(stderr); */
         });
       });
     }); 
