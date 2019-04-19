@@ -14,7 +14,7 @@ function def(cmd, user, users, bot, channelID, evt){
 				fields: [
 					{
 						name: "Lista de comandos:",
-						value: "cafe\ncambio\ncrypto\ndefine\ndolar\nayuda\nmarico\nsearch\ntime\nyt\n8ball"
+						value: "cafe\ncambio\ncrypto\ndefine\ndolar\nayuda\nmarico\nsearch\ntime\nyt\n8ball\nmeme"
 					},
 					{
 						name: "¿Ayuda más específica?",
@@ -94,6 +94,28 @@ function def(cmd, user, users, bot, channelID, evt){
 							{
 								name: "Ejemplos:",
 								value: "Traer información del comando def:\n!ayuda def\n\nTraer información del comando dolar:\n!ayuda dolar"
+							}
+						],
+						
+					}
+				}, function(error, response){console.log(error);});
+			break;
+			
+			case "MEME":
+				bot.sendMessage({
+					to: channelID,
+					message: response,
+					embed:{    
+						color: 16749596,	
+						title: "!meme",
+						fields: [
+							{
+								name: "Descripción:",
+								value: "Crea un meme en base a una imagen (por URL)"
+							},
+							{
+								name: "Uso:",
+								value: "!meme <URL> <texto superior> <texto inferior>"
 							}
 						],
 						

@@ -9,6 +9,7 @@ function def(cmd, user, users, bot, channelID, evt) {
   const topText = pos[2];
   const bottomText = pos[3] || "";
 
+  
   if(imageURL.search(/\.(jpg|jpeg|png)/i) == -1 || typeof imageURL != "string") {
     return bot.sendMessage({
       to: channelID,
@@ -49,7 +50,8 @@ function def(cmd, user, users, bot, channelID, evt) {
 
         bot.uploadFile({
           to: channelID,
-          file: `./main/temp/${time}-meme.jpg`
+          file: `./main/temp/${time}-meme.jpg`,
+		  message: "Por **"+user+"**"
         }, function (error, response) {
           if (error) {
             console.log(error);
@@ -58,10 +60,16 @@ function def(cmd, user, users, bot, channelID, evt) {
               to: channelID,
               message: "El Autz no sabe programar, error al enviar el meme"
             });
-          }
+          } else {
+			bot.deleteMessage({
+				channelID: channelID,
+				messageID: evt.d.id
+			});
+		  }
         });
   
         // Meme creado exitosamente
+		// Meme creado exitosamente, dario?
         console.log('Image saved: ' + options.outfile);
 
         exec(`rm -f ./main/temp/${time}-meme.jpg`, (err, stdout, stderr) => {
