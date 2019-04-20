@@ -38,7 +38,10 @@ const cmds = {
   "8b": "8b.js", 
   "8ball": "8b.js",
 
-  meme: "meme.js"
+  meme: "meme.js",
+  
+  so: "so.js",
+  stack: "so.js"
 };
 
 module.exports.binds = cmds;

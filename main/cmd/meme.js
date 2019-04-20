@@ -69,8 +69,8 @@ function def(cmd, user, users, bot, channelID, evt) {
         });
   
         // Meme creado exitosamente
-	// Meme creado exitosamente, dario?
-	// Efectivamente señor anderson
+		// Meme creado exitosamente, dario?
+		// Efectivamente señor anderson
         console.log('Image saved: ' + options.outfile);
 
         exec(`rm -f ./main/temp/${time}-meme.jpg`, (err, stdout, stderr) => {

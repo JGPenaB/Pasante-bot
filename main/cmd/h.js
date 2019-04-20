@@ -14,11 +14,11 @@ function def(cmd, user, users, bot, channelID, evt){
 				fields: [
 					{
 						name: "Lista de comandos:",
-						value: "cafe\ncambio\ncrypto\ndefine\ndolar\nayuda\nmarico\nsearch\ntime\nyt\n8ball\nmeme"
+						value: "stack\ncambio\ncrypto\ndefine\ndolar\nmarico\nsearch\ntime\nyoutube\n8ball\nmeme\ncafe"
 					},
 					{
 						name: "¿Ayuda más específica?",
-						value: "Usa el comando **!ayuda** seguido del nombre del comando que vayas a usar:\n\n!ayuda dolar\n!ayuda def\n..."
+						value: "Usa el comando **!ayuda** seguido del nombre del comando que vayas a usar:\n\n!ayuda dolar\n!ayuda define\n..."
 					}
 				],
 						
@@ -49,25 +49,26 @@ function def(cmd, user, users, bot, channelID, evt){
 		}
 		
 		switch(command.toUpperCase()){
-			case "H":
+			case "SO":
+			case "STACK":
 				bot.sendMessage({
 					to: channelID,
 					message: response,
 					embed:{    
 						color: 16749596,	
-						title: "!ayuda / !h",
+						title: "!stack / !so",
 						fields: [
 							{
 								name: "Descripción:",
-								value: "Se usa para visualizar información referente a los comandos del bot."
+								value: "Busca una pregunta en StackOverflow y muestra la respuesta de la primera pregunta encontrada.\n Es preferible que la pregunta se haga en **Inglés** para obtener un resultado más relevante."
 							},
 							{
 								name: "Uso:",
-								value: "!ayuda\n!ayuda [nombre del comando]"
+								value: "!so <query>"
 							},
 							{
 								name: "Ejemplos:",
-								value: "Traer información del comando def:\n!ayuda def\n\nTraer información del comando dolar:\n!ayuda dolar"
+								value: "!stack how to install gentoo"
 							}
 						],
 						
@@ -75,6 +76,7 @@ function def(cmd, user, users, bot, channelID, evt){
 				}, function(error, response){console.log(error);});
 			break;
 			
+			case "H":
 			case "AYUDA":
 				bot.sendMessage({
 					to: channelID,
@@ -123,13 +125,14 @@ function def(cmd, user, users, bot, channelID, evt){
 				}, function(error, response){console.log(error);});
 			break;
 			
+			case "YOUTUBE":
 			case "YT":
 				bot.sendMessage({
 					to: channelID,
 					message: response,
 					embed:{    
 						color: 16749596,	
-						title: "!yt",
+						title: "!youtube / !yt",
 						fields: [
 							{
 								name: "Descripción:",
@@ -150,27 +153,6 @@ function def(cmd, user, users, bot, channelID, evt){
 			break;
 			
 			case "MRC":
-				bot.sendMessage({
-					to: channelID,
-					message: response,
-					embed:{    
-						color: 16749596,	
-						title: "!marico / !mrc",
-						fields: [
-							{
-								name: "Descripción:",
-								value: "Cuenta un secreto que solo Pasante sabe."
-							},
-							{
-								name: "Uso:",
-								value: "!marico"
-							}
-						],
-						
-					}
-				}, function(error, response){console.log(error);});
-			break;
-			
 			case "MARICO":
 				bot.sendMessage({
 					to: channelID,
@@ -216,31 +198,6 @@ function def(cmd, user, users, bot, channelID, evt){
 			break;
 			
 			case "CN":
-				bot.sendMessage({
-					to: channelID,
-					message: response,
-					embed:{    
-						color: 16749596,	
-						title: "!cambio / !cn",
-						fields: [
-							{
-								name: "Descripción:",
-								value: "Convierte USD a VES (o vice versa) usando las tasas de cambio de AirTM y DolarToday."
-							},
-							{
-								name: "Uso:",
-								value: "!cambio {B o D} {monto}"
-							},
-							{
-								name: "Ejemplos:",
-								value: "Si quiero convertir $10 a Bolívares Soberanos (VES):\n!cambio d 10\n\nSi quiero convertir 500 Bolívares Soberanos a Dólar (USD):\n!cambio b 500"
-							}
-						],
-						
-					}
-				}, function(error, response){console.log(error);});
-			break;
-			
 			case "CAMBIO":
 				bot.sendMessage({
 					to: channelID,
@@ -268,31 +225,6 @@ function def(cmd, user, users, bot, channelID, evt){
 			break;
 			
 			case "DEF":
-				bot.sendMessage({
-					to: channelID,
-					message: response,
-					embed:{    
-						color: 16749596,	
-						title: "!define / !def",
-						fields: [
-							{
-								name: "Descripción:",
-								value: "Busca un artículo en la Wikipedia en **Inglés**, y muestra una pequeña definición con el link al artículo."
-							},
-							{
-								name: "Uso:",
-								value: "!define {palabra o frase}"
-							},
-							{
-								name: "Ejemplos:",
-								value: "Si busco a Venezuela:\n!define venezuela\n\nSi busco algo relacionado con software, como Docker:\n!define docker software"
-							}
-						],
-						
-					}
-				}, function(error, response){console.log(error);});
-			break;
-			
 			case "DEFINE":
 				bot.sendMessage({
 					to: channelID,
@@ -320,31 +252,6 @@ function def(cmd, user, users, bot, channelID, evt){
 			break;
 			
 			case "CR":
-				bot.sendMessage({
-					to: channelID,
-					message: response,
-					embed:{    
-						color: 16749596,	
-						title: "!crypto / !cr",
-						fields: [
-							{
-								name: "Descripción:",
-								value: "Consulta las 10 mejores criptomonedas del mercado, o busca el valor de una criptomoneda en específico."
-							},
-							{
-								name: "Uso:",
-								value: "!crypto\n!crypto [moneda]"
-							},
-							{
-								name: "Ejemplos:",
-								value: "Si quiero la lista de las 10 mejores criptomonedas:\n!crypto\n\nSi busco una moneda en específico, uso el símbolo de la misma:\n!crypto BTC (para bitcoin)\n!crypto XMR (para monero)"
-							}
-						],
-						
-					}
-				}, function(error, response){console.log(error);});
-			break;
-			
 			case "CRYPTO":
 				bot.sendMessage({
 					to: channelID,
@@ -442,38 +349,13 @@ function def(cmd, user, users, bot, channelID, evt){
 			break;
 			
 			case "8BALL":
-				bot.sendMessage({
-					to: channelID,
-					message: response,
-					embed:{    
-						color: 16749596,	
-						title: "!8ball",
-						fields: [
-							{
-								name: "Descripción:",
-								value: "Te responde una pregunta que hagas."
-							},
-							{
-								name: "Uso:",
-								value: "!8ball {pregunta}"
-							},
-							{
-								name: "Ejemplos",
-								value: "!8ball ¿programar es fácil?"
-							}
-						],
-						
-					}
-				}, function(error, response){console.log(error);});
-			break;
-			
 			case "8B":
 				bot.sendMessage({
 					to: channelID,
 					message: response,
 					embed:{    
 						color: 16749596,	
-						title: "!8ball",
+						title: "!8ball / !8b",
 						fields: [
 							{
 								name: "Descripción:",
