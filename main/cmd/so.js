@@ -12,11 +12,13 @@ function def(cmd, user, users, bot, channelID, evt){
 	let url = "https://api.stackexchange.com/2.2/similar?pagesize=1&order=desc&sort=relevance&title="+query+"&site=stackoverflow&key="+process.env.SO_KEY;
 
 	request({uri: url, gzip: true}, function (err, res, body) {
-		jsondata_base=JSON.parse(body);
-		let final_data = '';
-		console.log(jsondata_base);
 		
-		if(jsondata_base.items.length > 0){
+		let final_data = '';
+		let jsondata_base = '';
+		
+		if(res.statusCode!=400) jsondata_base=JSON.parse(body);
+		
+		if(jsondata_base.hasOwnProperty("items") && jsondata_base.items.length > 0){
 			
 			if(!jsondata_base.items[0].is_answered){
 			bot.sendMessage({
