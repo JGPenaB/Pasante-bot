@@ -31,7 +31,7 @@ bot.on("ready", function(evt) {
 });
 
 bot.on("message", function(user, userID, channelID, message, evt) {
-  if (message.substring(0, 1) == pfix) {
+  if (message.substring(0, 1) === pfix) {
     let args = message.substring(1).split(" ");
     let cmd = args[0].toLowerCase();
     let nd = bot.servers[bot.channels[channelID].guild_id].members;
@@ -57,7 +57,7 @@ bot.on("message", function(user, userID, channelID, message, evt) {
 	*/
 	if(cmdlist.binds.hasOwnProperty(cmd)){
       let exec = require("./cmd/" + cmdlist.binds[cmd]);
-	  //console.log(exec);
+      //console.log(exec);
       exec.def(message, user, users, bot, channelID, evt);
     } else {
       bot.sendMessage({

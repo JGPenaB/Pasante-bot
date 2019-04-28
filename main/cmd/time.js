@@ -6,7 +6,7 @@ function def(cmd, user, users, bot, channelID, evt){
  
 	let dateNow = new Date();
 	// cogemos la fecha utc
-	let dateUTC = new Date(dateNow.getUTCFullYear(), dateNow.getUTCMonth(), dateNow.getUTCDate(), dateNow.getUTCHours(), dateNow.getUTCMinutes(), dateNow.getUTCSeconds())
+	let dateUTC = new Date(dateNow.getUTCFullYear(), dateNow.getUTCMonth(), dateNow.getUTCDate(), dateNow.getUTCHours(), dateNow.getUTCMinutes(), dateNow.getUTCSeconds());
  
 	// Definimos la diferencia en horas del time zone
 	// Para la diferencia horaria de dos horas y media seria 2.5

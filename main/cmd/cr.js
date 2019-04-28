@@ -11,6 +11,7 @@ function def(cmd, user, users, bot, channelID, evt){
 		https.get("https://api.coinmarketcap.com/v2/ticker/", (resp) => {
 			let data = "";
 			let lista = [];
+			let  jsondata;
 						
 			resp.on("data", (chunk) => {
 				data += chunk;
@@ -18,7 +19,7 @@ function def(cmd, user, users, bot, channelID, evt){
 	
 			resp.on("end", () => {
 							
-				let jsondata=JSON.parse(data);
+				jsondata=JSON.parse(data);
 							
 				for(var key in jsondata.data){
 					if(jsondata.data.hasOwnProperty("id")){
@@ -32,7 +33,7 @@ function def(cmd, user, users, bot, channelID, evt){
 							
 				//concatenación de toda la info
 				for(let i=0; i<lista.length;i++){
-					if(lista[i].symbol == other.toUpperCase()){
+					if(lista[i].symbol === other.toUpperCase()){
 						bot.sendMessage({
 							to: channelID,
 							message: "Pana, al fín encontré info sobre esa moneda que me dijiste:",
@@ -73,14 +74,16 @@ function def(cmd, user, users, bot, channelID, evt){
 	
 			resp.on("end", () => {
 							
-				let jsondata=JSON.parse(data);
+				jsondata=JSON.parse(data);
 							
-				for(key in jsondata.data){
-					lista.push(jsondata.data[key]);
+				for(var key in jsondata.data){
+					if(jsondata.data.hasOwnProperty("id")){
+						lista.push(jsondata.data[key]);
+					}
 				}
 							
 				lista.sort(function(a,b){
-					return parseInt(a.rank) - parseInt(b.rank);
+					return parseInt(a.rank,10) - parseInt(b.rank,10);
 				});
 							
 				//concatenación de toda la info

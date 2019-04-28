@@ -52,7 +52,7 @@ function def(cmd, user, users, bot, channelID, evt) {
         let arr = [];
         let pos = 0;
 
-        resp.on("data", chunk => {
+        resp.on("data", (chunk) => {
           data += chunk;
         });
 
@@ -60,7 +60,8 @@ function def(cmd, user, users, bot, channelID, evt) {
           let jsondata = JSON.parse(data);
 
           https.get("https://airtmrates.com/rates", (resp2) => {
-            resp2.on("data", chunk2 => {
+			
+            resp2.on("data", (chunk2) => {
               data2 += chunk2;
             });
 
@@ -72,7 +73,7 @@ function def(cmd, user, users, bot, channelID, evt) {
                 .split(",");
               if (arr[4] === null) {arr[4] = "OFFLINE";}
               
-			  bot.sendMessage({
+              bot.sendMessage({
 				to: channelID,
 				embed:{    
 					color: 3141900,	

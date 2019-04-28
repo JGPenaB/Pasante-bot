@@ -13,22 +13,21 @@
 
 <p style="text-align:justify;">Es un bot para el server <a href="https://discord.gg/AvHvMz9">Web Development Vzla</a> . Nació con el propósito de consultar criptomonedas, pero se incluyeron otras funciones igual de útiles.</p>
 
-
 **Funciones principales:**
 
-*  Consulta del Dólar paralelo (DolarToday y AirTm) y Criptomonedas populares.
+* Consulta del Dólar paralelo (DolarToday y AirTm) y Criptomonedas populares.
 
-*  Búsqueda de imágenes y vídeos.
+* Búsqueda de imágenes y vídeos.
 
-*  Búsqueda de preguntas en Stack Overflow.
+* Búsqueda de preguntas en Stack Overflow.
 
-*  Búsqueda en la Wikipedia.
+* Búsqueda en la Wikipedia.
 
 --------
 
-#  Instalación
+## Instalación
 
-*  Requiere Node.js >= 8.9
+* Requiere Node.js >= 8.9
 
 Primero instala las dependencias necesarias:
 

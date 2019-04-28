@@ -57,6 +57,6 @@ function def(cmd, user, users, bot, channelID, evt){
 			message: "Lo siento mano, yo no me voy a arriesgar a que me quiten el internet solo por esa vaina."
 			}); 
 		});
-};
+}
 
 module.exports.def = def;

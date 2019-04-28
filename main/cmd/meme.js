@@ -10,7 +10,7 @@ function def(cmd, user, users, bot, channelID, evt) {
   const bottomText = pos[3] || "";
 
   
-  if(imageURL.search(/\.(jpg|jpeg|png)/i) == -1 || typeof imageURL != "string") {
+  if(imageURL.search(/\.(jpg|jpeg|png)/i) === -1 || typeof imageURL !== "string") {
     return bot.sendMessage({
       to: channelID,
       message: "El Autz no sabe programar, mira menor, esa URL de la imagen es invalida llave"
@@ -26,7 +26,7 @@ function def(cmd, user, users, bot, channelID, evt) {
 
       request(uri).pipe(fs.createWriteStream(filename)).on("close", callback);
     });
-  };
+  }
 
   try {
 
@@ -37,7 +37,7 @@ function def(cmd, user, users, bot, channelID, evt) {
         outfile: `./main/temp/${time}-meme.jpg`,  // Required
         topText: topText,
         bottomText: bottomText
-      }
+      };
   
       memeMaker(options, function (err) {
         if (err) {
@@ -50,7 +50,7 @@ function def(cmd, user, users, bot, channelID, evt) {
         bot.uploadFile({
           to: channelID,
           file: `./main/temp/${time}-meme.jpg`,
-		  message: "Por **"+user+"**"
+          message: "Por **"+user+"**"
         }, function (error, response) {
           if (error) {
             console.log(error);

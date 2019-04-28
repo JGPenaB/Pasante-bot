@@ -49,6 +49,6 @@ function def(cmd, user, users, bot, channelID, evt){
 		to: channelID,
 		message: marico
 	});
-};
+}
 
 module.exports.def = def;

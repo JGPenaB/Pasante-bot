@@ -1,5 +1,5 @@
 function def(cmd, user, users, bot, channelID, evt){
-	let args = cmd.substring(1).split(' ');
+	let args = cmd.substring(1).split(" ");
 	let command = args[1];
 	let response = "";
 	let content = "";
@@ -7,7 +7,7 @@ function def(cmd, user, users, bot, channelID, evt){
 	if (command == null){
 		bot.sendMessage({
 			to: channelID,
-			message: 'Buenos días a todos, soy pasante en este server porque necesito la experiencia para el currículum. Cualquier duda:',
+			message: "Buenos días a todos, soy pasante en este server porque necesito la experiencia para el currículum. Cualquier duda:",
 			embed:{    
 				color: 16749596,	
 				title: "Pasante Bot",
@@ -384,7 +384,6 @@ function def(cmd, user, users, bot, channelID, evt){
 			break;
 		}
 	}
-	
-};
+}
 
 module.exports.def = def;

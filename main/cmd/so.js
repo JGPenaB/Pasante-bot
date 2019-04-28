@@ -37,7 +37,7 @@ function def(cmd, user, users, bot, channelID, evt){
 						let FinalText = pred.substring(0,pred.search("share"));
 					
 						//Para evitar errores con el embed
-						if(FinalText.length > 1020) FinalText=FinalText.substring(0,1020)+"...";
+						if(FinalText.length > 1020){FinalText=FinalText.substring(0,1020)+"...";}
 				
 						bot.sendMessage({
 							to: channelID,
@@ -64,6 +64,6 @@ function def(cmd, user, users, bot, channelID, evt){
 			});
 		}
 	});
-};
+}
 
 module.exports.def = def;

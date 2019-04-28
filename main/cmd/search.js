@@ -40,7 +40,7 @@ function def(cmd, user, users, bot, channelID, evt) {
 			finalmsg = "El primer resultado en Bing es este.";
 		break;
       }
-	  
+	
       // Si entra acá todo bien al mandar el msg a discord
       bot.sendMessage(
         {
