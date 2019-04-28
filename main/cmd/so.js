@@ -4,7 +4,7 @@ function def(cmd, user, users, bot, channelID, evt){
 	Misión cumplida, señor Anderson?
 	*/
 	
-	const https = require('https');
+	const https = require("https");
 	const request = require("request");
 	const cheerio = require("cheerio");
 	
@@ -13,43 +13,43 @@ function def(cmd, user, users, bot, channelID, evt){
 
 	request({uri: url, gzip: true}, function (err, res, body) {
 		
-		let final_data = '';
-		let jsondata_base = '';
+		let JsonData = "";
+		let FinalData = "";
 		
-		if(res.statusCode!=400) jsondata_base=JSON.parse(body);
+		if(res.statusCode!==400){ JsonData=JSON.parse(body); }
 		
-		if(jsondata_base.hasOwnProperty("items") && jsondata_base.items.length > 0){
+		if(JsonData.hasOwnProperty("items") && JsonData.items.length > 0){
 			
-			if(!jsondata_base.items[0].is_answered){
+			if(!JsonData.items[0].is_answered){
 			bot.sendMessage({
 				to: channelID,
-				message: "Encontré una pregunta, pero no posee una respuesta definitiva. Puedes revisarlo si te interesa: \n"+jsondata_base.items[0].link
+				message: "Encontré una pregunta, pero no posee una respuesta definitiva. Puedes revisarlo si te interesa: \n"+JsonData.items[0].link
 			});
 			}else{
-				https.get(jsondata_base.items[0].link, function(resp){
-					resp.on('data', (c) => {
-						final_data += c;
+				https.get(JsonData.items[0].link, (resp) => {
+					resp.on("data", (c) => {
+						FinalData += c;
 					});
 		
-					resp.on('end', () =>{
-						let $ = cheerio.load(final_data);
+					resp.on("end", () => {
+						let $ = cheerio.load(FinalData);
 						let pred = $(".answercell").first().text();
-						let final_text = pred.substring(0,pred.search("share"));
+						let FinalText = pred.substring(0,pred.search("share"));
 					
 						//Para evitar errores con el embed
-						if(final_text.length > 1020) final_text=final_text.substring(0,1020)+"...";
+						if(FinalText.length > 1020) FinalText=FinalText.substring(0,1020)+"...";
 				
 						bot.sendMessage({
 							to: channelID,
-							message: 'Esto fue lo primero que encontré en Stack Overflow:',
+							message: "Esto fue lo primero que encontré en Stack Overflow:",
 							embed:{    
 								color: 16749596,	
-								title: jsondata_base.items[0].title,
-								url: jsondata_base.items[0].link,
+								title: JsonData.items[0].title,
+								url: JsonData.items[0].link,
 								fields: [
 									{
 										name: "Respuesta",
-										value: final_text.trim()
+										value: FinalText.trim()
 									}
 								],
 							}

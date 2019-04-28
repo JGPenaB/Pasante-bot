@@ -16,19 +16,19 @@
 
 **Funciones principales:**
 
-* Consulta del Dólar paralelo (DolarToday y AirTm) y Criptomonedas populares.
+*  Consulta del Dólar paralelo (DolarToday y AirTm) y Criptomonedas populares.
 
-* Búsqueda de imágenes y vídeos.
+*  Búsqueda de imágenes y vídeos.
 
-* Búsqueda de preguntas en Stack Overflow.
+*  Búsqueda de preguntas en Stack Overflow.
 
-* Búsqueda en la Wikipedia.
+*  Búsqueda en la Wikipedia.
 
-----------
+--------
 
-# <div align="center">Instalación</div> 
+#  Instalación
 
-* Requiere Node.js >= 8.9
+*  Requiere Node.js >= 8.9
 
 Primero instala las dependencias necesarias:
 
@@ -47,7 +47,7 @@ Y de último, para ejecutarlo, usa el siguiente comando:
  npm start
 ```
 
-----------
+--------
 
 Hecho en NodeJS con la librería [discord.io (por izy512)](https://github.com/izy521/discord.io).
 

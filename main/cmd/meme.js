@@ -1,8 +1,8 @@
 function def(cmd, user, users, bot, channelID, evt) {
-  const memeMaker = require('meme-maker');
+  const memeMaker = require("meme-maker");
   const request = require("request");
   const fs = require("fs");
-  const exec = require('child_process').exec;
+  const exec = require("child_process").exec;
 
   const pos = cmd.split(" ");
   const imageURL = pos[1];
@@ -21,17 +21,16 @@ function def(cmd, user, users, bot, channelID, evt) {
 
   function download (uri, filename, callback) {
     request.head(uri, function(err, res, body){
-      console.log('content-type:', res.headers['content-type']);
-      console.log('content-length:', res.headers['content-length']);
+      //console.log("content-type:", res.headers["content-type"]);
+      //console.log("content-length:", res.headers["content-length"]);
 
-      request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+      request(uri).pipe(fs.createWriteStream(filename)).on("close", callback);
     });
   };
 
   try {
 
     download(imageURL, `./main/temp/${time}.jpg`, function() {
-      console.log('download done');
   
       const options = {
         image: `./main/temp/${time}.jpg`,         // Required
@@ -61,17 +60,17 @@ function def(cmd, user, users, bot, channelID, evt) {
               message: "El Autz no sabe programar, error al enviar el meme"
             });
           } else {
-			bot.deleteMessage({
-				channelID: channelID,
-				messageID: evt.d.id
-			});
-		  }
+				bot.deleteMessage({
+					channelID: channelID,
+					messageID: evt.d.id
+				});
+			}
         });
   
         // Meme creado exitosamente
 		// Meme creado exitosamente, dario?
 		// Efectivamente señor anderson
-        console.log('Image saved: ' + options.outfile);
+        //console.log("Image saved: " + options.outfile);
 
         exec(`rm -f ./main/temp/${time}-meme.jpg`, (err, stdout, stderr) => {
           if (err) console.log(err);

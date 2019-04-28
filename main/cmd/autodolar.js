@@ -1,7 +1,7 @@
 function def(cmd, user, users, bot, channelID, evt) {
   bot.sendMessage({
     to: channelID,
-    message: `Se activo el autodolar, se imprimirá la tasa de cambio cada 20 minutos en este canal.`
+    message: "Se activo el autodolar, se imprimirá la tasa de cambio cada 20 minutos en este canal."
   });
   setInterval(function() {
     // Funcion para mostrar la fecha correcamente
@@ -42,11 +42,11 @@ function def(cmd, user, users, bot, channelID, evt) {
     // fecha UTC
     dateUTC.setTime(dateUTC.getTime() + seconds);
 
-    let fechaUTC_timeZone = dateFormat(dateUTC);
+    let FechaUTtcTimeZone = dateFormat(dateUTC);
 
     const https = require("https");
     https
-      .get("https://s3.amazonaws.com/dolartoday/data.json", resp => {
+      .get("https://s3.amazonaws.com/dolartoday/data.json", (resp) => {
         let data = "";
         let data2 = "";
         let arr = [];
@@ -57,9 +57,9 @@ function def(cmd, user, users, bot, channelID, evt) {
         });
 
         resp.on("end", () => {
-          jsondata = JSON.parse(data);
+          let jsondata = JSON.parse(data);
 
-          https.get("https://airtmrates.com/rates", resp2 => {
+          https.get("https://airtmrates.com/rates", (resp2) => {
             resp2.on("data", chunk2 => {
               data2 += chunk2;
             });
@@ -70,9 +70,7 @@ function def(cmd, user, users, bot, channelID, evt) {
                 .substring(pos, pos + 70)
                 .split("\n")[0]
                 .split(",");
-              if (arr[4] == null) {
-                arr[4] = "OFFLINE";
-              }
+              if (arr[4] === null) {arr[4] = "OFFLINE";}
               
 			  bot.sendMessage({
 				to: channelID,
@@ -82,7 +80,7 @@ function def(cmd, user, users, bot, channelID, evt) {
 					fields: [
 						{
 							name: "Fecha y Hora Actual",
-							value: fechaUTC_timeZone
+							value: FechaUTtcTimeZone
 						},
 						{
 							name: "Tasa DolarToday",
@@ -96,12 +94,12 @@ function def(cmd, user, users, bot, channelID, evt) {
 							
 				}
 		     }, function(error, response){console.log(error);});
-			  
-			  /*
+			
+			/*
               bot.sendMessage({
                 to: channelID,
                 message:
-                  fechaUTC_timeZone +
+                  FechaUTtcTimeZone +
                   "\nTasa de cambio actual:\n ```cs\n Tasa DolarToday:\n $1 => " +
                   jsondata.USD.transferencia +
                   " VES\n €1 => " +
@@ -115,7 +113,7 @@ function def(cmd, user, users, bot, channelID, evt) {
           });
         });
       })
-      .on("error", err => {
+      .on("error", (err) => {
         console.log("Error: " + err.message);
         bot.sendMessage({
           to: channelID,

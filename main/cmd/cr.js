@@ -1,31 +1,33 @@
 function def(cmd, user, users, bot, channelID, evt){
-	const https = require('https');
-	let args = cmd.substring(1).split(' ');
+	const https = require("https");
+	let args = cmd.substring(1).split(" ");
     let mcmd = args[0];
 	let other = args[1];
 	let top5 = [];
 	
 	//Moneda específica
-	if (typeof other != 'undefined'){
+	if (typeof other !== "undefined"){
 					
-		https.get('https://api.coinmarketcap.com/v2/ticker/', (resp) => {
-			let data = '';
+		https.get("https://api.coinmarketcap.com/v2/ticker/", (resp) => {
+			let data = "";
 			let lista = [];
 						
-			resp.on('data', (chunk) => {
+			resp.on("data", (chunk) => {
 				data += chunk;
 			});
 	
-			resp.on('end', () => {
+			resp.on("end", () => {
 							
-				jsondata=JSON.parse(data);
+				let jsondata=JSON.parse(data);
 							
-				for(key in jsondata.data){
-					lista.push(jsondata.data[key]);
+				for(var key in jsondata.data){
+					if(jsondata.data.hasOwnProperty("id")){
+						lista.push(jsondata.data[key]);
+					}
 				}
 							
 				lista.sort(function(a,b){
-					return parseInt(a.rank) - parseInt(b.rank);
+					return parseInt(a.rank,10) - parseInt(b.rank,10);
 				});
 							
 				//concatenación de toda la info
@@ -54,27 +56,26 @@ function def(cmd, user, users, bot, channelID, evt){
 				console.log("Error: " + err.message);
 				bot.sendMessage({
 					to: channelID,
-					message: 'Lo siento mano, estuve ocupado con la geva y no pude hacer lo que me pediste. ¿Tal vez otra oportunidad?'
+					message: "Lo siento mano, estuve ocupado con la geva y no pude hacer lo que me pediste. ¿Tal vez otra oportunidad?"
 				}); 
 			});
 					
 	}else{
 					
 		//Top 10 de monedas
-		https.get('https://api.coinmarketcap.com/v2/ticker/?limit=10', (resp) => {
-			let data = '';
+		https.get("https://api.coinmarketcap.com/v2/ticker/?limit=10", (resp) => {
+			let data = "";
 			let lista = [];
 						
-			resp.on('data', (chunk) => {
+			resp.on("data", (chunk) => {
 				data += chunk;
 			});
 	
-			resp.on('end', () => {
+			resp.on("end", () => {
 							
-				jsondata=JSON.parse(data);
+				let jsondata=JSON.parse(data);
 							
 				for(key in jsondata.data){
-					console.log(key);
 					lista.push(jsondata.data[key]);
 				}
 							
@@ -103,11 +104,11 @@ function def(cmd, user, users, bot, channelID, evt){
 			console.log("Error: " + err.message);
 			bot.sendMessage({
 				to: channelID,
-				message: 'Lo siento mano, estuve ocupado con la geva y no pude hacer lo que me pediste. ¿Tal vez otra oportunidad?'
+				message: "Lo siento mano, estuve ocupado con la geva y no pude hacer lo que me pediste. ¿Tal vez otra oportunidad?"
 			}); 
 		});
 					
 	}
-};
+}
 
 module.exports.def = def;

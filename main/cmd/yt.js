@@ -7,7 +7,7 @@ function def(cmd, user, users, bot, channelID, evt) {
   const url = `https://www.youtube.com/results?search_query=${query}`;
 
   request(url, (err, res, body) => {
-    if (err || res.statusCode != 200) {
+    if (err || res.statusCode !== 200) {
       bot.sendMessage({
         to: channelID,
         message: "El Autz no sabe programar",
@@ -24,7 +24,7 @@ function def(cmd, user, users, bot, channelID, evt) {
       // console.error(err);
     }
 
-    if (!err && res.statusCode == 200) {
+    if (!err && res.statusCode === 200) {
       let $ = cheerio.load(body);
       let links = [];
       const regexp = new RegExp(/^(https?\:\/\/)?(www\.youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)$/);
@@ -33,7 +33,7 @@ function def(cmd, user, users, bot, channelID, evt) {
         links.push(el.attribs.href);
       });
 
-      let link = links.find(el => {
+      let link = links.find( (el) => {
         let test = `https://www.youtube.com${el}`;
         return regexp.test(test);
       });

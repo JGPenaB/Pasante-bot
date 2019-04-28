@@ -43,8 +43,8 @@ bot.on("message", function(user, userID, channelID, message, evt) {
     let users = [];
     for (let key in nd) {
       if (
-        nd[key].status != undefined &&
-        nd[key].status != "offline" &&
+        nd[key].status !== undefined &&
+        nd[key].status !== "offline" &&
         !bot.users[key].bot
       ) {
         users.push(bot.users[key].username);
@@ -71,12 +71,12 @@ bot.on("message", function(user, userID, channelID, message, evt) {
 
 
 //Evento personalizado
-bot.on('any', function(event) {
+bot.on("any", function(event) {
 	//console.log(event);
 	//if(bot.servers[event.d.guild_id] != undefined){console.log(bot.servers[event.d.guild_id].roles);}
 	
 	//Si un usuario se une al server
-	if(event.t == "GUILD_MEMBER_ADD"){
+	if(event.t === "GUILD_MEMBER_ADD"){
 		
 		//event.d.user.{username, id, discriminator, avatar}
 		//event.d.roles
@@ -89,8 +89,7 @@ bot.on('any', function(event) {
 		});
 		
 		for(let key in bot.servers[event.d.guild_id].roles){
-			if(bot.servers[event.d.guild_id].roles[key].name == "Member"){
-				
+			if(bot.servers[event.d.guild_id].roles[key].name === "Member"){
 				bot.addToRole({
 					serverID: event.d.guild_id,
 					userID: event.d.user.id,

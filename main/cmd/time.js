@@ -18,12 +18,12 @@ function def(cmd, user, users, bot, channelID, evt){
 	// fecha UTC
   dateUTC.setTime(dateUTC.getTime() + seconds);
   
-	let fechaUTC_timeZone = "La fecha y hora actuales en Venezuela son => " + dateFormat(dateUTC);
+	let FechaUTtcTimeZone = "La fecha y hora actuales en Venezuela son => " + dateFormat(dateUTC);
 
 	bot.sendMessage({
         to: channelID,
-        message: `${fechaUTC_timeZone}`
+        message: `${FechaUTtcTimeZone}`
     });
-};
+}
 
 module.exports.def = def;
