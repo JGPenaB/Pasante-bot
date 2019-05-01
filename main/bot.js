@@ -31,20 +31,20 @@ bot.on("ready", function(evt) {
 });
 
 bot.on("message", function(user, userID, channelID, message, evt) {
-  if (message.substring(0, 1) === pfix) {
-    let args = message.substring(1).split(" ");
+  if (message.substring(0, pfix.length) === pfix) {
+    let args = message.substring(pfix.length).split(" ");
     let cmd = args[0].toLowerCase();
-    let nd = bot.servers[bot.channels[channelID].guild_id].members;
+    let MemberList = bot.servers[bot.channels[channelID].guild_id].members;
 	
 	//Archivo que contiene los posibles comandos y los archivos a ejecutar.
 	let cmdlist = require("./cmd_list.js");
 	
     //Extraer el username de los usuarios a un array
     let users = [];
-    for (let key in nd) {
+    for (let key in MemberList) {
       if (
-        nd[key].status !== undefined &&
-        nd[key].status !== "offline" &&
+        MemberList[key].status !== undefined &&
+        MemberList[key].status !== "offline" &&
         !bot.users[key].bot
       ) {
         users.push(bot.users[key].username);
@@ -73,10 +73,10 @@ bot.on("message", function(user, userID, channelID, message, evt) {
 //Evento personalizado
 bot.on("any", function(event) {
 	//console.log(event);
-	//if(bot.servers[event.d.guild_id] != undefined){console.log(bot.servers[event.d.guild_id].roles);}
+	//if(bot.servers[event.d.guild_id] != undefined){console.log(bot.servers[event.d.guild_id].name);}
 	
 	//Si un usuario se une al server
-	if(event.t === "GUILD_MEMBER_ADD"){
+	if(event.t === "GUILD_MEMBER_ADD" && bot.servers[event.d.guild_id].name === "Web Development Venezuela"){
 		
 		//event.d.user.{username, id, discriminator, avatar}
 		//event.d.roles
