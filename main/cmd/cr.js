@@ -10,7 +10,7 @@ function def(cmd, user, users, bot, channelID, evt){
 					
 		https.get("https://api.coinmarketcap.com/v2/ticker/", (resp) => {
 			let data = "";
-			let lista = [];
+			let moneda;
 			let  jsondata;
 						
 			resp.on("data", (chunk) => {
@@ -20,36 +20,30 @@ function def(cmd, user, users, bot, channelID, evt){
 			resp.on("end", () => {
 							
 				jsondata=JSON.parse(data);
-							
+				
 				for(var key in jsondata.data){
-					if(jsondata.data.hasOwnProperty("id")){
-						lista.push(jsondata.data[key]);
-					}
-				}
-							
-				lista.sort(function(a,b){
-					return parseInt(a.rank,10) - parseInt(b.rank,10);
-				});
-							
-				//concatenación de toda la info
-				for(let i=0; i<lista.length;i++){
-					if(lista[i].symbol === other.toUpperCase()){
-						bot.sendMessage({
-							to: channelID,
-							message: "Pana, al fín encontré info sobre esa moneda que me dijiste:",
-							embed:{
-								color: 3141900,	
-								title: "#"+(i+1)+". "+lista[i].name,
-								fields: [
-									{
-										name: "1 "+lista[i].symbol+" equivale a:",
-										value: "$"+lista[i].quotes.USD.price
-									}
-								],
-							}
-						});
+					if(jsondata.data[key].hasOwnProperty("id")){
+						moneda=jsondata.data[key];
 						break;
 					}
+				}
+				
+				//concatenación de toda la info
+				if(moneda.symbol === other.toUpperCase()){
+					bot.sendMessage({
+						to: channelID,
+						message: "Pana, al fín encontré info sobre esa moneda que me dijiste:",
+						embed:{
+							color: 3141900,	
+							title: moneda.name,
+							fields: [
+								{
+									name: "1 "+moneda.symbol+" equivale a:",
+									value: "$"+moneda.quotes.USD.price
+								}
+							],
+						}
+					});
 				}
 			});
 
@@ -77,7 +71,7 @@ function def(cmd, user, users, bot, channelID, evt){
 				jsondata=JSON.parse(data);
 							
 				for(var key in jsondata.data){
-					if(jsondata.data.hasOwnProperty("id")){
+					if(jsondata.data[key].hasOwnProperty("id")){
 						lista.push(jsondata.data[key]);
 					}
 				}
