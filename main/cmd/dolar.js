@@ -40,11 +40,11 @@ function def(cmd, user, users, bot, channelID, evt){
 							fields: [
 								{
 									name: "Tasa DolarToday",
-									value: "$1 => **" + jsondata.USD.transferencia.moneda() + "** VES\n€1 => **" + jsondata.EUR.transferencia.moneda() + "** VES"
+									value: "$1 => **" + Number(jsondata.USD.transferencia).moneda() + "** VES\n€1 => **" + Number(jsondata.EUR.transferencia).moneda() + "** VES"
 								},
 								{
 									name: "Tasa AirTM",
-									value: "$1 => **" + arr[4].moneda() + "** VES"
+									value: "$1 => **" + Number(arr[4]).moneda() + "** VES"
 								}
 							],
 							

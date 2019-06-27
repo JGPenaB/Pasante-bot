@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const Discord = require("discord.io");
 const dotenv = require("dotenv").config();
 const logger = require("winston");
