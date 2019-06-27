@@ -35,11 +35,11 @@ function def(cmd, user, users, bot, channelID, evt){
 							fields: [
 								{
 									name: "Tasa DolarToday",
-									value: "$1 => **"+jsondata.USD.transferencia+"** VES\n€1 => **"+jsondata.EUR.transferencia+"** VES"
+									value: "$1 => **" + jsondata.USD.transferencia.moneda() + "** VES\n€1 => **" + jsondata.EUR.transferencia.moneda() + "** VES"
 								},
 								{
 									name: "Tasa AirTM",
-									value: "$1 => **"+arr[4]+"** VES"
+									value: "$1 => **" + arr[4].moneda() + "** VES"
 								}
 							],
 							
@@ -58,5 +58,11 @@ function def(cmd, user, users, bot, channelID, evt){
 			}); 
 		});
 }
+
+Number.prototype.moneda = function() {
+	var re = '\\d(?=(\\d{3})+\\D)',
+		num = this.toFixed(Math.max(2));
+	return (num.replace('.', ',')).replace(new RegExp(re, 'g'), '$&.');
+};
 
 module.exports.def = def;
