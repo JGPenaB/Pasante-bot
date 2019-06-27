@@ -21,6 +21,11 @@ function def(cmd, user, users, bot, channelID, evt){
 				});
 	
 				resp2.on("end", () => {
+					Number.prototype.moneda = function() {
+						var re = '\\d(?=(\\d{3})+\\D)',
+							num = this.toFixed(Math.max(2));
+						return (num.replace('.', ',')).replace(new RegExp(re, 'g'), '$&.');
+					};
 					pos=data2.search("VES");
 					arr=data2.substring(pos,pos+70).split("\n")[0].split(",");
 					if(arr[4] == null){arr[4]="OFFLINE";}			
@@ -58,11 +63,5 @@ function def(cmd, user, users, bot, channelID, evt){
 			}); 
 		});
 }
-
-Number.prototype.moneda = function() {
-	var re = '\\d(?=(\\d{3})+\\D)',
-		num = this.toFixed(Math.max(2));
-	return (num.replace('.', ',')).replace(new RegExp(re, 'g'), '$&.');
-};
 
 module.exports.def = def;
