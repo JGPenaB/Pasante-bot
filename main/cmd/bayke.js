@@ -11,7 +11,7 @@ function def(cmd, user, users, bot, channelID, evt) {
           fields: [
               {
                   name: "Querido usuario",
-                  value: "Lamento informarle que Aparte de que bayke sigue sin trabajo usted debe ingresar el nombre del meme."
+                  value: "Lamento informarle que aparte de que bayke sigue sin trabajo usted debe ingresar algun nombre de un meme."
               },
               {
                   name: "Uso",
@@ -45,7 +45,7 @@ function def(cmd, user, users, bot, channelID, evt) {
               fields: [
                   {
                       name: "Querido usuario",
-                      value: "Lamento informarle que Aparte de que bayke sigue sin trabajo usted debe ingresar el nombre del meme."
+                      value: "Lamento informarle que aparte de que bayke sigue sin trabajo usted debe ingresar el nombre del meme CORRECTAMENTE OK?."
                   },
                   {
                       name: "Uso",
@@ -59,28 +59,19 @@ function def(cmd, user, users, bot, channelID, evt) {
           });
     }
     
-    return bot.sendMessage(
-    {
-        to: channelID,
-        message: "Burlemonos de bayke",
-        embed: {
-        color: 5396735,
-        footer: {
-            text: "Powered by Pecueca y Dario."
-        },
-        image: {
-            url: `../temp/bayke/${images[index]}.gif`
-        }
-    }
-    }, function(error, response){
-        if(error){
+    return bot.uploadFile({
+          to: channelID,
+          file: `./main/temp/bayke/${images[index]}.gif`
+        }, function (error, response) {
+          if (error) {
             console.log(error);
-            bot.sendMessage({
-                to: channelID,
-                message: "No pude encontrar la imagen que me pediste.",
+  
+            return bot.sendMessage({
+              to: channelID,
+              message: "El Autz no sabe programar, error al enviar el meme"
             });
-        }
-    });
+          }
+        });
   }
 
 module.exports.def = def;
