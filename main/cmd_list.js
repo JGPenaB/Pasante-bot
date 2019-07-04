@@ -41,7 +41,9 @@ const cmds = {
   meme: "meme.js",
   
   so: "so.js",
-  stack: "so.js"
+  stack: "so.js",
+
+  bayke: "bayke.js"
 };
 
 module.exports.binds = cmds;
