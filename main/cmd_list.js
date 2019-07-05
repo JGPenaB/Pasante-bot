@@ -31,6 +31,8 @@ const cmds = {
 
   time: "time.js",
   tiempo: "time.js",
+  fecha: "time.js",
+  hora: "time.js",
 
   imagen: "imagen.js",
   img: "imagen.js",
