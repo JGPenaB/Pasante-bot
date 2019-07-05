@@ -52,12 +52,12 @@ function def(cmd, user, users, bot, channelID, evt) {
 			})
 		}
 		bot.sendMessage({
-			to: channelID,
-			message: 'Mano, tuve que usar VPN y todo para ver esta vaina:',
-			embed: {
-				color: 2264407,
-				title: 'Tasa de conversión actual',
-				fields: Fields
+			'to': channelID,
+			'message': 'Mano, tuve que usar VPN y todo para ver esta vaina:',
+			'embed': {
+				'color': 2264407,
+				'title': 'Tasa de conversión actual',
+				'fields': Fields
 			}
 		}, (error, response) => {
 			console.log(error)
