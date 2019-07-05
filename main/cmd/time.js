@@ -1,29 +1,29 @@
-function def(cmd, user, users, bot, channelID, evt){
-	// Funcion para mostrar la fecha correcamente
-	function dateFormat(d) {
-		return d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
-	}
- 
-	let dateNow = new Date();
-	// cogemos la fecha utc
-	let dateUTC = new Date(dateNow.getUTCFullYear(), dateNow.getUTCMonth(), dateNow.getUTCDate(), dateNow.getUTCHours(), dateNow.getUTCMinutes(), dateNow.getUTCSeconds());
- 
-	// Definimos la diferencia en horas del time zone
-	// Para la diferencia horaria de dos horas y media seria 2.5
-	let tz = -4;
-	// Calculamos los segundos de la zona horaria
-	let seconds = (tz * 60 * 60) * 1000;
- 
-	// Aplicamos la diferencia horaria añadiendo los segundos al timestamp de la
-	// fecha UTC
-  dateUTC.setTime(dateUTC.getTime() + seconds);
-  
-	let FechaUTtcTimeZone = "La fecha y hora actuales en Venezuela son => " + dateFormat(dateUTC);
-
+function def(cmd, user, users, bot, channelID, evt) {
+	var Fecha = new Date()
 	bot.sendMessage({
-        to: channelID,
-        message: `${FechaUTtcTimeZone}`
-    });
+		'to': channelID,
+		'embed': {
+			'color': 700605,
+			'fields': [
+				{
+					'name': ':flag_ve: Venezuela',
+					'value': Fecha.toLocaleString('es-ES', {timeZone: 'America/Caracas'})
+				},
+				{
+					'name': ':flag_co: Colombia',
+					'value': Fecha.toLocaleString('es-ES', {timeZone: 'America/Bogota'})
+				},
+				{
+					'name': ':flag_cl: Chile',
+					'value': Fecha.toLocaleString('es-ES', {timeZone: 'America/Santiago'})
+				},
+				{
+					'name': ':flag_do: República Dominicana',
+					'value': Fecha.toLocaleString('es-ES', {timeZone: 'America/Santo_Domingo'})
+				}
+			]
+		}
+	})
 }
 
-module.exports.def = def;
+module.exports.def = def
