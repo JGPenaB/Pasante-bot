@@ -62,7 +62,7 @@ function def(cmd, user, users, bot, channelID, evt) {
 		}, (error, response) => {
 			console.log(error)
 		})
-	}
+	});
 }
 
 module.exports.def = def
