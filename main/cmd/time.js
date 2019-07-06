@@ -1,5 +1,17 @@
 function def(cmd, user, users, bot, channelID, evt) {
-	var Fecha = new Date();
+	function fecha(fecha, tz) {
+		var op = {
+			day: "2-digit",
+			month: "2-digit",
+			year: "numeric",
+			hour: "2-digit",
+			minute: "2-digit",
+			timeZone: tz
+		}
+		return fecha.toLocaleString(undefined, op)
+			.replace(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})/, '$4:$5 | $3.$2.$1');
+	}
+	var Ahora = new Date();
 	bot.sendMessage({
 		"to": channelID,
 		"embed": {
@@ -7,47 +19,19 @@ function def(cmd, user, users, bot, channelID, evt) {
 			"fields": [
 				{
 					"name": ":flag_ve: Venezuela",
-					"value": Fecha.toLocaleString(undefined, {
-						day: "2-digit",
-						month: "2-digit",
-						year: "numeric",
-						hour: "2-digit",
-						minute: "2-digit",
-						timeZone: "America/Caracas"
-					})
+					"value": fecha(Ahora, "America/Caracas")
 				},
 				{
 					'name': ':flag_co: Colombia',
-					"value": Fecha.toLocaleString(undefined, {
-						day: "2-digit",
-						month: "2-digit",
-						year: "numeric",
-						hour: "2-digit",
-						minute: "2-digit",
-						timeZone: "America/Bogota"
-					})
+					"value": fecha(Ahora, "America/Bogota")
 				},
 				{
 					'name': ':flag_cl: Chile',
-					"value": Fecha.toLocaleString(undefined, {
-						day: "2-digit",
-						month: "2-digit",
-						year: "numeric",
-						hour: "2-digit",
-						minute: "2-digit",
-						timeZone: "America/Santiago"
-					})
+					"value": fecha(Ahora, "America/Santiago")
 				},
 				{
 					'name': ':flag_do: República Dominicana',
-					"value": Fecha.toLocaleString(undefined, {
-						day: "2-digit",
-						month: "2-digit",
-						year: "numeric",
-						hour: "2-digit",
-						minute: "2-digit",
-						timeZone: "America/Santo_Domingo"
-					})
+					"value": fecha(Ahora, "America/Santo_Domingo")
 				}
 			]
 		}
