@@ -1,5 +1,5 @@
 # <div align="center">Pasante bot</div> 
-<div align="center">¡Pequeño bot para Discord!</div><br>
+<div align="center">¡Gran bot para Discord!</div><br>
 
 <div align="center">
 
