@@ -7,7 +7,7 @@ function def(cmd, user, users, bot, channelID, evt) {
 			"fields": [
 				{
 					"name": ":flag_ve: Venezuela",
-					"value": Fecha.toLocaleString("en-US", {
+					"value": Fecha.toLocaleString("en-GB", {
 						day: "2-digit",
 						month: "2-digit",
 						year: "numeric",
@@ -18,7 +18,7 @@ function def(cmd, user, users, bot, channelID, evt) {
 				},
 				{
 					'name': ':flag_co: Colombia',
-					"value": Fecha.toLocaleString("en-US", {
+					"value": Fecha.toLocaleString("en-GB", {
 						day: "2-digit",
 						month: "2-digit",
 						year: "numeric",
@@ -29,7 +29,7 @@ function def(cmd, user, users, bot, channelID, evt) {
 				},
 				{
 					'name': ':flag_cl: Chile',
-					"value": Fecha.toLocaleString("en-US", {
+					"value": Fecha.toLocaleString("en-GB", {
 						day: "2-digit",
 						month: "2-digit",
 						year: "numeric",
@@ -40,7 +40,7 @@ function def(cmd, user, users, bot, channelID, evt) {
 				},
 				{
 					'name': ':flag_do: República Dominicana',
-					"value": Fecha.toLocaleString("en-US", {
+					"value": Fecha.toLocaleString("en-GB", {
 						day: "2-digit",
 						month: "2-digit",
 						year: "numeric",
