@@ -7,15 +7,15 @@ function def(cmd, user, users, bot, channelID, evt) {
 			"fields": [
 				{
 					"name": ":flag_ve: Venezuela",
-					"value": Fecha.toLocaleString("es-ES", {timeZone: "America/Caracas"})
+					"value": Fecha.toLocaleString("es-VE", {timeZone: "America/Caracas"}) + "VE"
 				},
 				{
 					'name': ':flag_co: Colombia',
-					"value": Fecha.toLocaleString("es-ES", {timeZone: "America/Bogota"})
+					"value": Fecha.toLocaleString("en-US", {timeZone: "America/Bogota"}) + "US"
 				},
 				{
 					'name': ':flag_cl: Chile',
-					"value": Fecha.toLocaleString("es-ES", {timeZone: "America/Santiago"})
+					"value": Fecha.toLocaleString("en-GB", {timeZone: "America/Santiago"}) + "GB"
 				},
 				{
 					'name': ':flag_do: República Dominicana',
