@@ -6,7 +6,7 @@ function def(cmd, user, users, bot, channelID, evt) {
         host     : process.env.BATTLE_DB_URL,
         user     : process.env.BATTLE_DB_USER,
         password : process.env.BATTLE_DB_PASS,
-        database : 'HUNGER_GAMES'
+        database : process.env.BATTLE_DB_NAME
     });
 
     connection.connect();
