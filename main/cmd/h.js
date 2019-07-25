@@ -375,6 +375,31 @@ function def(cmd, user, users, bot, channelID, evt){
 				}, function(error, response){console.log(error);});
 			break;
 			
+			case "BATTLE":
+				bot.sendMessage({
+					to: channelID,
+					message: response,
+					embed:{    
+						color: 16749596,	
+						title: "!battle",
+						fields: [
+							{
+								name: "Descripción:",
+								value: "Nos vamos a cagar a plomo entre todos"
+							},
+							{
+								name: "Uso:",
+								value: "!battle"
+							},
+							{
+								name: "Ejemplos",
+								value: "!battle"
+							}
+						],
+						
+					}
+				}, function(error, response){console.log(error);});
+			break;
 			
 			default:
 				bot.sendMessage({

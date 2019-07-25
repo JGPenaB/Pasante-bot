@@ -45,7 +45,9 @@ const cmds = {
   so: "so.js",
   stack: "so.js",
 
-  bayke: "bayke.js"
+  bayke: "bayke.js",
+
+  battle: "battle.js"
 };
 
 module.exports.binds = cmds;
