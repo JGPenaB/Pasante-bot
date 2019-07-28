@@ -11,7 +11,7 @@ function def(cmd, user, users, bot, channelID, evt) {
           fields: [
               {
                   name: "Querido usuario",
-                  value: "Lamento informarle que aparte de que bayke sigue sin trabajo usted debe ingresar algun nombre de un meme."
+                  value: "Lamento informarle que aparte de que bayke tiene trabajo, usted debe ingresar algun nombre de un meme."
               },
               {
                   name: "Uso",

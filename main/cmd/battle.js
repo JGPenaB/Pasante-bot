@@ -87,13 +87,17 @@ function def(cmd, user, users, bot, channelID, evt) {
             
             const vivos = results;
 			
-			let texto = "";
+			if(vivos.length>0){
+				let texto = "";
 			
-			for(let i=0; i<vivos.length; ++i){
-				texto += vivos[i].USERNAME+"\n";
-			}
+				for(let i=0; i<vivos.length; ++i){
+					texto += vivos[i].USERNAME+"\n";
+				}
 
-            return callback(texto);
+				return callback(texto);
+			}
+			
+			return callback("No hay muertos... Todavía.");
         });
     }
 	
