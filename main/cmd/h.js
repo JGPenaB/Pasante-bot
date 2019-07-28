@@ -14,7 +14,7 @@ function def(cmd, user, users, bot, channelID, evt){
 				fields: [
 					{
 						name: "Lista de comandos:",
-						value: "stack\ncambio\ncrypto\ndefine\ndolar\nmarico\nsearch\ntime\nyoutube\n8ball\nmeme\ncafe"
+						value: "stack\ncambio\ncrypto\ndefine\ndolar\nmarico\nsearch\ntime\nyoutube\n8ball\nmeme\ncafe\nbattle"
 					},
 					{
 						name: "¿Ayuda más específica?",
@@ -76,6 +76,8 @@ function def(cmd, user, users, bot, channelID, evt){
 				}, function(error, response){console.log(error);});
 			break;
 			
+			
+			
 			case "H":
 			case "AYUDA":
 				bot.sendMessage({
@@ -91,7 +93,7 @@ function def(cmd, user, users, bot, channelID, evt){
 							},
 							{
 								name: "Uso:",
-								value: "!ayuda\n!ayuda [nombre del comando]"
+								value: "!ayuda\n!ayuda <nombre del comando>"
 							},
 							{
 								name: "Ejemplos:",
@@ -385,15 +387,15 @@ function def(cmd, user, users, bot, channelID, evt){
 						fields: [
 							{
 								name: "Descripción:",
-								value: "Nos vamos a cagar a plomo entre todos"
+								value: "Un pequeño juego a muerte entre los usuarios del server."
 							},
 							{
 								name: "Uso:",
-								value: "!battle"
+								value: "!battle\n!battle [vivos/muertos/ganadores]"
 							},
 							{
-								name: "Ejemplos",
-								value: "!battle"
+								name: "Ejemplos:",
+								value: "Ejecuta un turno:\n!battle\n\nLista de usuarios vivos:\n!battle vivos"
 							}
 						],
 						

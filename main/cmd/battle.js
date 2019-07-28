@@ -1,4 +1,5 @@
 function def(cmd, user, users, bot, channelID, evt) {
+	var ncmd = cmd.split(" ");
     const mysql = require('mysql');
     var textos = [];
 
@@ -28,7 +29,8 @@ function def(cmd, user, users, bot, channelID, evt) {
         connection.query(`UPDATE USUARIOS SET VIVO = "SI";`);
         connection.query(`INSERT INTO GANADORES VALUES(NULL, '${username}', NOW());`);
     }
-
+	
+	//Función principal
     function battle(callback) {
         connection.query('SELECT * FROM USUARIOS WHERE VIVO = "SI";', function (error, results, fields) {
             if (error) throw error;
@@ -37,7 +39,7 @@ function def(cmd, user, users, bot, channelID, evt) {
 
             if (vivos.length === 1) {
                 reset(vivos[0].USERNAME);
-                return callback("El ganador es: " + vivos[0].USERNAME);
+                return callback("El ganador es: **" + vivos[0].USERNAME + "**");
             }
 
             let texto = textos[Math.floor(Math.random()*textos.length)];
@@ -60,13 +62,132 @@ function def(cmd, user, users, bot, channelID, evt) {
             return callback(texto);
         });
     }
+	
+	//Vivos
+	function alive(callback) {
+        connection.query('SELECT * FROM USUARIOS WHERE VIVO = "SI";', function (error, results, fields) {
+            if (error) throw error;
+            
+            const vivos = results;
+			
+			let texto = "";
+			
+			for(let i=0; i<vivos.length; ++i){
+				texto += vivos[i].USERNAME+"\n";
+			}
 
-    battle(function (data) {
-        return bot.sendMessage({
-            to: channelID,
-            message: data
+            return callback(texto);
         });
-    });
+    }
+	
+	//Muertos
+	function dead(callback) {
+        connection.query('SELECT * FROM USUARIOS WHERE VIVO = "NO";', function (error, results, fields) {
+            if (error) throw error;
+            
+            const vivos = results;
+			
+			let texto = "";
+			
+			for(let i=0; i<vivos.length; ++i){
+				texto += vivos[i].USERNAME+"\n";
+			}
+
+            return callback(texto);
+        });
+    }
+	
+	//Ganadores
+	function winners(callback) {
+        connection.query('SELECT USERNAME, COUNT(USERNAME) as C FROM GANADORES GROUP BY USERNAME ORDER BY C DESC LIMIT 3;', function (error, results, fields) {
+            if (error) throw error;
+            
+            const top3 = results;
+			
+			let texto = "";
+			
+			for(let i=0; i<top3.length; ++i){
+				texto += top3[i].USERNAME+": "+top3[i].C+"\n";
+			}
+
+            return callback(texto);
+        });
+    }
+	
+	if(ncmd[1] === undefined)
+	{
+		battle(function (data) {
+			return bot.sendMessage({
+				to: channelID,
+				message: data
+			});
+		});
+	}else{
+		switch(ncmd[1].toLowerCase()){
+			case "vivos":
+				alive(function (data) {
+					return bot.sendMessage({
+						to: channelID,
+						message: '',
+						embed: {
+							color: 2264407,
+							title: 'Battle Royale',
+							fields: [
+								{
+									name: "Lista de usuarios vivos",
+									value: data
+								}
+							]
+						}
+					}, function(error, response){if (error) console.log(error);});
+				});
+			break;
+			
+			case "muertos":
+				dead(function (data) {
+					return bot.sendMessage({
+						to: channelID,
+						message: '',
+						embed: {
+							color: 15138821,
+							title: 'Battle Royale',
+							fields: [
+								{
+									name: "Lista de usuarios muertos",
+									value: data
+								}
+							]
+						}
+					}, function(error, response){if (error) console.log(error);});
+				});
+			break;
+			
+			case "ganadores":
+				winners(function (data) {
+					return bot.sendMessage({
+						to: channelID,
+						message: '',
+						embed: {
+							color: 16749596,
+							title: 'Battle Royale',
+							fields: [
+								{
+									name: "Top 3 de jugadores",
+									value: data
+								}
+							]
+						}
+					}, function(error, response){if (error) console.log(error);});
+				});
+			break;
+			
+			default:
+				bot.sendMessage({
+					to: channelID,
+					message: "Parámetro no reconocido. Intenta esto:\n!battle **vivos**\n!battle **muertos**\n!battle **ganadores**"
+				});
+		}
+	}
 
     setTimeout(() => {
         connection.end();

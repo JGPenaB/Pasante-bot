@@ -53,7 +53,7 @@ function def(cmd, user, users, bot, channelID, evt){
 									}
 								],
 							}
-						}, function(error, response){console.log(error);});
+						}, function(error, response){if (error) console.log(error);});
 					});
 				});
 			}
