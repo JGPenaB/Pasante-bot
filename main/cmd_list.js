@@ -47,7 +47,9 @@ const cmds = {
 
   bayke: "bayke.js",
 
-  battle: "battle.js"
+  battle: "battle.js",
+
+  hispa: "hispa.js"
 };
 
 module.exports.binds = cmds;

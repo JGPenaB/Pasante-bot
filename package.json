@@ -21,7 +21,9 @@
     "pngjs-image": "^0.11.7",
     "request": "^2.88.0",
     "winston": "^3.1.0",
-    "mysql": "^2.17.1"
+    "mysql": "^2.17.1",
+    "rimraf": "^2.6.3",
+    "zip-folder": "^1.0.0"
   },
   "engines": {
     "node": "8.9.3"
