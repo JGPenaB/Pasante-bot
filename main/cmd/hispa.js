@@ -2,7 +2,7 @@ function def(cmd, user, users, bot, channelID, evt){
     let url = cmd.split(" ")[1];
 
     const spawn = require("child_process").spawn;
-    const pythonProcess = spawn('python', ["hispachan-scraping.py", url]);
+    const pythonProcess = spawn('python3', ["main/cmd/hispachan-scraping.py", url]);
 
     var zipFolder = require('zip-folder');
     var rimraf = require("rimraf");
@@ -21,7 +21,6 @@ function def(cmd, user, users, bot, channelID, evt){
                 
                 var link = "";
 
-                const spawn = require("child_process").spawn;
                 const curlProcess = spawn('curl', ["-F", "file=@archive.zip", "https://file.io"]);
                 
                 curlProcess.stdout.on('data', (data) => {
