@@ -1,16 +1,17 @@
-const axios = require('axios')
+const axios = require('axios');
 
 Number.prototype.moneda = function() {
-	var re = '\\d(?=(\\d{3})+\\D)',
-		num = this.toFixed(Math.max(2))
+	const re = '\\d(?=(\\d{3})+\\D)',
+		num = this.toFixed(Math.max(2));
 	return (num.replace('.', ',')).replace(new RegExp(re, 'g'), '$&.')
-}
+};
 
 function def(cmd, user, users, bot, channelID, evt) {
 	const Sitios = [
 		axios.get('https://s3.amazonaws.com/dolartoday/data.json'),
 		axios.get('https://airtmrates.com/rates')
-	]
+	];
+
 	axios.all(Sitios).then(axios.spread((dolar, air) => {
 		var DolarUSD = dolar.data.USD.dolartoday
 		var DolarEUR = dolar.data.EUR.dolartoday

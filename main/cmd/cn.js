@@ -1,5 +1,10 @@
 function def(cmd, user, users, bot, channelID, evt){
-	
+	Number.prototype.moneda = function() {
+		const re = '\\d(?=(\\d{3})+\\D)',
+			num = this.toFixed(Math.max(2));
+		return (num.replace('.', ',')).replace(new RegExp(re, 'g'), '$&.')
+	};
+
 	const https = require("https");
 	let message = cmd.substring(1).split(" ");
 	let modo = message[1].toUpperCase();
@@ -45,11 +50,11 @@ function def(cmd, user, users, bot, channelID, evt){
 								fields: [
 									{
 										name: "Tasa DolarToday("+TasaDolar+" VES):",
-										value: "$**"+cantidad+"** => **"+(cantidad*TasaDolar)+"** VES"
+										value: "$**"+cantidad+"** => **"+(cantidad*TasaDolar).moneda()+"** VES"
 									},
 									{
 										name: "Tasa AirTM("+TasaAir+" VES):",
-										value: "$**"+cantidad+"** => **"+(cantidad*TasaAir)+"** VES"
+										value: "$**"+cantidad+"** => **"+(cantidad*TasaAir).moneda()+"** VES"
 									}
 								],
 							}
@@ -66,11 +71,11 @@ function def(cmd, user, users, bot, channelID, evt){
 								fields: [
 									{
 										name: "Tasa DolarToday("+TasaDolar+" VES):",
-										value: "**"+cantidad+"** VES => $**"+(cantidad/TasaDolar)+"**"
+										value: "**"+cantidad+"** VES => $**"+(cantidad/TasaDolar).moneda()+"**"
 									},
 									{
 										name: "Tasa AirTM("+TasaAir+" VES):",
-										value: "**"+cantidad+"** VES => $**"+(cantidad/TasaAir)+"**"
+										value: "**"+cantidad+"** VES => $**"+(cantidad/TasaAir).moneda()+"**"
 									}
 								],
 							}
