@@ -4,10 +4,10 @@ function def(cmd, user, users, bot, channelID, evt) {
     var textos = [];
 
     const connection = mysql.createConnection({
-        host     : process.env.BATTLE_DB_URL,
-        user     : process.env.BATTLE_DB_USER,
-        password : process.env.BATTLE_DB_PASS,
-        database : process.env.BATTLE_DB_NAME
+		host: process.env.BATTLE_DB_URL,
+		user: process.env.BATTLE_DB_USER,
+		password: process.env.BATTLE_DB_PASS,
+		database: process.env.BATTLE_DB_NAME
     });
 
     connection.connect();
@@ -29,12 +29,12 @@ function def(cmd, user, users, bot, channelID, evt) {
         connection.query(`UPDATE USUARIOS SET VIVO = "SI";`);
         connection.query(`INSERT INTO GANADORES VALUES(NULL, '${username}', NOW());`);
     }
-	
+
 	//Función principal
     function battle(callback) {
         connection.query('SELECT * FROM USUARIOS WHERE VIVO = "SI";', function (error, results, fields) {
             if (error) throw error;
-            
+
             const vivos = results;
 
             if (vivos.length === 1) {
@@ -42,15 +42,15 @@ function def(cmd, user, users, bot, channelID, evt) {
                 return callback("El ganador es: **" + vivos[0].USERNAME + "**");
             }
 
-            let texto = textos[Math.floor(Math.random()*textos.length)];
+			let texto = textos[Math.floor(Math.random() * textos.length)];
 
             setNo(texto.ID, "texto");
 
-            let user1 = Math.floor(Math.random()*vivos.length);
-            let user2 = Math.floor(Math.random()*vivos.length);
+			let user1 = Math.floor(Math.random() * vivos.length);
+			let user2 = Math.floor(Math.random() * vivos.length);
 
             setNo(vivos[user2].ID, "usuario");
-            
+
             if (user1 == user2) {
                 return battle(callback);
             }
@@ -62,72 +62,71 @@ function def(cmd, user, users, bot, channelID, evt) {
             return callback(texto);
         });
     }
-	
+
 	//Vivos
 	function alive(callback) {
         connection.query('SELECT * FROM USUARIOS WHERE VIVO = "SI";', function (error, results, fields) {
             if (error) throw error;
-            
+
             const vivos = results;
-			
+
 			let texto = "";
-			
-			for(let i=0; i<vivos.length; ++i){
-				texto += vivos[i].USERNAME+"\n";
+
+			for (let i = 0; i < vivos.length; ++i) {
+				texto += vivos[i].USERNAME + "\n";
 			}
 
             return callback(texto);
         });
     }
-	
+
 	//Muertos
 	function dead(callback) {
         connection.query('SELECT * FROM USUARIOS WHERE VIVO = "NO";', function (error, results, fields) {
             if (error) throw error;
-            
+
             const vivos = results;
-			
-			if(vivos.length>0){
+
+			if (vivos.length > 0) {
 				let texto = "";
-			
-				for(let i=0; i<vivos.length; ++i){
-					texto += vivos[i].USERNAME+"\n";
+
+				for (let i = 0; i < vivos.length; ++i) {
+					texto += vivos[i].USERNAME + "\n";
 				}
 
 				return callback(texto);
 			}
-			
+
 			return callback("No hay muertos... Todavía.");
         });
     }
-	
+
 	//Ganadores
 	function winners(callback) {
         connection.query('SELECT USERNAME, COUNT(USERNAME) as C FROM GANADORES GROUP BY USERNAME ORDER BY C DESC LIMIT 3;', function (error, results, fields) {
             if (error) throw error;
-            
-            const top3 = results;
-			
+
+			const top3 = results;
+
 			let texto = "";
-			
-			for(let i=0; i<top3.length; ++i){
-				texto += top3[i].USERNAME+": "+top3[i].C+"\n";
+
+			for (let i = 0; i < top3.length; ++i) {
+				texto += top3[i].USERNAME + ": " + top3[i].C + "\n";
 			}
 
             return callback(texto);
         });
     }
-	
-	if(ncmd[1] === undefined)
-	{
+
+	if (ncmd[1] === undefined) {
 		battle(function (data) {
 			return bot.sendMessage({
 				to: channelID,
 				message: data
 			});
 		});
-	}else{
-		switch(ncmd[1].toLowerCase()){
+	} else {
+		switch (ncmd[1].toLowerCase()) {
 			case "vivos":
 				alive(function (data) {
 					return bot.sendMessage({
@@ -143,10 +142,12 @@ function def(cmd, user, users, bot, channelID, evt) {
 								}
 							]
 						}
-					}, function(error, response){if (error) console.log(error);});
+					}, function (error, response) {
+						if (error) console.log(error);
+					});
 				});
-			break;
-			
+				break;
+
 			case "muertos":
 				dead(function (data) {
 					return bot.sendMessage({
@@ -162,10 +163,12 @@ function def(cmd, user, users, bot, channelID, evt) {
 								}
 							]
 						}
-					}, function(error, response){if (error) console.log(error);});
+					}, function (error, response) {
+						if (error) console.log(error);
+					});
 				});
-			break;
-			
+				break;
+
 			case "ganadores":
 				winners(function (data) {
 					return bot.sendMessage({
@@ -181,10 +184,12 @@ function def(cmd, user, users, bot, channelID, evt) {
 								}
 							]
 						}
-					}, function(error, response){if (error) console.log(error);});
+					}, function (error, response) {
+						if (error) console.log(error);
+					});
 				});
-			break;
-			
+				break;
+
 			default:
 				bot.sendMessage({
 					to: channelID,

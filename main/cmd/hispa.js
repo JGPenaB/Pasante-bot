@@ -1,4 +1,4 @@
-function def(cmd, user, users, bot, channelID, evt){
+function def(cmd, user, users, bot, channelID, evt) {
     let url = cmd.split(" ")[1];
 
     const spawn = require("child_process").spawn;
@@ -9,8 +9,8 @@ function def(cmd, user, users, bot, channelID, evt){
     var fs = require("fs");
 
     pythonProcess.stdout.on('close', (code) => {
-        zipFolder('imgs', 'archive.zip', function(err) {
-            if(err) {
+        zipFolder('imgs', 'archive.zip', function (err) {
+            if (err) {
                 console.log('oh no!', err);
             } else {
                 // console.log("Descarga de imagenes terminada");
@@ -18,11 +18,11 @@ function def(cmd, user, users, bot, channelID, evt){
                     to: channelID,
                     message: `Imagenes descargadas, procedo a comprimir y subir a file.io`
                 });
-                
+
                 var link = "";
 
                 const curlProcess = spawn('curl', ["-F", "file=@archive.zip", "https://file.io"]);
-                
+
                 curlProcess.stdout.on('data', (data) => {
                     let obj = JSON.parse(data);
                     // console.log("link:" + obj.link);

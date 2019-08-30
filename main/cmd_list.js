@@ -1,55 +1,55 @@
 const cmds = {
-  ayuda: "h.js",
-  help: "h.js",
-  h: "h.js",
+    ayuda: "h.js",
+    help: "h.js",
+    h: "h.js",
 
-  dolar: "dolar.js",
+    dolar: "dolar.js",
 
-  autodolar: "autodolar.js",
+    autodolar: "autodolar.js",
 
-  cr: "cr.js",
-  cripto: "cr.js",
-  crypto: "cr.js",
+    cr: "cr.js",
+    cripto: "cr.js",
+    crypto: "cr.js",
 
-  cambio: "cn.js",
-  cmb: "cn.js",
-  cn: "cn.js",
+    cambio: "cn.js",
+    cmb: "cn.js",
+    cn: "cn.js",
 
-  cafe: "cafe.js",
+    cafe: "cafe.js",
 
-  def: "def.js",
-  define: "def.js",
-  wiki: "def.js",
+    def: "def.js",
+    define: "def.js",
+    wiki: "def.js",
 
-  mrc: "mrc.js",
-  marico: "mrc.js",
+    mrc: "mrc.js",
+    marico: "mrc.js",
 
-  youtube: "yt.js",
-  yt: "yt.js",
+    youtube: "yt.js",
+    yt: "yt.js",
 
-  search: "search.js",
+    search: "search.js",
 
-  time: "time.js",
-  tiempo: "time.js",
-  fecha: "time.js",
-  hora: "time.js",
+    time: "time.js",
+    tiempo: "time.js",
+    fecha: "time.js",
+    hora: "time.js",
 
-  imagen: "imagen.js",
-  img: "imagen.js",
-  
-  "8b": "8b.js", 
-  "8ball": "8b.js",
+    imagen: "imagen.js",
+    img: "imagen.js",
 
-  meme: "meme.js",
-  
-  so: "so.js",
-  stack: "so.js",
+    "8b": "8b.js",
+    "8ball": "8b.js",
 
-  bayke: "bayke.js",
+    meme: "meme.js",
 
-  battle: "battle.js",
+    so: "so.js",
+    stack: "so.js",
 
-  hispa: "hispa.js"
+    bayke: "bayke.js",
+
+    battle: "battle.js",
+
+    hispa: "hispa.js"
 };
 
 module.exports.binds = cmds;
