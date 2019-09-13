@@ -15,8 +15,6 @@ const cmds = {
     cmb: "cn.js",
     cn: "cn.js",
 
-    cafe: "cafe.js",
-
     def: "def.js",
     define: "def.js",
     wiki: "def.js",
@@ -47,9 +45,7 @@ const cmds = {
 
     bayke: "bayke.js",
 
-    battle: "battle.js",
-
-    hispa: "hispa.js"
+    battle: "battle.js"
 };
 
 module.exports.binds = cmds;

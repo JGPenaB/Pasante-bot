@@ -349,30 +349,6 @@ function def(cmd, user, users, bot, channelID, evt) {
                 });
                 break;
 
-            case "CAFE":
-                bot.sendMessage({
-                    to: channelID,
-                    message: response,
-                    embed: {
-                        color: 16749596,
-                        title: "!cafe",
-                        fields: [
-                            {
-                                name: "Descripción:",
-                                value: "Te trae un café imaginario."
-                            },
-                            {
-                                name: "Uso:",
-                                value: "!cafe"
-                            }
-                        ],
-
-                    }
-                }, function (error, response) {
-                    console.log(error);
-                });
-                break;
-
             case "8BALL":
             case "8B":
                 bot.sendMessage({
