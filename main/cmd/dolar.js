@@ -60,8 +60,25 @@ function def(cmd, user, users, bot, channelID, evt) {
             }
         }, (error, response) => {
             console.log(error)
-        })
-    }));
+        });
+    })).catch(function(err){
+		bot.sendMessage({
+            'to': channelID,
+            'message': 'Mano, no sé que pasa. El Internet Explorer dice esto:',
+			'embed': {
+				'color': 2264407,
+				'title': err.response.statusText+" ("+err.response.status+")",
+				'fields': [
+						{
+							name: "Sitio web del error",
+							value: err.response.config.url
+                        }
+						]
+			}
+        }, (error, response) => {
+            console.log(error)
+        });
+	});
 }
 
 module.exports.def = def
