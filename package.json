@@ -16,13 +16,14 @@
     "dotenv": "^6.1.0",
     "image-data-uri": "^2.0.0",
     "meme-maker": "^2.1.2",
+    "mysql": "^2.17.1",
     "osmosis": "^1.1.8",
     "pg": "^7.4.3",
     "pngjs-image": "^0.11.7",
     "request": "^2.88.0",
-    "winston": "^3.1.0",
-    "mysql": "^2.17.1",
     "rimraf": "^2.6.3",
+    "twitter": "^1.7.1",
+    "winston": "^3.1.0",
     "zip-folder": "^1.0.0"
   },
   "engines": {

@@ -8,19 +8,12 @@ Number.prototype.moneda = function () {
 
 function def(cmd, user, users, bot, channelID, evt) {
     const Sitios = [
-        axios.get('https://s3.amazonaws.com/dolartoday/data.json'),
-        axios.get('https://airtmrates.com/rates')
+        axios.get('https://s3.amazonaws.com/dolartoday/data.json')
     ];
 
-    axios.all(Sitios).then(axios.spread((dolar, air) => {
+    axios.all(Sitios).then(axios.spread((dolar) => {
         var DolarUSD = dolar.data.USD.dolartoday
         var DolarEUR = dolar.data.EUR.dolartoday
-        var AirTmPos = air.data
-            .search('VES')
-        var AirTmUSD = air.data
-            .substring(AirTmPos, AirTmPos + 70)
-            .split("\n")[0]
-            .split(',')[4]
         var Fields = []
         if (DolarUSD == null) {
             Fields.push({
@@ -37,17 +30,6 @@ function def(cmd, user, users, bot, channelID, evt) {
                 'name': 'DolarToday (EUR)',
                 'value': '**' + Number(DolarEUR).moneda() + ' Bs.S**',
                 'inline': true
-            })
-        }
-        if (AirTmUSD == null) {
-            Fields.push({
-                'name': 'AirTM',
-                'value': '**Error**'
-            })
-        } else {
-            Fields.push({
-                'name': 'AirTM (USD)',
-                'value': '**' + Number(AirTmUSD).moneda() + ' Bs.S**'
             })
         }
         bot.sendMessage({
