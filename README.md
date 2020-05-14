@@ -6,7 +6,7 @@
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![MIT License](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
-<br>Desarrollado por: [Jesús Peña](https://github.com/JGPenaB), [José Padrón ♥](https://github.com/josevenezuelapadron).
+<br>Desarrollado por: [Jesús Peña](https://github.com/JGPenaB), [José Padrón](https://github.com/josevenezuelapadron).
 </div>
 
 --------

@@ -8,28 +8,47 @@ Number.prototype.moneda = function () {
 
 function def(cmd, user, users, bot, channelID, evt) {
     const Sitios = [
-        axios.get('https://s3.amazonaws.com/dolartoday/data.json')
+        //axios.get('https://s3.amazonaws.com/dolartoday/data.json')
+        axios.get('https://monitordolar.com/api/index.php?action=ver')
     ];
 
     axios.all(Sitios).then(axios.spread((dolar) => {
-        var DolarUSD = dolar.data.USD.dolartoday
-        var DolarEUR = dolar.data.EUR.dolartoday
+        var DolarToday = dolar.data.actual.dolarToday;
+        var AirTM = dolar.data.actual.airTM;
+        var LocalBit = dolar.data.actual.localBitcoin;
+        var bolCucuta = dolar.data.actual.bolivarCucuta;
+        var promedio = dolar.data.actual.promedioTotal;
         var Fields = []
-        if (DolarUSD == null) {
+        if (DolarToday == null || AirTM == null || LocalBit == null || bolCucuta == null || promedio == null) {
             Fields.push({
-                'name': 'DolarToday',
-                'value': '**Error**'
+                'name': 'Error',
+                'value': '**Sin datos**'
             })
         } else {
             Fields.push({
-                'name': 'DolarToday (USD)',
-                'value': '**' + Number(DolarUSD).moneda() + ' Bs.S**',
-                'inline': true
+                'name': 'DolarToday',
+                'value': '**' + Number(DolarToday).moneda() + ' VES**',
+                'inline': false
             })
             Fields.push({
-                'name': 'DolarToday (EUR)',
-                'value': '**' + Number(DolarEUR).moneda() + ' Bs.S**',
-                'inline': true
+                'name': 'AirTM',
+                'value': '**' + Number(AirTM).moneda() + ' VES**',
+                'inline': false
+            })
+            Fields.push({
+                'name': 'LocalBitcoin',
+                'value': '**' + Number(LocalBit).moneda() + ' VES**',
+                'inline': false
+            })
+            Fields.push({
+                'name': 'Bolívar Cúcuta',
+                'value': '**' + Number(bolCucuta).moneda() + ' VES**',
+                'inline': false
+            })
+            Fields.push({
+                'name': 'Promedio',
+                'value': '**' + Number(promedio).moneda() + ' VES**',
+                'inline': false
             })
         }
         bot.sendMessage({
@@ -41,26 +60,17 @@ function def(cmd, user, users, bot, channelID, evt) {
                 'fields': Fields
             }
         }, (error, response) => {
-            console.log(error)
+
+            if(error){
+                console.log(error);
+
+                bot.sendMessage({
+                    'to': channelID,
+                    'message': 'Mano, no sé que pasa. El Internet Explorer dice que me quedé sin Internet.',
+                });
+            }
         });
-    })).catch(function(err){
-		bot.sendMessage({
-            'to': channelID,
-            'message': 'Mano, no sé que pasa. El Internet Explorer dice esto:',
-			'embed': {
-				'color': 2264407,
-				'title': err.response.statusText+" ("+err.response.status+")",
-				'fields': [
-						{
-							name: "Sitio web del error",
-							value: err.response.config.url
-                        }
-						]
-			}
-        }, (error, response) => {
-            console.log(error)
-        });
-	});
+    }));
 }
 
 module.exports.def = def
