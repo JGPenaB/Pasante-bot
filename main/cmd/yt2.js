@@ -20,19 +20,20 @@ function def(cmd, user, users, bot, channelID, evt) {
                     }
                 }
             });
+
             // console.error(err);
         }
 
         if (!err && res.statusCode === 200) {
             let $ = cheerio.load(body);
-            
             let links = [];
-
             const regexp = new RegExp(/^(https?\:\/\/)?(www\.youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)$/);
 
             $("a").each((index, el) => {
                 links.push(el.attribs.href);
             });
+
+            //console.log(links)
 
             let link = links.find((el) => {
                 let test = `https://www.youtube.com${el}`;
@@ -59,5 +60,4 @@ function def(cmd, user, users, bot, channelID, evt) {
     });
 }
 
-// def("!yt ali primera");
 module.exports.def = def;

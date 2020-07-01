@@ -11,7 +11,7 @@
 
 --------
 
-<p style="text-align:justify;">Es un bot para nuestro server de Discord . Nació con el propósito de consultar criptomonedas, pero se incluyeron otras funciones igual de (in)útiles.</p>
+<p style="text-align:justify;">Es un bot para nuestro server de Discord. Nació con el propósito de consultar criptomonedas, pero se incluyeron otras funciones igual de (in)útiles.</p>
 
 **Funciones principales:**
 
