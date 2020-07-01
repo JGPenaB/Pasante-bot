@@ -1,6 +1,5 @@
 const request = require("request");
 const cheerio = require("cheerio");
-const fs = require("fs");
 
 function def(cmd, user, users, bot, channelID, evt) {
     const query = encodeURI(cmd.substring(4));
@@ -26,8 +25,6 @@ function def(cmd, user, users, bot, channelID, evt) {
 
         if (!err && res.statusCode === 200) {
             let $ = cheerio.load(body);
-
-            fs.writeFileSync('./output.html', body);
             
             let links = [];
 

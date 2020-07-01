@@ -7,31 +7,22 @@ function def(cmd, user, users, bot, channelID, evt) {
     scrapper.searchOne(query).then(result => {
         console.log(result);
 
-        /*bot.sendMessage(
-            {
-                to: channelID,
-                message: `https://www.youtube.com${link}`
-            }
-        );*/
+        if (result) {
+            bot.sendMessage(
+                {
+                    to: channelID,
+                    message: `${result}`
+                }
+            );
+        } else {
+            bot.sendMessage(
+                {
+                    to: channelID,
+                    message: `404`
+                }
+            );
+        }
     });
-    
-    // Si entra acá todo bien al mandar el msg a discord
-    /*if (link) {
-        bot.sendMessage(
-            {
-                to: channelID,
-                message: `https://www.youtube.com${link}`
-            }
-        );
-    } else {
-        bot.sendMessage(
-            {
-                to: channelID,
-                message: `La marisquera que buscas no ha sido localizada rata`
-            }
-        );
-    }*/
 }
 
-// def("!yt ali primera");
 module.exports.def = def;
