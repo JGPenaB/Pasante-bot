@@ -15,7 +15,7 @@
 
 **Funciones principales:**
 
-* Consulta del Dólar paralelo (DolarToday y AirTm) y Criptomonedas populares.
+* Consulta del Dólar paralelo (DolarToday y AirTm).
 
 * Búsqueda de imágenes y vídeos.
 

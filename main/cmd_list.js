@@ -5,12 +5,6 @@ const cmds = {
 
     dolar: "dolar.js",
 
-    autodolar: "autodolar.js",
-
-    cr: "cr.js",
-    cripto: "cr.js",
-    crypto: "cr.js",
-
     cambio: "cn.js",
     cmb: "cn.js",
     cn: "cn.js",
@@ -24,6 +18,7 @@ const cmds = {
 
     youtube: "yt.js",
     yt: "yt.js",
+    "yt2": "yt2.js",
 
     search: "search.js",
 
@@ -32,20 +27,13 @@ const cmds = {
     fecha: "time.js",
     hora: "time.js",
 
-    imagen: "imagen.js",
-    img: "imagen.js",
-
     "8b": "8b.js",
     "8ball": "8b.js",
-
-    meme: "meme.js",
 
     so: "so.js",
     stack: "so.js",
 
-    bayke: "bayke.js",
-
-    battle: "battle.js"
+    bayke: "bayke.js"
 };
 
 module.exports.binds = cmds;

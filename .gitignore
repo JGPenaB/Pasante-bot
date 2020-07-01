@@ -5,3 +5,4 @@ npm-debug.log
 test
 package-lock.json
 .idea
+output.html

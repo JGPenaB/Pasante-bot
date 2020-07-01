@@ -25,16 +25,8 @@ function def(cmd, user, users, bot, channelID, evt) {
                     "value": fecha(Ahora, "America/Caracas")
                 },
                 {
-                    'name': ':flag_co: Colombia',
-                    "value": fecha(Ahora, "America/Bogota")
-                },
-                {
                     'name': ':flag_cl: Chile',
                     "value": fecha(Ahora, "America/Santiago")
-                },
-                {
-                    'name': ':flag_do: República Dominicana',
-                    "value": fecha(Ahora, "America/Santo_Domingo")
                 }
             ]
         }

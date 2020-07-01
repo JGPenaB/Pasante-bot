@@ -14,7 +14,7 @@ function def(cmd, user, users, bot, channelID, evt) {
                 fields: [
                     {
                         name: "Lista de comandos:",
-                        value: "stack\ncambio\ncrypto\ndefine\ndolar\nmarico\nsearch\ntime\nyoutube\n8ball\nmeme\ncafe\nbattle"
+                        value: "stack\ncambio\ndefine\ndolar\nmarico\nsearch\ntime\nyoutube\n8ball"
                     },
                     {
                         name: "¿Ayuda más específica?",
@@ -99,30 +99,6 @@ function def(cmd, user, users, bot, channelID, evt) {
                             {
                                 name: "Ejemplos:",
                                 value: "Traer información del comando def:\n!ayuda def\n\nTraer información del comando dolar:\n!ayuda dolar"
-                            }
-                        ],
-
-                    }
-                }, function (error, response) {
-                    console.log(error);
-                });
-                break;
-
-            case "MEME":
-                bot.sendMessage({
-                    to: channelID,
-                    message: response,
-                    embed: {
-                        color: 16749596,
-                        title: "!meme",
-                        fields: [
-                            {
-                                name: "Descripción:",
-                                value: "Crea un meme en base a una imagen (por URL)"
-                            },
-                            {
-                                name: "Uso:",
-                                value: "!meme <URL> <texto superior> <texto inferior>"
                             }
                         ],
 
@@ -268,35 +244,6 @@ function def(cmd, user, users, bot, channelID, evt) {
                 });
                 break;
 
-            case "CR":
-            case "CRYPTO":
-                bot.sendMessage({
-                    to: channelID,
-                    message: response,
-                    embed: {
-                        color: 16749596,
-                        title: "!crypto / !cr",
-                        fields: [
-                            {
-                                name: "Descripción:",
-                                value: "Consulta las 10 mejores criptomonedas del mercado, o busca el valor de una criptomoneda en específico."
-                            },
-                            {
-                                name: "Uso:",
-                                value: "!crypto\n!crypto [moneda]"
-                            },
-                            {
-                                name: "Ejemplos:",
-                                value: "Si quiero la lista de las 10 mejores criptomonedas:\n!crypto\n\nSi busco una moneda en específico, uso el símbolo de la misma:\n!crypto BTC (para bitcoin)\n!crypto XMR (para monero)"
-                            }
-                        ],
-
-                    }
-                }, function (error, response) {
-                    console.log(error);
-                });
-                break;
-
             case "TIME":
                 bot.sendMessage({
                     to: channelID,
@@ -369,34 +316,6 @@ function def(cmd, user, users, bot, channelID, evt) {
                             {
                                 name: "Ejemplos",
                                 value: "!8ball ¿programar es fácil?"
-                            }
-                        ],
-
-                    }
-                }, function (error, response) {
-                    console.log(error);
-                });
-                break;
-
-            case "BATTLE":
-                bot.sendMessage({
-                    to: channelID,
-                    message: response,
-                    embed: {
-                        color: 16749596,
-                        title: "!battle",
-                        fields: [
-                            {
-                                name: "Descripción:",
-                                value: "Un pequeño juego a muerte entre los usuarios del server."
-                            },
-                            {
-                                name: "Uso:",
-                                value: "!battle\n!battle [vivos/muertos/ganadores]"
-                            },
-                            {
-                                name: "Ejemplos:",
-                                value: "Ejecuta un turno:\n!battle\n\nLista de usuarios vivos:\n!battle vivos"
                             }
                         ],
 
