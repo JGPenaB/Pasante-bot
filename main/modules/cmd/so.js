@@ -1,4 +1,34 @@
-function def(cmd, user, users, bot, channelID, evt) {
+/* 
+    Lista de alias válidos para el comando
+*/
+function aliases(){
+    return [
+        "stack",
+        "so"
+    ]
+}
+
+/**
+ * Información sobre el comando
+ */
+function help(){
+    return {
+        "usage": "!stack {query}",
+        "desc": "Busca una pregunta en StackOverflow y muestra la respuesta de la primera pregunta encontrada.\n Es preferible que la pregunta se haga en **Inglés** para obtener un resultado más relevante.",
+        "example": "!stack how to install gentoo"
+    }
+}
+
+/**
+ * Función principal del comando
+ * @param {*} cmd comando original
+ * @param {*} user usuario que escribió el comando
+ * @param {*} users lista de usuarios en el server
+ * @param {*} bot el cliente
+ * @param {*} channelID el canal donde se envió el comando
+ * @param {*} evt lista de eventos
+ */
+function main(cmd, user, users, bot, channelID, evt) {
 
     /*
     Misión cumplida, señor Anderson?
@@ -72,4 +102,4 @@ function def(cmd, user, users, bot, channelID, evt) {
     });
 }
 
-module.exports.def = def;
+module.exports = {aliases, help, main};

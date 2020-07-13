@@ -1,7 +1,36 @@
 const request = require("request");
 const cheerio = require("cheerio");
 
-function def(cmd, user, users, bot, channelID, evt) {
+/* 
+    Lista de alias válidos para el comando
+*/
+function aliases(){
+    return [
+        "yt2"
+    ]
+}
+
+/**
+ * Información sobre el comando
+ */
+function help(){
+    return {
+        "usage": "!yt2 {query}",
+        "desc": "Backup de la antigua funcion de youtubiste. Dario no lo ha arreglao menol",
+        "example": "!yt2"
+    }
+}
+
+/**
+ * Función principal del comando
+ * @param {*} cmd comando original
+ * @param {*} user usuario que escribió el comando
+ * @param {*} users lista de usuarios en el server
+ * @param {*} bot el cliente
+ * @param {*} channelID el canal donde se envió el comando
+ * @param {*} evt lista de eventos
+ */
+function main(cmd, user, users, bot, channelID, evt) {
     const query = encodeURI(cmd.substring(4));
     const url = `https://www.youtube.com/results?search_query=${query}`;
 
@@ -60,4 +89,4 @@ function def(cmd, user, users, bot, channelID, evt) {
     });
 }
 
-module.exports.def = def;
+module.exports = {aliases, help, main};

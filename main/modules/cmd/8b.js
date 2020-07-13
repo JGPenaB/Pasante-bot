@@ -1,4 +1,34 @@
-function def(cmd, user, users, bot, channelID, evt) {
+/* 
+    Lista de alias válidos para el comando
+*/
+function aliases(){
+    return [
+        "8ball",
+        "8b"
+    ]
+}
+
+/**
+ * Información sobre el comando
+ */
+function help(){
+    return {
+        "usage": "!8ball {pregunta}",
+        "desc": "Te responde una pregunta que hagas.",
+        "example": "!8ball ¿programar es fácil?"
+    }
+}
+
+/**
+ * Función principal del comando
+ * @param {*} cmd comando original
+ * @param {*} user usuario que escribió el comando
+ * @param {*} users lista de usuarios en el server
+ * @param {*} bot el cliente
+ * @param {*} channelID el canal donde se envió el comando
+ * @param {*} evt lista de eventos
+ */
+function main(cmd, user, users, bot, channelID, evt) {
     let pos = cmd.search(" ");
     const query = cmd.substring(pos + 1);
 
@@ -59,5 +89,5 @@ function def(cmd, user, users, bot, channelID, evt) {
     );
 }
 
-module.exports.def = def;
+module.exports = {aliases, help, main};
 

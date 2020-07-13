@@ -1,7 +1,36 @@
 const request = require("request");
 const cheerio = require("cheerio");
 
-function def(cmd, user, users, bot, channelID, evt) {
+/* 
+    Lista de alias válidos para el comando
+*/
+function aliases(){
+    return [
+        "search"
+    ]
+}
+
+/**
+ * Información sobre el comando
+ */
+function help(){
+    return {
+        "usage": "!search {query}",
+        "desc": "Busca una imagen en Bing usando un query, y lo postea en el chat. El SafeSearch está habilitado para los canales corrientes.",
+        "example": "Si busco una imagen de Venezuela:\n!search Venezuela\n\nSi busco una película como Toy Story:\n!search toy story"
+    }
+}
+
+/**
+ * Función principal del comando
+ * @param {*} cmd comando original
+ * @param {*} user usuario que escribió el comando
+ * @param {*} users lista de usuarios en el server
+ * @param {*} bot el cliente
+ * @param {*} channelID el canal donde se envió el comando
+ * @param {*} evt lista de eventos
+ */
+function main(cmd, user, users, bot, channelID, evt) {
     const query = encodeURI(cmd.substring(8));
     // const query = encodeURI("Mia Khalifa");
 
@@ -86,5 +115,5 @@ function def(cmd, user, users, bot, channelID, evt) {
     });
 }
 
-// def();
-module.exports.def = def;
+
+module.exports = {aliases, help, main};

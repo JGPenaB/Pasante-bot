@@ -1,4 +1,35 @@
-function def(cmd, user, users, bot, channelID, evt) {
+
+/* 
+    Lista de alias válidos para el comando
+*/
+function aliases(){
+    return [
+        "mrc",
+        "marico"
+    ]
+}
+
+/**
+ * Información sobre el comando
+ */
+function help(){
+    return {
+        "usage": "!mrc",
+        "desc": "Cuenta un secreto que solo Pasante sabe.",
+        "example": "!mrc"
+    }
+}
+
+/**
+ * Función principal del comando
+ * @param {*} cmd comando original
+ * @param {*} user usuario que escribió el comando
+ * @param {*} users lista de usuarios en el server
+ * @param {*} bot el cliente
+ * @param {*} channelID el canal donde se envió el comando
+ * @param {*} evt lista de eventos
+ */
+function main(cmd, user, users, bot, channelID, evt) {
 
     let marico = ``;
     let ind = Math.floor(Math.random() * (users.length));
@@ -25,7 +56,7 @@ function def(cmd, user, users, bot, channelID, evt) {
             break;
 
         case 6:
-            marico = `**${users[ind]}** mea sentada.`;
+            marico = `Oí que **${users[ind]}** mea sentada..`;
             break;
 
         case 7:
@@ -51,4 +82,4 @@ function def(cmd, user, users, bot, channelID, evt) {
     });
 }
 
-module.exports.def = def;
+module.exports = {aliases, help, main};

@@ -6,7 +6,36 @@ Number.prototype.moneda = function () {
     return (num.replace(".", ",")).replace(new RegExp(re, "g"), "$&.")
 };
 
-function def(cmd, user, users, bot, channelID, evt) {
+/* 
+    Lista de alias válidos para el comando
+*/
+function aliases(){
+    return [
+		"dolar"
+    ]
+}
+
+/**
+ * Información sobre el comando
+ */
+function help(){
+    return {
+        "usage": "!dolar",
+        "desc": "Consulta la tasa de cambio actual de distintas fuentes.",
+        "example": "!dolar"
+    }
+}
+
+/**
+ * Función principal del comando
+ * @param {*} cmd comando original
+ * @param {*} user usuario que escribió el comando
+ * @param {*} users lista de usuarios en el server
+ * @param {*} bot el cliente
+ * @param {*} channelID el canal donde se envió el comando
+ * @param {*} evt lista de eventos
+ */
+function main(cmd, user, users, bot, channelID, evt) {
     const Sitios = [
         //axios.get("https://s3.amazonaws.com/dolartoday/data.json")
         axios.get("https://monitordolar.com/api/index.php?action=ver")
@@ -73,4 +102,4 @@ function def(cmd, user, users, bot, channelID, evt) {
     }));
 }
 
-module.exports.def = def
+module.exports = {aliases, help, main};

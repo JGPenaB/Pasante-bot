@@ -1,4 +1,35 @@
-function def(cmd, user, users, bot, channelID, evt) {
+/* 
+    Lista de alias válidos para el comando
+*/
+function aliases(){
+    return [
+        "time",
+        "hora",
+        "tiempo"
+    ]
+}
+
+/**
+ * Información sobre el comando
+ */
+function help(){
+    return {
+        "usage": "!time",
+        "desc": "Muestra la fecha y hora actual de Venezuela y de otros países.",
+        "example": "!time"
+    }
+}
+
+/**
+ * Función principal del comando
+ * @param {*} cmd comando original
+ * @param {*} user usuario que escribió el comando
+ * @param {*} users lista de usuarios en el server
+ * @param {*} bot el cliente
+ * @param {*} channelID el canal donde se envió el comando
+ * @param {*} evt lista de eventos
+ */
+function main(cmd, user, users, bot, channelID, evt) {
     function fecha(fecha, tz) {
         const op = {
             day: "2-digit",
@@ -33,4 +64,4 @@ function def(cmd, user, users, bot, channelID, evt) {
     });
 }
 
-module.exports.def = def;
+module.exports = {aliases, help, main};

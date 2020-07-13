@@ -1,6 +1,36 @@
 const scrapper = require("scrape-youtube").default;
 
-function def(cmd, user, users, bot, channelID, evt) {
+/* 
+    Lista de alias válidos para el comando
+*/
+function aliases(){
+    return [
+        "youtube",
+        "yt"
+    ]
+}
+
+/**
+ * Información sobre el comando
+ */
+function help(){
+    return {
+        "usage": "!youtube {query}",
+        "desc": "Busca un vídeo en Youtube y coloca el link.",
+        "example": "Buscar un vídeo de programación:\n!yt programacion"
+    }
+}
+
+/**
+ * Función principal del comando
+ * @param {*} cmd comando original
+ * @param {*} user usuario que escribió el comando
+ * @param {*} users lista de usuarios en el server
+ * @param {*} bot el cliente
+ * @param {*} channelID el canal donde se envió el comando
+ * @param {*} evt lista de eventos
+ */
+function main(cmd, user, users, bot, channelID, evt) {
     const query = cmd.substring(4);
     //console.log(query);
 
@@ -41,4 +71,4 @@ function def(cmd, user, users, bot, channelID, evt) {
     });
 }
 
-module.exports.def = def;
+module.exports = {aliases, help, main};

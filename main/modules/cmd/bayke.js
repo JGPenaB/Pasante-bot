@@ -1,4 +1,33 @@
-function def(cmd, user, users, bot, channelID, evt) {
+/* 
+    Lista de alias válidos para el comando
+*/
+function aliases(){
+    return [
+        "bayke"
+    ]
+}
+
+/**
+ * Información sobre el comando
+ */
+function help(){
+    return {
+        "usage": "!bayke {boing|ditto|DVD|laserman|spin|thanos}",
+        "desc": "Muestra a la mascota del server.",
+        "example": "!bayke dvd"
+    }
+}
+
+/**
+ * Función principal del comando
+ * @param {*} cmd comando original
+ * @param {*} user usuario que escribió el comando
+ * @param {*} users lista de usuarios en el server
+ * @param {*} bot el cliente
+ * @param {*} channelID el canal donde se envió el comando
+ * @param {*} evt lista de eventos
+ */
+function main(cmd, user, users, bot, channelID, evt) {
     let pos = cmd.search(" ");
     const query = cmd.substring(pos + 1).toLowerCase();
 
@@ -61,7 +90,7 @@ function def(cmd, user, users, bot, channelID, evt) {
 
     return bot.uploadFile({
         to: channelID,
-        file: `./main/temp/bayke/${images[index]}.gif`
+        file: `./main/img/bayke/${images[index]}.gif`
     }, function (error, response) {
         if (error) {
             console.log(error);
@@ -74,4 +103,4 @@ function def(cmd, user, users, bot, channelID, evt) {
     });
 }
 
-module.exports.def = def;
+module.exports = {aliases, help, main};
