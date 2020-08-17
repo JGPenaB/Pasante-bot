@@ -1,4 +1,4 @@
-const scrapper = require("scrape-youtube").default;
+const axios = require("axios");
 
 /* 
     Lista de alias válidos para el comando
@@ -34,40 +34,28 @@ function main(cmd, user, users, bot, channelID, evt) {
     const query = cmd.substring(4);
     //console.log(query);
 
-    scrapper.searchOne(query).then(result => {
-        //console.log(result);
+    axios.get(`https://www.youtube.com/results?search_query=${query}`).then((jewtube) => {
 
-        if (result) {
+        let links = [];
+        const regexp = new RegExp(/((watch\?v=)|(embed|v)\/)([^\?&"'>]+)/g);
+
+        links = jewtube.data.match(regexp);
+
+        if(links){
             bot.sendMessage(
                 {
                     to: channelID,
-                    message: `${result}`
+                    message: `https://www.youtube.com/${links[0]}`
                 }
             );
-        } else {
+        }else{
             bot.sendMessage(
                 {
                     to: channelID,
-                    message: `404`
+                    message: `No pude encontrar el vídeo.`
                 }
             );
         }
-    }).catch(err => {
-        bot.sendMessage({
-            to: channelID,
-            message: `El Autz no sabe programar. Error: ${err}`,
-            embed: {
-                color: 6826080,
-                footer: {
-                    text: "Dificultades tecnicas brother"
-                },
-                image: {
-                    url: "https://i.ytimg.com/vi/a3rmgGoibsE/maxresdefault.jpg"
-                }
-            }
-        });
-
-        //console.error(err);
     });
 }
 
