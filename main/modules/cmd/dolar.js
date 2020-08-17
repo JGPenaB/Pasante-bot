@@ -72,6 +72,11 @@ function main(cmd, user, users, bot, channelID, evt) {
                 });
             }
         });
+    }).catch(() => {
+        bot.sendMessage({
+            "to": channelID,
+            "message": "MonitorDolar dejó de funcionar... O me bloquearon, no sé.",
+        });
     });
 
 
