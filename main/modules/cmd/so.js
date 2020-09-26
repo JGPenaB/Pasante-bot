@@ -38,8 +38,8 @@ function main(cmd, user, users, bot, channelID, evt) {
     const request = require("request");
     const cheerio = require("cheerio");
 
-    let query = cmd.substring(cmd.search(" "), cmd.length);
-    let url = "https://api.stackexchange.com/2.2/similar?pagesize=1&order=desc&sort=relevance&title=" + query + "&site=stackoverflow&key=" + process.env.SO_KEY;
+    let query = encodeURI(cmd.substring(cmd.search(" ")+1, cmd.length));
+    let url = `https://api.stackexchange.com/2.2/similar?pagesize=1&order=desc&sort=relevance&title=${query}&site=stackoverflow&key=${process.env.SO_KEY}`;
 
     request({uri: url, gzip: true}, function (err, res, body) {
 
