@@ -33,7 +33,7 @@ function main(cmd, user, users, bot, channelID, evt) {
 
     let marico = ``;
     let ind = Math.floor(Math.random() * (users.length));
-    switch (Math.floor(Math.random() * 9) + 1) {
+    switch (Math.floor(Math.random() * 11) + 1) {
 
         case 1:
             marico = `¡**${users[ind]}** es ***ROLO'E MARICO!***`;
@@ -56,7 +56,7 @@ function main(cmd, user, users, bot, channelID, evt) {
             break;
 
         case 6:
-            marico = `Oí que **${users[ind]}** mea sentada..`;
+            marico = `Oí que **${users[ind]}** mea sentada.`;
             break;
 
         case 7:
@@ -73,6 +73,14 @@ function main(cmd, user, users, bot, channelID, evt) {
 
         case 10:
             marico = `**${users[ind]}** muchacho marico.`;
+            break;
+
+        case 11:
+            marico = `A **${users[ind]}** le gustan los garrotes.`;
+            break;
+
+        case 11:
+            marico = `A **${users[ind]}** le limpian las cañerias a diario.`;
             break;
     }
 

@@ -42,7 +42,11 @@ bot.on("message", function (user, userID, channelID, message, evt) {
                 MemberList[key].status !== "offline" &&
                 !bot.users[key].bot
             ) {
-                users.push(bot.users[key].username);
+                if (MemberList[key].nick) {
+                    users.push(MemberList[key].nick);
+                } else {
+                    users.push(bot.users[key].username);
+                }
             }
         }
 
