@@ -38,7 +38,7 @@ function main(cmd, user, users, bot, channelID, evt) {
     let Fields = [];
     let current = new Date();
 
-    axios.get(`http://newsapi.org/v2/everything?qInTitle=${query}&from=${current.toISOString()}pageSize=5&sortBy=publishedAt&apiKey=${process.env.NEWSKEY}`).then((noticias) => {
+    axios.get(`http://newsapi.org/v2/everything?qInTitle=${query}&from=${current.toISOString()}pageSize=5&sortBy=publishedAt&language=en&apiKey=${process.env.NEWSKEY}`).then((noticias) => {
         
         if(noticias.data.articles.length > 0){
             Fields = noticias.data.articles.slice(0,5).map((data) => {
