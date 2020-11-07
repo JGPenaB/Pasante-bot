@@ -36,16 +36,17 @@ function main(cmd, user, users, bot, channelID, evt) {
 
     let query = encodeURI(cmd.substring(cmd.search(" ")+1, cmd.length));
     let Fields = [];
+    let current = new Date();
 
-    axios.get(`http://newsapi.org/v2/everything?qInTitle=${query}&pageSize=5&apiKey=458127a58a82419eaa3af764d948431a`).then((noticias) => {
+    axios.get(`http://newsapi.org/v2/everything?qInTitle=${query}&from=${current.toISOString()}pageSize=5&sortBy=publishedAt&apiKey=${process.env.NEWSKEY}`).then((noticias) => {
         
         if(noticias.data.articles.length > 0){
-            for(let i = 0; i < noticias.data.articles.length; i++){
-                Fields.push({
-                    "name": `:newspaper: ${noticias.data.articles[i].title}`,
-                    "value": `${noticias.data.articles[i].url}`
-                });
-            }
+            Fields = noticias.data.articles.slice(0,5).map((data) => {
+                return {
+                    "name": `:newspaper: ${data.title}`,
+                    "value": `${data.url}`
+                };
+            });
     
             bot.sendMessage({
                 "to": channelID,

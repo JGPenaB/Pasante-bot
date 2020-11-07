@@ -68,7 +68,7 @@ function main(cmd, user, users, bot, channelID, evt) {
             break;
 
         case 9:
-            marico = `**${users[ind]} piaso e puta.`;
+            marico = `**${users[ind]}** piaso e puta.`;
             break;
 
         case 10:
