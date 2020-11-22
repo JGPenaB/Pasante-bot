@@ -6,3 +6,5 @@ test
 package-lock.json
 .idea
 output.html
+output.log
+temp
