@@ -65,19 +65,19 @@ function main(cmd, user, users, bot, channelID, evt) {
                 imagenes.push(`${path}/${el}`);
             });
 
-            mergeImg(imagenes, {direction: true}).then(img => {
+            mergeImg(imagenes, {direction: true, align: "center", offset: 2}).then(img => {
                 img.write('out.png', () => {
                     bot.uploadFile({
                         "to": channelID,
                         "file": 'out.png',
                         "message": `Pajero`,
-                    });
+                    };
                 });
             });
 
             zipFolder.zipFolder(`./${path}`, `./${path}.zip`, function(err) {
                 if(err) {
-                    console.log('Something went wrong!', err);
+                    console.error('Something went wrong!', err);
                 } else {
                     bot.sendMessage({
                         "to": channelID,
@@ -101,6 +101,8 @@ function main(cmd, user, users, bot, channelID, evt) {
                             rimraf.sync(path);
                             fs.unlinkSync(path+".zip");
                             fs.unlinkSync("out.png");      
+
+                            console.log("Rippeo terminado");
                         }
                     });
                 }
