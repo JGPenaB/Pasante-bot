@@ -51,8 +51,8 @@ bot.on("message", function (user, userID, channelID, message, evt) {
         }
 
         /*
-         Executa un comando en base al alias proporcionado. Si el comando existe como propiedad de la lista de comandos,
-         ejecuta su función que tiene asignada.
+            Ejecuta un comando en base al alias proporcionado. Si el comando existe como propiedad de la lista de comandos,
+            ejecuta su función que tiene asignada.
         */
         if (commands.hasOwnProperty(cmd)) {
             commands[cmd].main(message, user, users, bot, channelID, evt);
@@ -60,16 +60,16 @@ bot.on("message", function (user, userID, channelID, message, evt) {
             /*
                 Caso contrario, verifica si se escribió el comando para la ayuda
             */
-            if(cmd === "h" || cmd === "help" || cmd === "ayuda"){
+            if (cmd === "h" || cmd === "help" || cmd === "ayuda") {
                 let subcmd = message.substring(1).split(" ")[1];
 
-                if(subcmd == null){
+                if (subcmd == null) {
                     let cmdlist = "";
 
                     //Armando la lista de comandos para presentarla
                     Object.keys(commands).forEach(element => {
                         let cmdalias = commands[element].aliases()[0];
-                        if(cmdlist.indexOf(cmdalias) === -1){
+                        if (cmdlist.indexOf(cmdalias) === -1) {
                             cmdlist += cmdalias+"\n";
                         }
                     });
@@ -93,11 +93,11 @@ bot.on("message", function (user, userID, channelID, message, evt) {
             
                         }
                     }, function (error, response) {
-                        if(error){
+                        if (error) {
                             console.log(error);
                         }
                     });
-                }else if(commands.hasOwnProperty(subcmd)){
+                } else if (commands.hasOwnProperty(subcmd)) {
                     
                     //Pidiendo la información del comando con un formato específico
                     let commandInfo = commands[subcmd].help();
@@ -179,12 +179,11 @@ bot.on("message", function (user, userID, channelID, message, evt) {
 //Evento personalizado
 bot.on("any", function (event) {
     //Si un usuario se une al server
-    if (event.t === "GUILD_MEMBER_ADD" && bot.servers[event.d.guild_id].name === "Sin barreras") {
-
+    if (event.t === "GUILD_MEMBER_ADD") {
         // Se le manda saludo al nuevo novato que acaba de entrar
         bot.sendMessage({
             to: bot.servers[event.d.guild_id].system_channel_id,
-            message: "Bienvenido <@!" + event.d.user.id + ">, al server de **Sin barreras**."
+            message: "Bienvenido <@!" + event.d.user.id + ">, al server. Rolitranco e pato."
         });
     }
 });

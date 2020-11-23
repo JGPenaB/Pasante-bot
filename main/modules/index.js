@@ -26,4 +26,4 @@ fs
         });
     });
 
-  module.exports = commands;
+module.exports = commands;

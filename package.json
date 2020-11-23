@@ -14,7 +14,6 @@
     "discord.io": "github:woor/discord.io#gateway_v6",
     "dotenv": "^6.1.0",
     "image-data-uri": "^2.0.0",
-    "merge-img": "^2.1.3",
     "osmosis": "^1.1.8",
     "request": "^2.88.0",
     "rimraf": "^2.7.1",

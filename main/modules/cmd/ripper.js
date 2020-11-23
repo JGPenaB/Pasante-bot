@@ -59,29 +59,9 @@ function main(cmd, user, users, bot, channelID, evt) {
                 recursiveDownload (urlArray, nameArray, i+1);
             }        
         } else {
-            const imagenes = [];
-
-            nameArray.forEach(el => {
-                imagenes.push(`${path}/${el}`);
-            });
-
-            mergeImg(imagenes, {direction: true, align: "center", offset: 2}).then(img => {
-                img.write('out.png', (err) => {
-                    if (err) {
-                        console.error(err);
-                    }
-                    
-                    bot.uploadFile({
-                        "to": channelID,
-                        "file": 'out.png',
-                        "message": `Pajero`,
-                    });
-                });
-            });
-
             zipFolder.zipFolder(`./${path}`, `./${path}.zip`, function(err) {
                 if(err) {
-                    console.error('Something went wrong!', err);
+                    console.error('Error al comprimir la carpeta rippeada: ' + err);
                 } else {
                     bot.sendMessage({
                         "to": channelID,
@@ -90,11 +70,10 @@ function main(cmd, user, users, bot, channelID, evt) {
 
                     exec(`curl -F "file=@${path}.zip" https://file.io`, (err, stdout, stderr) => {
                         if (err) {
-                            //some err occurred
-                            console.error(err)
+                            console.error('Error subiendo el archivo a file.io' + err)
                         } else {
-                            // the *entire* stdout and stderr (buffered)
                             console.log(`stdout: ${stdout}`);
+
                             const link = JSON.parse(stdout);
 
                             bot.sendMessage({
@@ -103,8 +82,7 @@ function main(cmd, user, users, bot, channelID, evt) {
                             });
 
                             rimraf.sync(path);
-                            fs.unlinkSync(path+".zip");
-                            fs.unlinkSync("out.png");      
+                            fs.unlinkSync(path+".zip"); 
 
                             console.log("Rippeo terminado");
                         }
@@ -138,6 +116,7 @@ function main(cmd, user, users, bot, channelID, evt) {
 
         if(!info.tablon || !info.hilo) {
             console.error("Error al obtener tablon o hilo");
+            
             bot.sendMessage({
                 "to": channelID,
                 "message": "Error al obtener tablon o hilo",
