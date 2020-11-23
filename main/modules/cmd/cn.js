@@ -36,7 +36,7 @@ function main(cmd, user, users, bot, channelID, evt) {
 	let modo = message[1];
 	let cantidad = parseFloat(message[2]);
 
-	if (modo !== undefined && (modo.toUpperCase() === "B" && modo.toUpperCase() === "D") && !isNaN(cantidad)) {
+	if (modo !== undefined && (modo.toUpperCase() === "B" || modo.toUpperCase() === "D") && !isNaN(cantidad)) {
 		modo = modo.toUpperCase();
 		
 		dolarService.dolarService().then(dolar => {
@@ -79,7 +79,8 @@ function main(cmd, user, users, bot, channelID, evt) {
 					],
 				}
 			}, function (error, response) {
-						console.log(error);
+				if(error)
+					console.log(error);
 			});
 
 		}).catch(() => {

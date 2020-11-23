@@ -22,7 +22,11 @@ fs
 
         Object.keys(aliases).forEach(alias => {
             console.log("Alias de "+file+": "+aliases[alias]);
-            commands[aliases[alias]] = module;
+            if(commands[aliases[alias]] !== undefined){
+                throw new Error("El alias \""+aliases[alias]+"\" ya esta en uso cuando el archivo "+file+" lo declara");
+            }else{
+                commands[aliases[alias]] = module;
+            }
         });
     });
 

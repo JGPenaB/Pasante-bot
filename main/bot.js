@@ -43,6 +43,12 @@ bot.on("message", function (user, userID, channelID, message, evt) {
                 !bot.users[key].bot
             ) {
                 if (MemberList[key].nick) {
+
+                    //Reemplaza el username por el nick para el que inició un evento
+                    if(MemberList[key].username === user){
+                        user = MemberList[key].nick;
+                    }
+                    
                     users.push(MemberList[key].nick);
                 } else {
                     users.push(bot.users[key].username);
