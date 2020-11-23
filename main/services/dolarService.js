@@ -20,10 +20,11 @@ async function dolarService(){
         $(".box-prices").each((index, el) => {
             let title = $("div", el).first().text();
             let price = $("div", el).first().next().text();
-            price = (price.replace(".","")).replace(",",".");
+            price = (price.replace(/\./g,"")).replace(",",".");
 
             //Guarda el "valor" convertido para realizar operaciones matemáticas
             list.push({"Titulo": title, "Precio": Number(price).moneda(), "Valor": price});
+            console.log(price);
         });
 
     });

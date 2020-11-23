@@ -33,11 +33,12 @@ function help(){
  */
 function main(cmd, user, users, bot, channelID, evt) {
 	let message = cmd.substring(1).split(" ");
-	let modo = message[1].toUpperCase();
+	let modo = message[1];
 	let cantidad = parseFloat(message[2]);
 
-	if ((modo === "D" || modo === "B") && !isNaN(cantidad)) {
-
+	if (modo !== undefined && !isNaN(cantidad)) {
+		modo = modo.toUpperCase();
+		
 		dolarService.dolarService().then(dolar => {
 			var DolarToday = dolar[0].Valor;
 			var AirTM = dolar[3].Valor;
