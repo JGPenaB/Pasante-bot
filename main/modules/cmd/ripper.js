@@ -32,12 +32,13 @@ function help(){
 function main(cmd, user, users, bot, channelID, evt) {
     const url = cmd.substring(1).split(" ")[1];
 
-    const request = require("request");
-    const cheerio = require("cheerio");
-    const fs = require("fs");
+    const request = require('request');
+    const cheerio = require('cheerio');
+    const fs = require('fs');
     const zipFolder = require('zip-a-folder');
-    const rimraf = require("rimraf");
+    const rimraf = require('rimraf');
     const { exec } = require('child_process');
+    const mergeImg = require('merge-img');
 
 
     function recursiveDownload (urlArray, nameArray, i, path) {
@@ -58,13 +59,29 @@ function main(cmd, user, users, bot, channelID, evt) {
                 recursiveDownload (urlArray, nameArray, i+1);
             }        
         } else {
+            const imagenes = [];
+
+            nameArray.forEach(el => {
+                imagenes.push(`${path}/${el}`);
+            });
+
+            mergeImg(imagenes, {direction: true}).then(img => {
+                img.write('out.png', () => {
+                    bot.uploadFile({
+                        "to": channelID,
+                        "file": 'out.png',
+                        "message": `Pajero`,
+                    });
+                });
+            });
+
             zipFolder.zipFolder(`./${path}`, `./${path}.zip`, function(err) {
                 if(err) {
                     console.log('Something went wrong!', err);
                 } else {
                     bot.sendMessage({
                         "to": channelID,
-                        "message": `Subiendo a file.io`,
+                        "message": `Subiendo a file.io`
                     });
 
                     exec(`curl -F "file=@${path}.zip" https://file.io`, (err, stdout, stderr) => {
@@ -82,7 +99,8 @@ function main(cmd, user, users, bot, channelID, evt) {
                             });
 
                             rimraf.sync(path);
-                            fs.unlinkSync(path+".zip");        
+                            fs.unlinkSync(path+".zip");
+                            fs.unlinkSync("out.png");      
                         }
                     });
                 }
