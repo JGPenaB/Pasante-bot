@@ -71,7 +71,7 @@ function main(cmd, user, users, bot, channelID, evt) {
                         "to": channelID,
                         "file": 'out.png',
                         "message": `Pajero`,
-                    };
+                    });
                 });
             });
 
