@@ -109,7 +109,7 @@ function main(cmd, user, users, bot, channelID, evt) {
 
         bot.sendMessage({
             "to": channelID,
-            "message": `Rippeando hispachan ${info.tablon}/${info.hilo}`,
+            "message": `Rippeando ${info.host}/${info.tablon}/${info.hilo}`,
         });
 
         if(!info.tablon || !info.hilo) {
