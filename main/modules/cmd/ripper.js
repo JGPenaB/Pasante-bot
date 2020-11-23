@@ -66,7 +66,11 @@ function main(cmd, user, users, bot, channelID, evt) {
             });
 
             mergeImg(imagenes, {direction: true, align: "center", offset: 2}).then(img => {
-                img.write('out.png', () => {
+                img.write('out.png', (err) => {
+                    if (err) {
+                        console.error(err);
+                    }
+                    
                     bot.uploadFile({
                         "to": channelID,
                         "file": 'out.png',
