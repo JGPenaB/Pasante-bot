@@ -30,10 +30,8 @@ const help = () => {
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-    const members = message.guild.members.cache.map(member => member.id);
-
-    const randomUserIndex = Math.floor(Math.random() * members.length);
-    const userName = message.guild.member(members[randomUserIndex]).displayName;
+    const randomUserKey = message.guild.members.cache.randomKey();
+    const userName = message.guild.member(randomUserKey).displayName;
 
     const randomAnswerIndex = Math.floor(Math.random() * messages.length);
     const answer = messages[randomAnswerIndex].replace('__USERNAME__', userName);

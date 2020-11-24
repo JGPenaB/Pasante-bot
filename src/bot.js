@@ -5,7 +5,9 @@ const Discord = require("discord.js");
 const logger = require("winston");
 const commands = require("./modules");
 
-const client = new Discord.Client();
+const client = new Discord.Client({
+    fetchAllMembers: true,
+});
 
 //Prefijo
 const prefix = process.env.PREFIX;
