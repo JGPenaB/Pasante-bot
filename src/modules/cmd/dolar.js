@@ -37,7 +37,7 @@ const main = async (message) => {
     exchanges = exchanges.map(exchange => {
         return {
             name: exchange.title,
-            value: exchange.value,
+            value: `**${dolarService.formatNumber(exchange.value)} VES**`,
             inline: false
         }
     });
