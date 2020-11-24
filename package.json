@@ -21,9 +21,6 @@
     "winston": "^3.3.3",
     "zip-a-folder": "0.0.12"
   },
-  "engines": {
-    "node": "8.9.3"
-  },
   "devDependencies": {
     "nodemon": "^2.0.6"
   }
