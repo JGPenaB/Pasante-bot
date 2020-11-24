@@ -8,10 +8,12 @@ Number.prototype.moneda = function () {
 };
 
 /**
- * Servicio de Dólar paralelo. Devuelve un array con los precios de cada tasa de cambio disponible
+ * Obtiene las tasas de los dólares
+ * 
+ * @return { Array<number> }
  */
-async function dolarService(){
-    var list = [];
+const getExchangeRates = async () => {
+    const list = [];
 
     await axios.get(`https://monitordolarvenezuela.com`).then((dolar) => {
 
@@ -23,7 +25,7 @@ async function dolarService(){
             price = (price.replace(/\./g,"")).replace(",",".");
 
             //Guarda el "valor" convertido para realizar operaciones matemáticas
-            list.push({"Titulo": title, "Precio": Number(price).moneda(), "Valor": price});
+            list.push({title, "rate": Number(price).moneda(), "value": price});
             console.log(price);
         });
 
@@ -32,4 +34,4 @@ async function dolarService(){
     return list;
 }
 
-module.exports = {dolarService};
+module.exports = {getExchangeRates};

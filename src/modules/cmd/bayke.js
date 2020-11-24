@@ -1,58 +1,37 @@
-/* 
-    Lista de alias válidos para el comando
-*/
-function aliases(){
-    return [
-        "bayke"
-    ]
-}
+const { Message } = require('discord.js');
+
+const generateEmbed = require('../messages/embed');
+
+/**
+ * Lista de alias válidos para el comando
+ * 
+ * @return { Array<string> }
+ */
+const aliases = () => {
+    return ['bayke'];
+};
 
 /**
  * Información sobre el comando
+ * 
+ * @return { Object }
  */
-function help(){
+const help = () => {
     return {
         "usage": "!bayke {boing|ditto|DVD|laserman|spin|thanos}",
         "desc": "Muestra a la mascota del server.",
         "example": "!bayke dvd"
     }
-}
+};
 
 /**
- * Función principal del comando
- * @param {*} cmd comando original
- * @param {*} user usuario que escribió el comando
- * @param {*} users lista de usuarios en el server
- * @param {*} bot el cliente
- * @param {*} channelID el canal donde se envió el comando
- * @param {*} evt lista de eventos
+ * Manejador del comando
+ * 
+ * @param { Message } message Evento completo del mensaje
  */
-function main(cmd, user, users, bot, channelID, evt) {
-    let pos = cmd.search(" ");
-    const query = cmd.substring(pos + 1).toLowerCase();
-
-    if (!query || pos === -1) {
-        return bot.sendMessage({
-            to: channelID,
-            message: "",
-            embed: {
-                color: 5396735,
-                fields: [
-                    {
-                        name: "Querido usuario",
-                        value: "Lamento informarle que aparte de que bayke tiene trabajo, usted debe ingresar algun nombre de un meme."
-                    },
-                    {
-                        name: "Uso",
-                        value: "!bayke (boing|ditto|DVD|laserman|spin|thanos)"
-                    }
-                ],
-                image: {
-                    url: "https://www.bkconnection.com/system/refinery/blog/posts/thumbnails/000/003/323/post_detail/family-friendly-app-store.gif?1432824720"
-                }
-            }
-        });
-    }
+const main = async (message) => {
+    const pos = message.content.search(' ');
+    const query = message.content.substring(pos + 1);
 
     const images = [
         'boing',
@@ -63,44 +42,24 @@ function main(cmd, user, users, bot, channelID, evt) {
         'thanos'
     ];
 
-    const index = images.indexOf(query);
-
-    if (index === -1) {
-        return bot.sendMessage({
-            to: channelID,
-            message: "",
-            embed: {
-                color: 5396735,
-                fields: [
-                    {
-                        name: "Querido usuario",
-                        value: "Lamento informarle que aparte de que bayke sigue sin trabajo usted debe ingresar el nombre del meme CORRECTAMENTE OK?."
-                    },
-                    {
-                        name: "Uso",
-                        value: "!bayke (boing|ditto|DVD|laserman|spin|thanos)"
-                    }
-                ],
-                image: {
-                    url: "https://www.bkconnection.com/system/refinery/blog/posts/thumbnails/000/003/323/post_detail/family-friendly-app-store.gif?1432824720"
-                }
-            }
+    if (!query || pos === -1 || images.indexOf(query) === -1) {
+        return message.channel.send({
+            embed: generateEmbed('ingresar el nombre del meme CORRECTAMENTE OK?.', '!bayke (boing|ditto|DVD|laserman|spin|thanos)')
         });
     }
 
-    return bot.uploadFile({
-        to: channelID,
-        file: `./main/img/bayke/${images[index]}.gif`
-    }, function (error, response) {
-        if (error) {
-            console.log(error);
+    const index = images.indexOf(query);
 
-            return bot.sendMessage({
-                to: channelID,
-                message: "El Autz no sabe programar, error al enviar el meme"
-            });
-        }
+    await message.channel.send({
+        files: [{
+            attachment: `./src/img/bayke/${images[index]}.gif`,
+            name: 'bayke_gay.gif'
+        }]
+    }).catch(error => {
+        console.log(error);
+
+        message.channel.send('El Autz no sabe programar, error al enviar el meme');
     });
-}
+};
 
-module.exports = {aliases, help, main};
+module.exports = { aliases, help, main };

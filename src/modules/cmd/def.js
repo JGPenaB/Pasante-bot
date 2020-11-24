@@ -1,24 +1,24 @@
-/* 
-    Lista de alias válidos para el comando
-*/
-function aliases(){
-    return [
-		"wiki",
-		"define",
-		"def"
-    ]
-}
+/**
+ * Lista de alias válidos para el comando
+ * 
+ * @return { Array<string> }
+ */
+const aliases = () => {
+    return ['wiki', 'define', 'def'];
+};
 
 /**
  * Información sobre el comando
+ * 
+ * @return { Object }
  */
-function help(){
+const help = () => {
     return {
         "usage": "!wiki {palabra o frase}",
         "desc": "Busca un artículo en la Wikipedia en **Inglés**, y muestra una pequeña definición con el link al artículo.",
         "example": "Si busco a Venezuela:\n!define venezuela\n\nSi busco algo relacionado con software, como Docker:\n!define docker software"
     }
-}
+};
 
 /**
  * Función principal del comando
@@ -28,6 +28,8 @@ function help(){
  * @param {*} bot el cliente
  * @param {*} channelID el canal donde se envió el comando
  * @param {*} evt lista de eventos
+ * 
+ * @todo: refactor this shit
  */
 function main(cmd, user, users, bot, channelID, evt) {
     const https = require("https");
