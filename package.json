@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.21.0",
     "cheerio": "^1.0.0-rc.3",
+    "discord.js": "^12.5.0",
     "dotenv": "^8.2.0",
     "image-data-uri": "^2.0.1",
     "osmosis": "^1.1.10",
