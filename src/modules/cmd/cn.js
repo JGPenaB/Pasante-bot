@@ -72,11 +72,11 @@ const main = async (message) => {
 			fields: [
 				{
 					name: `Tasa DolarToday (${dolarService.formatNumber(dolarToday)} VES):`,
-					value: `${from} **${amount}** => **${dolarService.formatNumber(exchange[0])}** ${to}`
+					value: `**${from} ${dolarService.formatNumber(amount)}** => **${dolarService.formatNumber(exchange[0])} ${to}**`
 				},
 				{
 					name: `Tasa AirTM (${dolarService.formatNumber(airTM)} VES):`,
-					value: `${from} **${amount}** => **${dolarService.formatNumber(exchange[1])}** ${to}`
+					value: `**${from} ${dolarService.formatNumber(amount)}** => **${dolarService.formatNumber(exchange[1])} ${to}**`
 				}
 			],
 		}
