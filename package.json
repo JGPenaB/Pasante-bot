@@ -9,21 +9,21 @@
     "dev": "nodemon main/bot.js"
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "cheerio": "^1.0.0-rc.2",
-    "dotenv": "^6.1.0",
-    "image-data-uri": "^2.0.0",
-    "osmosis": "^1.1.8",
+    "axios": "^0.21.0",
+    "cheerio": "^1.0.0-rc.3",
+    "dotenv": "^8.2.0",
+    "image-data-uri": "^2.0.1",
+    "osmosis": "^1.1.10",
     "request": "^2.88.0",
-    "rimraf": "^2.7.1",
-    "scrape-youtube": "^0.2.0",
-    "winston": "^3.1.0",
+    "rimraf": "^3.0.2",
+    "scrape-youtube": "^2.0.1",
+    "winston": "^3.3.3",
     "zip-a-folder": "0.0.12"
   },
   "engines": {
     "node": "8.9.3"
   },
   "devDependencies": {
-    "nodemon": "^1.18.11"
+    "nodemon": "^2.0.6"
   }
 }
