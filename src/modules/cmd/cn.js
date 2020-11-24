@@ -44,7 +44,6 @@ const main = async (message) => {
 	let to = 'VES';
 	const exchange = [];
 
-
 	const exchangeRates = await dolarService.getExchangeRates().catch(error => {
 		message.channel.send('MonitorDolar dejó de funcionar... O me bloquearon, no sé.');
 	});
@@ -52,7 +51,7 @@ const main = async (message) => {
 	const dolarToday = exchangeRates[0].value;
 	const airTM = exchangeRates[3].value;
 
-	if (mode === 'D') {
+	if (mode.toUpperCase() === 'D') {
 		exchange.push(amount * dolarToday);
 		exchange.push(amount * airTM);
 	} else {
@@ -64,18 +63,20 @@ const main = async (message) => {
 		exchange.push(amount / airTM);
 	}
 
+	console.log('EXCHANGE:::', exchange);
+
 	message.channel.send('Tuve que usar una calculadora, porque esto es demasiada matemática para mí', {
 		embed: {
 			color: 3141900,
 			title,
 			fields: [
 				{
-					name: `Tasa DolarToday (${dolarToday} VES):`,
-					value: `${from} **${amount}** => **${exchange[0].moneda()}** ${to}`
+					name: `Tasa DolarToday (${dolarService.formatNumber(dolarToday)} VES):`,
+					value: `${from} **${amount}** => **${dolarService.formatNumber(exchange[0])}** ${to}`
 				},
 				{
-					name: `Tasa AirTM (${airTM} VES):`,
-					value: `${from} **${amount}** => **${exchange[1].moneda()}** ${to}`
+					name: `Tasa AirTM (${dolarService.formatNumber(airTM)} VES):`,
+					value: `${from} **${amount}** => **${dolarService.formatNumber(exchange[1])}** ${to}`
 				}
 			],
 		}

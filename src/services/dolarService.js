@@ -1,10 +1,15 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-Number.prototype.moneda = function () {
-    const re = "\\d(?=(\\d{3})+\\D)",
-    num = this.toFixed(Math.max(2));
-    return (num.replace(".", ",")).replace(new RegExp(re, "g"), "$&.")
+/**
+ * Formatea un número y lo pone bonito
+ * 
+ * @param { number } formattingNumber
+ * 
+ * @return { number }
+ */
+const formatNumber = (formattingNumber) => {
+    return new Intl.NumberFormat().format(formattingNumber);
 };
 
 /**
@@ -25,7 +30,7 @@ const getExchangeRates = async () => {
             price = (price.replace(/\./g,"")).replace(",",".");
 
             //Guarda el "valor" convertido para realizar operaciones matemáticas
-            list.push({title, "rate": Number(price).moneda(), "value": price});
+            list.push({title, rate: formatNumber(Number(price)), value: price});
             console.log(price);
         });
 
@@ -34,4 +39,4 @@ const getExchangeRates = async () => {
     return list;
 }
 
-module.exports = {getExchangeRates};
+module.exports = { getExchangeRates, formatNumber };
