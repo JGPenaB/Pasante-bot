@@ -5,8 +5,8 @@
   "main": "bot.js",
   "author": "Autz64, Darioxlz",
   "scripts": {
-    "start": "node main/bot.js",
-    "dev": "nodemon main/bot.js"
+    "start": "node src/bot.js",
+    "dev": "nodemon src/bot.js"
   },
   "dependencies": {
     "axios": "^0.21.0",
