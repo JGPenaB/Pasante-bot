@@ -35,7 +35,7 @@ const help = () => {
  * 
  * @param { Message } message Evento completo del mensaje
  */
-const main = async (message) => {
+const main = async (message, userName) => {
     const readDir = util.promisify(fs.readdir);
     const readFile = util.promisify(fs.readFile);
 
@@ -59,19 +59,30 @@ const main = async (message) => {
         let randomAvatar = images[random.num(images.length)];
         randomAvatar = await readFile(`${avataresFolder}/${randomAvatar}`);
 
-        message.channel.send(randomRambling[0]);
-
-        randomRambling.shift();
-
         for (const rambling of randomRambling) {
-            await flow.sleep(2000);
-            
-            message.channel.send(rambling);
+
+            //Simula escritura en tiempo real (44 ms por caracter)
+            message.channel.startTyping();
+
+            await flow.sleep(rambling.length*40);
+
+            message.channel.stopTyping();
+
+            message.channel.send(rambling.replace('__USERNAME__', userName));
+
+            //Aguanta un poco antes del siguiente mensaje
+            await flow.sleep(500);
         }
 
         await bot.setAvatar(randomAvatar);
         
         await flow.sleep(5000);
+        
+        message.channel.startTyping();
+
+        await flow.sleep(randomIntroduction.length*40);
+        
+        message.channel.stopTyping();
 
         message.channel.send(randomIntroduction);
 
