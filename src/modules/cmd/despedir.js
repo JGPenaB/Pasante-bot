@@ -7,6 +7,7 @@ const { Message } = require('discord.js');
 const messages = require('../messages/despedir');
 const flow = require('../../utils/flow');
 const random = require('../../utils/random');
+const botUtils = require('../../utils/bot');
 
 /**
  * Lista de alias válidos para el comando
@@ -60,15 +61,7 @@ const main = async (message, userName) => {
         randomAvatar = await readFile(`${avataresFolder}/${randomAvatar}`);
 
         for (const rambling of randomRambling) {
-
-            //Simula escritura en tiempo real (44 ms por caracter)
-            message.channel.startTyping();
-
-            await flow.sleep(rambling.length*40);
-
-            message.channel.stopTyping();
-
-            message.channel.send(rambling.replace('__USERNAME__', userName));
+            await botUtils.simulateTyping(message, rambling.replace('__USERNAME__', userName));
 
             //Aguanta un poco antes del siguiente mensaje
             await flow.sleep(500);
@@ -77,24 +70,15 @@ const main = async (message, userName) => {
         await bot.setAvatar(randomAvatar);
         
         await flow.sleep(5000);
-        
-        message.channel.startTyping();
 
-        await flow.sleep(randomIntroduction.length*40);
-        
-        message.channel.stopTyping();
-
-        message.channel.send(randomIntroduction);
-
+        await botUtils.simulateTyping(message, randomIntroduction);
     } catch (error) {
         console.log(error);
 
-        const answer = messages.error[Math.floor(Math.random() * messages.error.length)];
+        const answer = messages.error[random.num(messages.error.length)];
 
         message.channel.send(answer);
     }
-
-    /* bot.setAvatar() */
 };
 
 module.exports = { aliases, help, main };
