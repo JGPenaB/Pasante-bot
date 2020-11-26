@@ -1,6 +1,7 @@
 const { Message } = require('discord.js');
 
 const messages = require('../messages/mrc');
+const random = require('../../utils/random');
 
 /**
  * Lista de alias válidos para el comando
@@ -30,11 +31,14 @@ const help = () => {
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-    const randomUserKey = message.guild.members.cache.randomKey();
+    const members = message.guild.members.cache
+        .filter(member => member.presence.status !== 'offline')
+        .map(member => member.id);
+
+    const randomUserKey = members[random.num(members.length)];
     const userName = message.guild.member(randomUserKey).displayName;
 
-    const randomAnswerIndex = Math.floor(Math.random() * messages.length);
-    const answer = messages[randomAnswerIndex].replace('__USERNAME__', userName);
+    const answer = messages[random.num(messages.length)].replace('__USERNAME__', userName);
 
     message.channel.send(answer);
 };
