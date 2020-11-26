@@ -6,7 +6,7 @@
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![MIT License](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
-<br>Desarrollado por: [Jesús Peña](https://github.com/JGPenaB), [José Padrón](https://github.com/josevenezuelapadron).
+<br>Desarrollado por: [Jesús Peña](https://github.com/JGPenaB), [José Padrón](https://github.com/josevenezuelapadron), [César Escudero](https://github.com/cedaesca).
 </div>
 
 --------
@@ -27,7 +27,7 @@
 
 ## Instalación
 
-* Requiere Node.js >= 8.9
+* Requiere Node.js >= 14.15
 
 Primero instala las dependencias necesarias:
 
@@ -35,7 +35,7 @@ Primero instala las dependencias necesarias:
 npm install
 ```
 
-Luego, crea un archivo .env que contenga el token de tu bot (para obtener un token, [sigue estos pasos](https://github.com/Chikachi/DiscordIntegration/wiki/How-to-get-a-token-and-channel-ID-for-Discord)):
+Luego, crea un archivo .env que contenga la estructura del archivo `.env.example` y coloca el token de tu bot (para obtener un token, [sigue estos pasos](https://github.com/Chikachi/DiscordIntegration/wiki/How-to-get-a-token-and-channel-ID-for-Discord)):
 ```
 TOKEN=<tu token>
 ```
