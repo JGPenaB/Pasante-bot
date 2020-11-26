@@ -1,3 +1,5 @@
+!.gitkeep
+
 /node_modules
 npm-debug.log
 .DS_Store
@@ -8,3 +10,4 @@ package-lock.json
 output.html
 output.log
 temp
+avatares
