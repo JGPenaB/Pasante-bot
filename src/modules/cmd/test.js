@@ -31,7 +31,11 @@ const help = () => {
 const main = (message, userName) => {
     const tests = Math.floor(Math.random() * 8) + 1;
     const assertions = Math.floor(Math.random() * 255) + 1;
-    return message.channel.send(`El código tiene: **${tests}** tests, **${assertions}** assertions y **${assertions}** fallos. \n ¿Quién programó eso?, ¿Cristian? :pepekek:`);
+
+    let emoji = message.guild.emojis.cache.find(emoji => emoji.name === 'pepekek');
+    emoji = emoji !== undefined ? emoji : ':poop:';
+
+    return message.channel.send(`El código tiene: **${tests}** tests, **${assertions}** assertions y **${assertions}** fallos. \n ¿Quién programó eso?, ¿Cristian? ${emoji}`);
 };
 
 module.exports = { aliases, help, main };
