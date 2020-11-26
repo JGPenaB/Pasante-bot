@@ -2,14 +2,14 @@ t]
 Description=My app
 
 [Service]
-ExecStart=/root/Pasante-bot/main/bot.js
+ExecStart=/root/Pasante-bot/src/bot.js
 Restart=always
 User=nobody
 # Note Debian/Ubuntu uses 'nogroup', RHEL/Fedora uses 'nobody'
 Group=nogroup
 Environment=PATH=/usr/bin/node
 Environment=NODE_ENV=production
-WorkingDirectory=/root/Pasante-bot/main
+WorkingDirectory=/root/Pasante-bot/src
 
 [Install]
 WantedBy=multi-user.target
