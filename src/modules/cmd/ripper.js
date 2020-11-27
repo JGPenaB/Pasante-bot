@@ -10,7 +10,7 @@ function aliases(){
 }
 
 /**
- * Información sobre el comando
+ * Información sobre el comandoo
  */
 function help(){
     return {
