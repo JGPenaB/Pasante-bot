@@ -39,7 +39,7 @@ const main = async (message, userName) => {
     args = args.filter(el => el != '' && el != ' ');
 
     if (args.length <= 1) {
-        message.channel.send(`Maldito mongolico tienes dos o mas opciones.`);
+        message.channel.send(`Maldito mongolico tienes que poner dos o mas opciones.`);
     } else {
         const option = args[random.num(args.length)];
         console.log(args);
