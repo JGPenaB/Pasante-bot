@@ -8,6 +8,7 @@ package-lock.json
 output.html
 output.log
 temp
+.env.prod
 
 avatares/*
 !avatares/.gitkeep

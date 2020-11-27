@@ -12,6 +12,7 @@ const messages = {
         ],
         [
             'Bueno, adiós. Ojala se mueran.',
+            'Es humillante que Bayke siga aqui y me boten es a mi',
             'Marditos.'
         ],
         [
@@ -30,7 +31,9 @@ const messages = {
         ],
         [
             '¿Es una broma?',
-            'Ah, no lo es...'
+            'Ah, no lo es...',
+            '¿Acaso no soy suficiente para ti?',
+            '¿Qué hice para merecerme tu desprecio?'
         ],
         [
             'Tanto tiempo trabajando para **__USERNAME__** y mira...',

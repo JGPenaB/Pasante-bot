@@ -1,45 +1,43 @@
-/* 
-    Lista de alias válidos para el comando
-*/
-function aliases(){
-    return [
-		"rip",
-		"ripper",
-		"rippea"
-    ]
-}
+const request = require('request');
+const cheerio = require('cheerio');
+const fs = require('fs');
+const zipFolder = require('zip-a-folder');
+const rimraf = require('rimraf');
+const { exec } = require('child_process');
+const { Message } = require('discord.js');
 
 /**
- * Información sobre el comandoo
+ * Información sobre el comando
+ * 
+ * @return { Object }
  */
-function help(){
+const help = () => {
     return {
-        "usage": "!rip {url a un hilo de hispachan}",
-        "desc": "Descarga imagenes/videos del hilo, los comprime y te manda un link para que lo descargues.",
+        "usage": "!rip",
+        "desc": "Rippea un hilo de hispachan",
         "example": "!rip https://www.hispachan.org/##/res/######.html#######"
     }
-}
+};
 
 /**
- * Función principal del comando
- * @param {*} cmd comando original
- * @param {*} user usuario que escribió el comando
- * @param {*} users lista de usuarios en el server
- * @param {*} bot el cliente
- * @param {*} channelID el canal donde se envió el comando
- * @param {*} evt lista de eventos
+ * Lista de alias válidos para el comando
+ * 
+ * @return { Array<string> }
  */
-function main(cmd, user, users, bot, channelID, evt) {
-    const url = cmd.substring(1).split(" ")[1];
+const aliases = () => {
+    return ['rip', 'ripper', 'rippea'];
+};
 
-    const request = require('request');
-    const cheerio = require('cheerio');
-    const fs = require('fs');
-    const zipFolder = require('zip-a-folder');
-    const rimraf = require('rimraf');
-    const { exec } = require('child_process');
-    const mergeImg = require('merge-img');
 
+/**
+ * Manejador del comando
+ * 
+ * @param { Message } message Evento completo del mensaje
+ */
+const main = async (message, userName) => {
+    const prefix = process.env.PREFIX;
+    const args = message.content.substring(prefix.length).split(' ');
+    const url = args[1];
 
     function recursiveDownload (urlArray, nameArray, i, path) {
         if (i < urlArray.length) {
@@ -63,10 +61,7 @@ function main(cmd, user, users, bot, channelID, evt) {
                 if(err) {
                     console.error('Error al comprimir la carpeta rippeada: ' + err);
                 } else {
-                    bot.sendMessage({
-                        "to": channelID,
-                        "message": `Subiendo a file.io`
-                    });
+                    message.channel.send('Subiendo a File.io');
 
                     exec(`curl -F "file=@${path}.zip" https://file.io`, (err, stdout, stderr) => {
                         if (err) {
@@ -76,10 +71,7 @@ function main(cmd, user, users, bot, channelID, evt) {
 
                             const link = JSON.parse(stdout);
 
-                            bot.sendMessage({
-                                "to": channelID,
-                                "message": `${link.link}`,
-                            });
+                            message.channel.send(`${link.link}`);
 
                             rimraf.sync(path);
                             fs.unlinkSync(path+".zip"); 
@@ -94,10 +86,8 @@ function main(cmd, user, users, bot, channelID, evt) {
 
     if(/(http[s]?:\/\/)?([^\/\s]+\/)(.*)/.test(url) == false) {
         console.error("Error: no hay url valida, url debe ser: https://www.hispachan.org/XX/res/XXX.html#XXX");
-        bot.sendMessage({
-            "to": channelID,
-            "message": "URL invalida",
-        });
+        
+        message.channel.send('URL invalida');
     } else {
         const partes = url.split("/");
 
@@ -109,18 +99,12 @@ function main(cmd, user, users, bot, channelID, evt) {
 
         const path = `${info.host}.${info.tablon}.${info.hilo}`;
 
-        bot.sendMessage({
-            "to": channelID,
-            "message": `Rippeando ${info.host}/${info.tablon}/${info.hilo}`,
-        });
+        message.channel.send(`Rippeando ${info.host}/${info.tablon}/${info.hilo}`);
 
         if(!info.tablon || !info.hilo) {
             console.error("Error al obtener tablon o hilo");
-            
-            bot.sendMessage({
-                "to": channelID,
-                "message": "Error al obtener tablon o hilo",
-            });
+
+            message.channel.send(`Error al obtener tablon o hilo`);
         } else {
             var src = [];
             var names = [];
@@ -149,10 +133,7 @@ function main(cmd, user, users, bot, channelID, evt) {
 
                     if(src.length == 0) {
                         console.error("No hay imagenes/videos para descargar");
-                        bot.sendMessage({
-                            "to": channelID,
-                            "message": "No hay imagenes/videos para descargar",
-                        });
+                        message.channel.send(`No hay imagenes/videos para descargar`);
                     } else {
                         recursiveDownload(src, names, 0, path);
                     }
@@ -160,6 +141,6 @@ function main(cmd, user, users, bot, channelID, evt) {
             });
         }
     }
-}
+};
 
-module.exports = {aliases, help, main};
+module.exports = { aliases, help, main };
