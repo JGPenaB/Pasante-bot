@@ -48,7 +48,7 @@ Y de último, para ejecutarlo, usa el siguiente comando:
 
 --------
 
-Hecho en NodeJS con la librería [discord.io (por izy512)](https://github.com/izy521/discord.io).
+Hecho en NodeJS con la librería [discord.js](https://github.com/discordjs/discord.js/).
 
 El bot hace uso de la API "[Stack Exchange API](https://api.stackexchange.com/docs)" para las búsquedas en Stack Overflow. Tanto el Stack Exchange API como Stack Overflow pertenecen a Stack Exchange Inc.
 
