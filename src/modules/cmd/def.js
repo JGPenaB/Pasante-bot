@@ -68,14 +68,20 @@ const main = async (message) => {
         let pages = second.data.query.pages;
 
         //Busca el primer extracto disponible de la lista de páginas
-        embedData.description = Object.values(pages)
+        let candidates = Object.values(pages)
         .filter((el) => {
             return el.hasOwnProperty("extract");
-        })
-        [0]
-        .extract
-        .toString()
-        .substring(0,1020);
+        });
+
+        if(candidates.length){
+            embedData.description = candidates[0]
+            .extract
+            .toString()
+            .substring(0,1020);
+        }else{
+            embedData.description = "";
+        }
+        
     }
 
     message.channel.send("Mano, esto fue lo primero que me apareció en la wikipedia:", {
