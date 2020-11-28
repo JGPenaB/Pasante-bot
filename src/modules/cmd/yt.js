@@ -30,12 +30,12 @@ const help = () => {
  */
 const main = async (message) => {
     const query = message.content.substring(4);
-    const regexp = new RegExp(/((watch\?v=)|(embed|v)\/)([^\?&"'>]+)/g);
+    const regexp = new RegExp(/(watch\?v=)([^\?\s*&"'>]+)/g);
 
     const { data } = await axios.get(`https://www.youtube.com/results?search_query=${query}`).catch(error => {
         message.channel.send('Mano, me salió sendo error buscando ese vídeo.');
     });
-
+    
     const links = data.match(regexp);
 
     if (links) {
