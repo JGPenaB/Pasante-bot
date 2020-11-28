@@ -1,3 +1,5 @@
+const { Message } = require('discord.js');
+
 /**
  * Lista de alias válidos para el comando
  * 
@@ -21,115 +23,63 @@ const help = () => {
 };
 
 /**
- * Función principal del comando
- * @param {*} cmd comando original
- * @param {*} user usuario que escribió el comando
- * @param {*} users lista de usuarios en el server
- * @param {*} bot el cliente
- * @param {*} channelID el canal donde se envió el comando
- * @param {*} evt lista de eventos
+ * Manejador del comando
  * 
- * @todo: refactor this shit
+ * @param { Message } message Evento completo del mensaje
  */
-function main(cmd, user, users, bot, channelID, evt) {
-    const https = require("https");
-    let pos = cmd.search(" ");
-    console.log(cmd.substring(pos + 1));
-    https.get("https://en.wikipedia.org/w/api.php?action=opensearch&search=" + cmd.substring(pos + 1) + "&limit=1&namespace=0&format=json", (resp) => {
-        let data = "";
-        let exdata = "";
-        let extract = "";
+const main = async (message) => {
 
-        resp.on("data", (chunk) => {
-            data += chunk;
+    const axios = require("axios");
+    const query = message.content.substring(message.content.search(" ") + 1, message.content.length);
+
+    if (message.content === query)
+        return message.channel.send("Inserta un término para buscar.");
+
+    const { data } = await axios.get(`https://en.wikipedia.org/w/api.php?action=opensearch&search=${query}`).catch(error => {
+        if(error) console.log(error);
+        return message.channel.send('Lo siento mano, estuve ocupado con la geva y no pude hacer lo que me pediste. ¿Tal vez otra oportunidad?');
+    });
+
+    //Si no devuelve un título o link, no encontró nada
+    if (!data[1].length || !data[3].length)
+        return message.channel.send("Estuve pegado toda la tarde, pero no encontré nada.");
+
+    let embedData = {
+        color: 13030341,
+        footer: {
+            text: "Powered by Wikimedia."
+        },
+        thumbnail: {
+            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Wikipedia-logo-v2-es.svg/557px-Wikipedia-logo-v2-es.svg.png"
+        },
+        title: data[1][0].toString(),
+        description: data[2][0].toString(),
+        url: data[3][0].toString()
+    };
+
+    //Si no hay un extracto definido, busca uno
+    if (!embedData.description.length) {
+
+        let second = await axios.get(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${query}`).catch(error => {
+            if(error) console.log(error);
+            return message.channel.send('Encontré varios links, pero me da flojera hacer el resumen. Sé más específico.');
         });
 
-        resp.on("end", () => {
-            //Convertir en JSON
-            let jsondata = JSON.parse(data);
+        let pages = second.data.query.pages;
 
-            if (!jsondata[2].toString().length) {
-                if (!jsondata[3].toString().length) {
+        //Busca el primer extracto disponible de la lista de páginas
+        embedData.description = Object.values(pages)
+        .filter((el) => {
+            return el.hasOwnProperty("extract");
+        })
+        [0]
+        .extract
+        .toString()
+        .substring(0,1020);
+    }
 
-                    bot.sendMessage({
-                        to: channelID,
-                        message: "estuve pegado toda la tarde buscando, pero no encontré nada."
-                    });
-                } else {
-
-                    https.get("https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=" + jsondata[3].toString().substring(30), (aditional) => {
-
-                        aditional.on("data", (exchunck) => {
-                            exdata += exchunck;
-                        });
-
-                        aditional.on("end", () => {
-                            let exjsondata = JSON.parse(exdata);
-
-                            for (var k in exjsondata.query.pages) {
-                                if (exjsondata.query.pages[k].hasOwnProperty("extract")) {
-                                    extract = exjsondata.query.pages[k].extract.toString();
-                                }
-                            }
-
-                            if (extract.length > 1020) {
-                                extract = extract.substring(0, 1020) + "...";
-                            }
-
-                            bot.sendMessage({
-                                to: channelID,
-                                message: "Mano, esto fue lo primero que me apareció en el gugul:",
-                                embed: {
-                                    color: 13030341,
-                                    footer: {
-                                        text: "Powered by Wikimedia."
-                                    },
-                                    thumbnail: {
-                                        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Wikipedia-logo-v2-es.svg/557px-Wikipedia-logo-v2-es.svg.png"
-                                    },
-                                    title: jsondata[1].toString(),
-                                    description: extract,
-                                    url: jsondata[3].toString()
-                                }
-                            }, function (error, response) {
-                                console.log(error);
-                            });
-
-                        });
-                    }).on("error", (exerr) => {
-                        console.log("Error:" + exerr.message);
-                    });
-                }
-            } else {
-                extract = jsondata[2].toString();
-                bot.sendMessage({
-                    to: channelID,
-                    message: "Mano, esto fue lo primero que me apareció en el gugul:",
-                    embed: {
-                        color: 13030341,
-                        footer: {
-                            text: "Powered by Wikimedia."
-                        },
-                        thumbnail: {
-                            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Wikipedia-logo-v2-es.svg/557px-Wikipedia-logo-v2-es.svg.png"
-                        },
-                        title: jsondata[1].toString(),
-                        description: extract,
-                        url: jsondata[3].toString()
-                    }
-                }, function (error, response) {
-                    console.log(error);
-                });
-            }
-
-        });
-
-    }).on("error", (err) => {
-        bot.sendMessage({
-            to: channelID,
-            message: "Lo siento mano, estuve ocupado con la geva y no pude hacer lo que me pediste. ¿Tal vez otra oportunidad?"
-        });
-        console.log("Error: " + err.message);
+    message.channel.send("Mano, esto fue lo primero que me apareció en la wikipedia:", {
+        embed: embedData
     });
 }
 
