@@ -24,14 +24,20 @@ const getExchangeRates = async () => {
 
         let $ = cheerio.load(dolar.data);
 
+        //Extrae el valor desde el CSS, ya que usan pseudo-elementos
+        const regexp = /content:(\s+)\'([^\s]+)\'/g;
+        const matches = [...dolar.data.matchAll(regexp)];
+
         $(".box-prices").each((index, el) => {
             let title = $("div", el).first().text();
-            let price = $("div", el).first().next().text();
+            let price = matches[index][2];
+
             price = (price.replace(/\./g,"")).replace(",",".");
 
             //Guarda el "valor" convertido para realizar operaciones matemáticas
-            list.push({title, rate: formatNumber(Number(price)), value: price});
-            console.log(price);
+            if ( !isNaN(price) )
+                list.push({title, rate: formatNumber(Number(price)), value: price});
+                
         });
 
     });

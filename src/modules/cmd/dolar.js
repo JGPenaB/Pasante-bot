@@ -34,6 +34,11 @@ const main = async (message) => {
         message.channel.send('MonitorDolar dejó de funcionar... O me bloquearon, no sé.');
     });
 
+    //Caso extremo
+    if ( !exchanges.length ){
+        return message.channel.send('No pude extraer nada de MonitorDolar.');
+    }
+
     exchanges = exchanges.map(exchange => {
         return {
             name: exchange.title,
@@ -44,7 +49,7 @@ const main = async (message) => {
 
     message.channel.send('Mano, tuve que usar VPN y todo para ver esta vaina:', {
         embed: {
-            color: 2264407,
+            color: 3141900,
             title: "Tasas de conversión del momento",
             fields: exchanges
         }

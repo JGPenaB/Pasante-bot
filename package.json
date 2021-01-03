@@ -14,6 +14,7 @@
     "discord.js": "^12.5.0",
     "dotenv": "^8.2.0",
     "image-data-uri": "^2.0.1",
+    "jsdom": "^16.4.0",
     "osmosis": "^1.1.10",
     "request": "^2.88.0",
     "rimraf": "^3.0.2",
