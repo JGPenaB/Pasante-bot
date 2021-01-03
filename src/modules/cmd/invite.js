@@ -31,9 +31,8 @@ const aliases = () => {
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-    
-    const answer = messages[random.num(messages.length)];
 
+    let answer = messages[random.num(messages.length)];
     answer += "\nhttps://discord.com/api/oauth2/authorize?client_id=489634750156242974&permissions=2081422545&scope=bot";
 
     message.channel.send(answer);
