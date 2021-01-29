@@ -30,6 +30,7 @@ const help = () => {
 const main = async (message) => {
 
     const axios = require("axios");
+    const cheerio = require("cheerio");
     const query = message.content.substring(message.content.search(" ") + 1, message.content.length);
 
     if (message.content === query)
@@ -83,6 +84,25 @@ const main = async (message) => {
         }
         
     }
+
+    //Caso extremo en el que no haya extracto alguno, lo crea
+    if ( !embedData.description.length ) {
+
+        let third = await axios.get(embedData.url).catch(error => {
+            if(error) console.log(error);
+            return message.channel.send("La PC se me congeló haciendo el resumen.");
+        });
+
+        let $ = cheerio.load(third.data);
+
+        //Extrae los primero párrafos
+        $("p").toArray().slice(0,3).forEach(el => {
+            embedData.description += $(el).text();
+        });
+
+        embedData.description = embedData.description.substr(0,1020);
+    }
+
 
     message.channel.send("Mano, esto fue lo primero que me apareció en la wikipedia:", {
         embed: embedData
