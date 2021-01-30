@@ -142,7 +142,7 @@ const main = async (message, userName) => {
                             const port = process.env.HOST_PORT || 8000;
                 
                             server.listen(port, host, () => {
-                                message.channel.send(`Descarga tu mierda en http://${host}:${port}`);
+                                message.channel.send(`Descarga tu mierda en ${host}:${port}`);
                             });
                 
                             const sockets = new Set();
