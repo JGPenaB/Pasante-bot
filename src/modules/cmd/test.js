@@ -35,7 +35,7 @@ const main = (message, userName) => {
     let emoji = message.guild.emojis.cache.find(emoji => emoji.name === 'pepekek');
     emoji = emoji !== undefined ? emoji : ':poop:';
 
-    return message.channel.send(`El código tiene: **${tests}** tests, **${assertions}** assertions y **${assertions}** fallos. \n ¿Quién programó eso?, ¿Cristian? ${emoji}`);
+    return message.channel.send(`El código tiene: **${tests}** tests, **${assertions}** assertions y **${assertions}** fallos. \n ¿Quién programó eso? ¿Cristian? ${emoji}`);
 };
 
 module.exports = { aliases, help, main };

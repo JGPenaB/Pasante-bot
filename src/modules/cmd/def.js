@@ -100,6 +100,8 @@ const main = async (message) => {
             embedData.description += $(el).text();
         });
 
+        //Elimina las citas "[1][2]... [citation needed]"
+        embedData.description = embedData.description.replace(/(\[)([\s\S]*?)(\])/g, "");
         embedData.description = embedData.description.substr(0,1020);
     }
 
