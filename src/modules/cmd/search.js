@@ -57,7 +57,7 @@ const main = async (message) => {
         }
 
         const $ = cheerio.load(body);
-        let link = $('img')[2].attribs.src;
+        let link = $('img')[11].attribs.src;
 
         // Quita los parámetros que recortan la img
         link = link.substr(0, 61);
