@@ -44,8 +44,7 @@ const main = async (message) => {
     .filter((newsItem)=>newsItem.lang==='en')
     .map((newsItem)=>`[${newsItem.headline}](${newsItem.url})`)
     .slice(0,2)
-    
-    let signo = quote.change > 0 ? '+' : ''
+    const signo = quote.change > 0 ? '+' : ''
     const embedData = {
       color: quote.changePercent > 0 ? 3141900 : 16711680,
       title: quote.companyName,
@@ -56,7 +55,7 @@ const main = async (message) => {
        },
        { 
          name:'Cambio %',
-         value: `${signo}${Math.round(quote.change*100)/100}  ( ${signo}${Math.round(quote.changePercent*100)/100}% )`
+         value: `${signo}${Math.round(quote.change*100)/100}  ( ${signo}${Math.round(quote.changePercent*10000)/100}% )`
        },
        { 
          name:'Volumen',
