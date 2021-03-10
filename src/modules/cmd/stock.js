@@ -52,11 +52,11 @@ const main = async (message) => {
       fields: [
        { 
          name: 'Precio',
-         value:`$${quote.latestPrice}`
+         value:`$${Math.round(quote.latestPrice*100)/100}`
        },
        { 
          name:'Cambio %',
-         value: `${signo}${quote.change}  ( ${signo}${Math.round(quote.changePercent*100)/100}% )`
+         value: `${signo}${Math.round(quote.change*100)/100}  ( ${signo}${Math.round(quote.changePercent*100)/100}% )`
        },
        { 
          name:'Volumen',
