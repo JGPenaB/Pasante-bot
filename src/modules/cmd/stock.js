@@ -2,7 +2,6 @@ const { Message } = require('discord.js')
 const axios = require('axios')
 const random = require('../../utils/random')
 const messages = require('../messages/stock')
-// let randomAvatar = images[random.num(images.length)];
 
 /**
  * Información sobre el comando
@@ -34,7 +33,7 @@ const main = async (message) => {
     return message.channel.send('Ingresa el simbolo de tu stock favorita, TSLA para Tesla')
   }
   try {
-    const { data:{quote , news} } = await axios.get(`https://cloud.iexapis.com/stable/stock/${query}/batch?types=quote,news`, {
+    const { data: { quote , news } } = await axios.get(`https://cloud.iexapis.com/stable/stock/${query}/batch?types=quote,news`, {
       params: {
         token: process.env.IEX_KEY
       }
