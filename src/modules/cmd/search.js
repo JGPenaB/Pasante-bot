@@ -38,14 +38,12 @@ const main = async (message) => {
     url += '&safesearch=off'
   }
 
-  let imageLink = 'https://i.ytimg.com/vi/a3rmgGoibsE/maxresdefault.jpg'
-
   try {
     const { data } = await axios.get(url)
     const $ = cheerio.load(data)
-    imageLink = $('img')[11].attribs.src
+    let imageLink = $('img')[11].attribs.src
     // Quita los parámetros que recortan la img
-    imageLink = imageLink.substr(0, 61)
+    imageLink = imageLink.substring(0, 61)
 
     return message.channel.send(messages[random.num(messages.length)], {
       embed: {
@@ -68,7 +66,7 @@ const main = async (message) => {
           text: 'Dificultades técnicas brother'
         },
         image: {
-          url: imageLink
+          url: 'https://i.ytimg.com/vi/a3rmgGoibsE/maxresdefault.jpg'
         }
       }
     })
