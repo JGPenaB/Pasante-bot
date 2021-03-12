@@ -57,7 +57,8 @@ const main = async (message) => {
         }
 
         const $ = cheerio.load(body);
-        let link = $('img')[11].attribs.src;
+        let links = [].filter.call($('img'), el => {return el.attribs.src != null && el.attribs.src.indexOf('svg') === -1;});
+        let link = links[3].attribs.src;
 
         // Quita los parámetros que recortan la img
         link = link.substr(0, 61);
