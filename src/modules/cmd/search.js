@@ -57,7 +57,7 @@ const main = async (message) => {
         }
 
         const $ = cheerio.load(body);
-        let links = [].filter.call($('img'), el => {return el.attribs.src != null && el.attribs.src.indexOf('bing.net') != -1;});
+        let links = [].filter.call($('img'), el => {return el.attribs.src != null && el.attribs.src.indexOf('bing.net/th/id/OIP') != -1;});
         links.forEach(el => console.log(el.attribs.src));
         let link = links[0].attribs.src;
 
