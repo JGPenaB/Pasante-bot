@@ -30,37 +30,33 @@ const main = async (message) => {
     return message.channel.send('Ingresa el simbolo de tu stock favorita, TSLA para Tesla')
   }
   try {
-    const { data: { quote , news } } = await axios.get(`https://cloud.iexapis.com/stable/stock/${query}/batch?types=quote,news`, {
+    const { data: { quote } } = await axios.get(`https://cloud.iexapis.com/stable/stock/${query}/batch?types=quote,news`, {
       params: {
         token: process.env.IEX_KEY
       }
     })
-    
-    //Extraemos las primeras 2 noticias en ingles
-    const englishNews = news
-    .filter((newsItem)=>newsItem.lang==='en')
-    .map((newsItem)=>`[${newsItem.headline}](${newsItem.url})`)
-    .slice(0,2)
     const signo = quote.change > 0 ? '+' : ''
     const embedData = {
       color: quote.change > 0 ? 3141900 : 16711680,
       title: quote.companyName,
       fields: [
        { 
-         name: 'Precio',
-         value:`$${Math.round((quote.latestPrice*100)/100).toLocaleString()}`
+         name:'Precio',
+         value:`$${(Math.round(quote.latestPrice*100)/100).toLocaleString()}`
        },
        { 
-         name:'Cambio %',
-         value: `${signo}${Math.round(quote.change*100)/100}  ( ${signo}${Math.round(quote.changePercent*10000)/100}% )`
+         name:'Cambio',
+         value:`${signo}${Math.round(quote.change*100)/100}  ( ${signo}${Math.round(quote.changePercent*10000)/100}% )`
        },
        { 
          name:'Volumen',
-         value: `${quote.avgTotalVolume}`
+         value:`${quote.avgTotalVolume.toLocaleString()}`
        },
        {
-         name:'Noticias',
-         value:englishNews,
+         name:'Mas info',
+         value:`[Yahoo Finance](https://finance.yahoo.com/quote/${query})
+                [Seeking Alpha](https://seekingalpha.com/symbol/${query.toUpperCase()})
+                [CNBC](https://www.cnbc.com/quotes/${query})`
        }
       ],
       footer: { text: `Bolsa: ${quote.isUSMarketOpen ? 'abierta' : 'cerrada'}` }
