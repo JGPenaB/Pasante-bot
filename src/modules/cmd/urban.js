@@ -89,7 +89,7 @@ const main = async (message) => {
                 embed: {
                     color: 5396735,
                     title: `_La definición gonsaladezca_`,
-                    description: `**Termino**: ${response.list[0].word}\n\n**Definición**: ${response.list[0].definition}\n\n**Example**: ${response.list[0].example}`
+                    description: `**Termino**: ${response.list[0].word}\n\n**Definición**: ${response.list[0].definition}\n\n**Ejemplo**: ${response.list[0].example}`
                 }
             });
         }
