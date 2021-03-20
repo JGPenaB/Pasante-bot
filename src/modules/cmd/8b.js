@@ -1,5 +1,7 @@
 const { Message } = require('discord.js');
 
+const random = require('../../utils/random');
+
 const generateEmbed = require('../messages/embed');
 const messages = require('../messages/8b');
 
@@ -41,8 +43,7 @@ const main = (message, userName) => {
         });
     }
 
-    const index = Math.floor(Math.random() * messages.length);
-    const answer = messages[index - 1];
+    const answer = messages[random.num(messages.length)];
 
     return message.channel.send(`\`${query}\`\n${answer}, **${userName}**`);
 };
