@@ -29,7 +29,7 @@ const help = () => {
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-    const query = message.content.substring(4);
+    const query = message.content.substring(message.content.search(" ") + 1, message.content.length);
     const regexp = new RegExp(/(watch\?v=)([^\?\s*&"'>]+)/g);
 
     const { data } = await axios.get(`https://www.youtube.com/results?search_query=${query}`).catch(error => {

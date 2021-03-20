@@ -29,7 +29,7 @@ const help = () => {
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-    const query = encodeURI(message.content.substring(7));
+    const query = encodeURI(message.content.substring(message.content.search(" ") + 1, message.content.length));
     let url = `https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=${query}`;
 
     // Si el query está vacio
