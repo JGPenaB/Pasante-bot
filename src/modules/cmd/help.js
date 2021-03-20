@@ -36,9 +36,12 @@ const main = (message, _, commands) => {
             const cmdalias = commands[element].aliases()[0];
             
             if (cmdlist.indexOf(cmdalias) === -1) {
-                cmdlist += cmdalias+"\n";
+                cmdlist += "\`"+cmdalias+"\`, ";
             }
         });
+
+        //Elimina la última coma
+        cmdlist = cmdlist.substring(0,cmdlist.length-2);
 
         return message.channel.send('Buenos días a todos, soy pasante en este server porque necesito la experiencia para el currículum. Cualquier duda:', {
             embed: {
@@ -46,12 +49,16 @@ const main = (message, _, commands) => {
                 title: "Pasante Bot",
                 fields: [
                     {
-                        name: "Lista de comandos:",
+                        name: "Habilidades Técnicas:",
                         value: cmdlist
                     },
                     {
                         name: "¿Ayuda más específica?",
-                        value: "Usa el comando **!ayuda** seguido del nombre del comando que vayas a usar:\n\n!ayuda dolar\n!ayuda define\n..."
+                        value: "Usa el comando **!ayuda** seguido del nombre del comando que vayas a usar:\n`!ayuda dolar`\n`!ayuda define`\n`...`"
+                    },
+                    {
+                        name: "Información de Contacto:",
+                        value: "[Repositorio en Github](https://github.com/JGPenaB/Pasante-bot), [Invítame a tu server](https://discord.com/api/oauth2/authorize?client_id=489634750156242974&permissions=2081422545&scope=bot)"
                     }
                 ],
             }
@@ -66,11 +73,10 @@ const main = (message, _, commands) => {
         const commandAliases = commands[subcmd].aliases();
         
         let commandTitle = '';
-        let response = '';
 
         //Crea el título del comando en base a los alias existentes
         commandAliases.forEach(alias => {
-            commandTitle += prefix + alias+"   ";
+            commandTitle += prefix + alias + "   ";
         });
 
         const index = Math.floor(Math.random() * messages.length) + 1;
@@ -87,7 +93,7 @@ const main = (message, _, commands) => {
                     },
                     {
                         name: "Uso:",
-                        value: commandInfo.usage
+                        value: "\`"+commandInfo.usage+"\`"
                     },
                     {
                         name: "Ejemplos:",
