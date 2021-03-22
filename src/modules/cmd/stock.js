@@ -1,8 +1,7 @@
 const { Message } = require('discord.js')
 const axios = require('axios')
-const random = require('../../utils/random')
+const { decimalFix, randomWithLimit } = require('../../utils/numbers')
 const messages = require('../messages/stock')
-
 /**
  * Lista de alias válidos para el comando
  * @return { Array<string> }
@@ -26,47 +25,44 @@ const help = () => ({
 const main = async (message) => {
   const query = message.content.substring(7).replace(/\s/g,'')
 
-  if( query.length<1 ) {
+  if( query.length < 1 ) {
     return message.channel.send('Ingresa el simbolo de tu stock favorita, TSLA para Tesla')
   }
   try {
-    const { data: { quote } } = await axios.get(`https://cloud.iexapis.com/stable/stock/${query}/batch?types=quote,news`, {
+    const { data: quote } = await axios.get(`https://cloud.iexapis.com/stable/stock/${query}/quote`, {
       params: {
-        token: process.env.IEX_KEY
+        token: process.env.IEX_KEY,
+        displayPercent:true
       }
     })
     const signo = quote.change > 0 ? '+' : ''
-    const embedData = {
+    let fieldsArr = [
+    { 
+      name:'Precio',
+      value:`$${decimalFix(quote.latestPrice)}`
+    },
+    { 
+      name:'Cambio',
+      value:`${signo}${decimalFix(quote.change)}  ( ${signo}${decimalFix(quote.changePercent)}% )`
+    },
+    { 
+      name:'Volumen',
+      value:`${decimalFix(quote.avgTotalVolume)}`
+    }
+  ]
+   return message.channel.send(`${messages[randomWithLimit(messages.length)]} ${quote.symbol}`, {
+     embed: {
       color: quote.change > 0 ? 3141900 : 16711680,
       title: quote.companyName,
-      fields: [
-       { 
-         name:'Precio',
-         value:`$${(Math.round(quote.latestPrice*100)/100).toLocaleString()}`
-       },
-       { 
-         name:'Cambio',
-         value:`${signo}${Math.round(quote.change*100)/100}  ( ${signo}${Math.round(quote.changePercent*10000)/100}% )`
-       },
-       { 
-         name:'Volumen',
-         value:`${quote.avgTotalVolume.toLocaleString()}`
-       },
-       {
-         name:'Mas info',
-         value:`[Yahoo Finance](https://finance.yahoo.com/quote/${query})
-                [Seeking Alpha](https://seekingalpha.com/symbol/${query.toUpperCase()})
-                [CNBC](https://www.cnbc.com/quotes/${query})`
-       }
-      ],
-      footer: { text: `Bolsa: ${quote.isUSMarketOpen ? 'abierta' : 'cerrada'}` }
+      fields: quote.isUSMarketOpen 
+      ? fieldsArr
+      : [...fieldsArr, { name: 'Precio off-market', value: `$${decimalFix(quote.iexRealtimePrice)}` } ],
+      url: `https://finance.yahoo.com/quote/${query}`,
+      footer: { text: `Bolsa ${quote.isUSMarketOpen ? 'abierta' : 'cerrada'}` }
     }
-
-   return message.channel.send(`${messages[random.num(messages.length)]} ${quote.symbol}`, {
-     embed: embedData
    })
   } catch (err) {
-    console.log('Error en cmd stock', err.message)
+    console.log('Error en cmd stock: ', err.message)
     return  message.channel.send(`El mio no te encontre na, acuerdate que es el simbolo. \nEjemplo AAPL para rescatarte apple`)
   }
 }

@@ -6,7 +6,7 @@ const { Message } = require('discord.js');
 
 const messages = require('../messages/despedir');
 const flow = require('../../utils/flow');
-const random = require('../../utils/random');
+const { randomWithLimit } = require('../../utils/numbers');
 const botUtils = require('../../utils/bot');
 
 /**
@@ -47,8 +47,8 @@ const main = async (message, userName) => {
     try {
         const files = await readDir(avataresFolder);
 
-        const randomRambling = messages.fired[random.num(messages.fired.length)];
-        const randomIntroduction = messages.introduction[random.num(messages.introduction.length)];
+        const randomRambling = messages.fired[randomWithLimit(messages.fired.length)];
+        const randomIntroduction = messages.introduction[randomWithLimit(messages.introduction.length)];
 
         const images = files.filter(file => {
             const fileParts = file.split('.');
@@ -57,7 +57,7 @@ const main = async (message, userName) => {
             return extension === 'jpg' || extension === 'png' || extension === 'jpeg';
         });
 
-        let randomAvatar = images[random.num(images.length)];
+        let randomAvatar = images[randomWithLimit(images.length)];
         randomAvatar = await readFile(`${avataresFolder}/${randomAvatar}`);
 
         for (const rambling of randomRambling) {
@@ -75,7 +75,7 @@ const main = async (message, userName) => {
     } catch (error) {
         console.log(error);
 
-        const answer = messages.error[random.num(messages.error.length)];
+        const answer = messages.error[randomWithLimit(messages.error.length)];
 
         message.channel.send(answer);
     }

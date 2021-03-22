@@ -1,5 +1,5 @@
 const { Message } = require('discord.js');
-const random = require('../../utils/random');
+const { randomWithLimit } = require('../../utils/numbers');
 const messages = require('../messages/pick');
 
 /**
@@ -41,10 +41,10 @@ const main = async (message, userName) => {
     if (args.length <= 1) {
         message.channel.send(`Maldito mongolico tienes que poner dos o mas opciones.`);
     } else {
-        const option = args[random.num(args.length)];
+        const option = args[randomWithLimit(args.length)];
         console.log(args);
 
-        const answer = messages[random.num(messages.length)].replace('__USERNAME__', userName).replace('__OPTION__', option.trim());
+        const answer = messages[randomWithLimit(messages.length)].replace('__USERNAME__', userName).replace('__OPTION__', option.trim());
         
         message.channel.send(answer);
     }    
