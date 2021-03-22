@@ -12,9 +12,7 @@ const commands = {};
  */
 fs
     .readdirSync(directory)
-    .filter(file => {
-        return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-    })
+    .filter(file => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
     .forEach(file => {
         console.log("Cargando: "+file);
         const module = require(path.join(directory,file));
@@ -24,7 +22,7 @@ fs
             console.log("Alias de "+file+": "+aliases[alias]);
             if(commands[aliases[alias]] !== undefined){
                 throw new Error("El alias \""+aliases[alias]+"\" ya esta en uso cuando el archivo "+file+" lo declara");
-            }else{
+            } else {
                 commands[aliases[alias]] = module;
             }
         });

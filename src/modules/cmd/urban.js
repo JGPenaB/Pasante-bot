@@ -6,22 +6,18 @@ const request = require('request');
  * 
  * @return { Array<string> }
  */
-const aliases = () => {
-    return ['urban', 'dialecto', 'venequismo'];
-};
+const aliases = () => ['urban', 'dialecto', 'venequismo']
 
 /**
  * Información sobre el comando
  * 
  * @return { Object }
  */
-const help = () => {
-    return {
-        "usage": "!urban {termino}",
-        "desc": "Busca el termino que le pases por parametro en https://www.urbandictionary.com/",
-        "example": "Si busco la definición del termino :\n!urban wyswyg"
-    }
-};
+const help = () => ({
+    usage: '!urban {termino}',
+    desc: 'Busca el termino que le pases por parametro en https://www.urbandictionary.com/',
+    example: 'Si busco la definición del termino :\n!urban wyswyg'
+  })
 
 /**
  * Manejador del comando
@@ -33,7 +29,7 @@ const main = async (message) => {
     let url = `https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=${query}`;
 
     // Si el query está vacio
-    if (query == '') {
+    if (query === '') {
         return message.channel.send({
             embed: {
                 color: 5396735,

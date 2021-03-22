@@ -5,22 +5,20 @@ const { Message } = require('discord.js');
  * 
  * @return { Array<string> }
  */
-const aliases = () => {
-    return ['wiki', 'define', 'def'];
-};
+const aliases = () => ['wiki', 'define', 'def']
+
 
 /**
  * Información sobre el comando
  * 
  * @return { Object }
  */
-const help = () => {
-    return {
-        "usage": "!wiki {palabra o frase}",
-        "desc": "Busca un artículo en la Wikipedia en **Inglés**, y muestra una pequeña definición con el link al artículo.",
-        "example": "Si busco a Venezuela:\n!define venezuela\n\nSi busco algo relacionado con software, como Docker:\n!define docker software"
-    }
-};
+const help = () => ({
+      usage: '!wiki {palabra o frase}',
+      desc: 'Busca un artículo en la Wikipedia en **Inglés**, y muestra una pequeña definición con el link al artículo.',
+      example:
+        'Si busco a Venezuela:\n!define venezuela\n\nSi busco algo relacionado con software, como Docker:\n!define docker software'
+})
 
 /**
  * Manejador del comando
@@ -37,7 +35,7 @@ const main = async (message) => {
         return message.channel.send("Inserta un término para buscar.");
 
     const { data } = await axios.get(`https://en.wikipedia.org/w/api.php?action=opensearch&search=${query}`).catch(error => {
-        if(error) console.log(error);
+        if(error) console.log('Error en cmd def, get wikipedia', error);
         return message.channel.send('Lo siento mano, estuve ocupado con la geva y no pude hacer lo que me pediste. ¿Tal vez otra oportunidad?');
     });
 
@@ -89,7 +87,7 @@ const main = async (message) => {
     if ( !embedData.description.length ) {
 
         let third = await axios.get(embedData.url).catch(error => {
-            if(error) console.log(error);
+            if(error) console.log('Error en cmd def, get embed', error);
             return message.channel.send("La PC se me congeló haciendo el resumen.");
         });
 
@@ -104,7 +102,6 @@ const main = async (message) => {
         embedData.description = embedData.description.replace(/(\[)([\s\S]*?)(\])/g, "");
         embedData.description = embedData.description.substr(0,1020);
     }
-
 
     message.channel.send("Mano, esto fue lo primero que me apareció en la wikipedia:", {
         embed: embedData

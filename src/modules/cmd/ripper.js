@@ -8,34 +8,29 @@ const { Message } = require('discord.js');
 const http = require("http");
 
 /**
- * Información sobre el comando
- * 
- * @return { Object }
- */
-const help = () => {
-    return {
-        "usage": "!rip",
-        "desc": "Rippea un hilo de hispachan",
-        "example": "!rip https://www.hispachan.org/##/res/######.html#######"
-    }
-};
-
-/**
  * Lista de alias válidos para el comando
  * 
  * @return { Array<string> }
  */
-const aliases = () => {
-    return ['rip', 'ripper', 'rippea'];
-};
+const aliases = () => ['rip', 'ripper', 'rippea']
 
+/**
+ * Información sobre el comando
+ * 
+ * @return { Object }
+ */
+const help = () => ({
+    usage: '!rip',
+    desc: 'Rippea un hilo de hispachan',
+    example: '!rip https://www.hispachan.org/##/res/######.html#######'
+})
 
 /**
  * Manejador del comando
  * 
  * @param { Message } message Evento completo del mensaje
  */
-const main = async (message, userName) => {
+const main = async (message) => {
     const prefix = process.env.PREFIX;
     const args = message.content.substring(prefix.length).split(' ');
     const url = args[1];

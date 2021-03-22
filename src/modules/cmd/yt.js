@@ -6,22 +6,18 @@ const axios = require("axios");
  * 
  * @return { Array<string> }
  */
-const aliases = () => {
-    return ['youtube', 'yt'];
-};
+const aliases = () => ['youtube', 'yt']
 
 /**
  * Información sobre el comando
  * 
  * @return { Object }
  */
-const help = () => {
-    return {
-        "usage": "!youtube {query}",
-        "desc": "Busca un vídeo en Youtube y coloca el link.",
-        "example": "Buscar un vídeo de programación:\n!yt programacion"
-    }
-};
+const help = () => ({
+    usage: '!youtube {query}',
+    desc: 'Busca un vídeo en Youtube y coloca el link.',
+    example: 'Buscar un vídeo de programación:\n!yt programacion'
+})
 
 /**
  * Manejador del comando
@@ -33,6 +29,7 @@ const main = async (message) => {
     const regexp = new RegExp(/(watch\?v=)([^\?\s*&"'>]+)/g);
 
     const { data } = await axios.get(`https://www.youtube.com/results?search_query=${query}`).catch(error => {
+        console.log('Error en cmd yt', error)
         message.channel.send('Mano, me salió sendo error buscando ese vídeo.');
     });
     

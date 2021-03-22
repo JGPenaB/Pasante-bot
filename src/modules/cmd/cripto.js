@@ -32,7 +32,7 @@ const main = async (message) => {
   try {
     let params = {
       start: '1',
-      limit: '8',
+      limit: '10',
       convert: 'USD'
     }
 
@@ -47,9 +47,7 @@ const main = async (message) => {
         ? (params = { slug: query })
         : (params = { symbol: query }))
 
-    let {
-      data: { data }
-    } = await axios.get(url, {
+    let { data: { data } } = await axios.get(url, {
       headers: {
         'Accept-Encoding': 'deflate, gzip',
         'X-CMC_PRO_API_KEY': process.env.CMC_KEY

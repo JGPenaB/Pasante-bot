@@ -8,22 +8,20 @@ const { Message } = require('discord.js');
  * 
  * @return { Array<string> }
  */
-const aliases = () => {
-    return ['stack', 'so'];
-};
+const aliases = () => ['stack', 'so']
 
 /**
  * Información sobre el comando
  * 
  * @return { Object }
  */
-const help = () => {
-    return {
-        "usage": "!stack {query}",
-        "desc": "Busca una pregunta en StackOverflow y muestra la respuesta de la primera pregunta encontrada.\n Es preferible que la pregunta se haga en **Inglés** para obtener un resultado más relevante.",
-        "example": "!stack how to install gentoo"
-    }
-};
+const help = () => ({
+    usage: '!stack {query}',
+    desc:
+      'Busca una pregunta en StackOverflow y muestra la respuesta de la primera pregunta encontrada.\n Es preferible que la pregunta se haga en **Inglés** para obtener un resultado más relevante.',
+    example: '!stack how to install gentoo'
+})
+
 
 /**
  * Manejador del comando

@@ -7,22 +7,20 @@ const dolarService = require("../../services/dolarService");
  * 
  * @return { Array<string> }
  */
-const aliases = () => {
-    return ['cambio', 'cn', 'cmb']
-};
+const aliases = () => ['cambio', 'cn', 'cmb']
+
 
 /**
  * Información sobre el comando
  * 
  * @return { Object }
  */
-const help = () => {
-    return {
-        "usage": "!cambio {B o D} {monto}",
-        "desc": "Convierte USD a VES (o vice versa) usando distintas tasas de cambio.",
-        "example": "Si quiero convertir $10 a Bolívares Soberanos (VES):\n!cambio d 10\n\nSi quiero convertir 500 Bolívares Soberanos a Dólar (USD):\n!cambio b 500"
-    }
-};
+const help = () => ({
+	  usage: '!cambio {B o D} {monto}',
+	  desc: 'Convierte USD a VES (o vice versa) usando distintas tasas de cambio.',
+	  example:
+		'Si quiero convertir $10 a Bolívares Soberanos (VES):\n!cambio d 10\n\nSi quiero convertir 500 Bolívares Soberanos a Dólar (USD):\n!cambio b 500'
+})
 
 /**
  * Manejador del comando
@@ -44,7 +42,7 @@ const main = async (message) => {
 	let to = 'VES';
 	const exchange = [];
 
-	const exchangeRates = await dolarService.getExchangeRates().catch(error => {
+	const exchangeRates = await dolarService.getExchangeRates().catch(() => {
 		message.channel.send('MonitorDolar dejó de funcionar... O me bloquearon, no sé.');
 	});
 

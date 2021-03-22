@@ -9,22 +9,19 @@ const messages = require('../messages/search');
  * 
  * @return { Array<string> }
  */
-const aliases = () => {
-    return ['search'];
-};
+const aliases = () => ['search']
 
 /**
  * Información sobre el comando
  * 
  * @return { Object }
  */
-const help = () => {
-    return {
-        "usage": "!search {query}",
-        "desc": "Busca una imagen en Bing usando un query, y lo postea en el chat. El SafeSearch está habilitado para los canales corrientes.",
-        "example": "Si busco una imagen de Venezuela:\n!search Venezuela\n\nSi busco una película como Toy Story:\n!search toy story"
-    }
-};
+const help = () => ({
+    usage: '!search {query}',
+    desc: 'Busca una imagen en Bing usando un query, y lo postea en el chat. El SafeSearch está habilitado para los canales corrientes.',
+    example:
+      'Si busco una imagen de Venezuela:\n!search Venezuela\n\nSi busco una película como Toy Story:\n!search toy story'
+})
 
 /**
  * Manejador del comando
@@ -58,7 +55,6 @@ const main = async (message) => {
 
         const $ = cheerio.load(body);
         let links = [].filter.call($('img'), el => {return el.attribs.src != null && el.attribs.src.indexOf('bing.net/th/id/OIP') != -1;});
-        links.forEach(el => console.log(el.attribs.src));
         let link = links[0].attribs.src;
 
         // Quita los parámetros que recortan la img

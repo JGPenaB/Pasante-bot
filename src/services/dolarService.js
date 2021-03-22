@@ -8,9 +8,7 @@ const cheerio = require("cheerio");
  * 
  * @return { number }
  */
-const formatNumber = (formattingNumber) => {
-    return new Intl.NumberFormat().format(formattingNumber);
-};
+const formatNumber = (formattingNumber) => new Intl.NumberFormat().format(formattingNumber);
 
 /**
  * Obtiene las tasas de los dólares

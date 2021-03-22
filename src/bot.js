@@ -20,9 +20,7 @@ logger.add(new logger.transports.Console(), {
 
 logger.level = "debug";
 
-client.once('ready', () => {
-    console.log('Connected to discord');
-});
+client.once('ready', () => console.log('Connected to discord'));
 
 client.login(process.env.TOKEN);
 
