@@ -25,11 +25,10 @@ const help = () => ({
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-  const query = encodeURI(message.content.substring(message.content.search(' ') + 1, message.content.length));
-  let url = `https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=${query}`;
+  const query = message.content.split(' ');
 
   // Si el query está vacio
-  if (query === '') {
+  if (query[1] == null) {
     return message.channel.send({
       embed: {
         color: 5396735,
@@ -42,6 +41,8 @@ const main = async (message) => {
       }
     });
   }
+
+  const url = `https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=${query[1]}`;
 
   request(
     {
