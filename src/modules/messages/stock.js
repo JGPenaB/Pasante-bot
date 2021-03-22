@@ -8,7 +8,6 @@ const messages = [
   'Siri, dame la información de',
   'Te conseguí todo acerca de',
   'Aqui tienes la info de'
-]
-// ]'こんにちは、私は新しいインターンです。私の名前はMarica hase。'
+];
 
-module.exports = messages
+module.exports = messages;

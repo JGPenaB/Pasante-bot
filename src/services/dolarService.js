@@ -1,48 +1,42 @@
-const axios = require("axios");
-const cheerio = require("cheerio");
+const axios = require('axios');
+const cheerio = require('cheerio');
 
 /**
  * Formatea un número y lo pone bonito
- * 
+ *
  * @param { number } formattingNumber
- * 
+ *
  * @return { number }
  */
-const formatNumber = (formattingNumber) => {
-    return new Intl.NumberFormat().format(formattingNumber);
-};
+const formatNumber = (formattingNumber) => new Intl.NumberFormat().format(formattingNumber);
 
 /**
  * Obtiene las tasas de los dólares
- * 
+ *
  * @return { Array<number> }
  */
 const getExchangeRates = async () => {
-    const list = [];
+  const list = [];
 
-    await axios.get(`https://monitordolarvenezuela.com`).then((dolar) => {
+  await axios.get(`https://monitordolarvenezuela.com`).then((dolar) => {
+    let $ = cheerio.load(dolar.data);
 
-        let $ = cheerio.load(dolar.data);
+    //Extrae el valor desde el CSS, ya que usan pseudo-elementos
+    const regexp = /content:(\s+)\'([^\s]+)\'/g;
+    const matches = [...dolar.data.matchAll(regexp)];
 
-        //Extrae el valor desde el CSS, ya que usan pseudo-elementos
-        const regexp = /content:(\s+)\'([^\s]+)\'/g;
-        const matches = [...dolar.data.matchAll(regexp)];
+    $('.box-prices').each((index, el) => {
+      let title = $('div', el).first().text();
+      let price = matches[index][2];
 
-        $(".box-prices").each((index, el) => {
-            let title = $("div", el).first().text();
-            let price = matches[index][2];
+      price = price.replace(/\./g, '').replace(',', '.');
 
-            price = (price.replace(/\./g,"")).replace(",",".");
-
-            //Guarda el "valor" convertido para realizar operaciones matemáticas
-            if ( !isNaN(price) )
-                list.push({title, rate: formatNumber(Number(price)), value: price});
-                
-        });
-
+      //Guarda el "valor" convertido para realizar operaciones matemáticas
+      if (!isNaN(price)) list.push({ title, rate: formatNumber(Number(price)), value: price });
     });
-    
-    return list;
-}
+  });
+
+  return list;
+};
 
 module.exports = { getExchangeRates, formatNumber };

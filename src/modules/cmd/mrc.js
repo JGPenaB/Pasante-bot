@@ -5,42 +5,38 @@ const { randomWithLimit } = require('../../utils/numbers');
 
 /**
  * Lista de alias válidos para el comando
- * 
+ *
  * @return { Array<string> }
  */
-const aliases = () => {
-    return ['mrc', 'marico'];
-};
+const aliases = () => ['mrc', 'marico'];
 
 /**
  * Información sobre el comando
- * 
+ *
  * @return { Object }
  */
-const help = () => {
-    return {
-        "usage": "!mrc",
-        "desc": "Cuenta un secreto que solo Pasante sabe.",
-        "example": "!mrc"
-    }
-};
+const help = () => ({
+  usage: '!mrc',
+  desc: 'Cuenta un secreto que solo Pasante sabe.',
+  example: '!mrc'
+});
 
 /**
  * Manejador del comando
- * 
+ *
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-    const members = message.guild.members.cache
-        .filter(member => member.presence.status !== 'offline')
-        .map(member => member.id);
+  const members = message.guild.members.cache
+    .filter((member) => member.presence.status !== 'offline')
+    .map((member) => member.id);
 
-    const randomUserKey = members[randomWithLimit(members.length)];
-    const userName = message.guild.member(randomUserKey).displayName;
+  const randomUserKey = members[randomWithLimit(members.length)];
+  const userName = message.guild.member(randomUserKey).displayName;
 
-    const answer = messages[randomWithLimit(messages.length)].replace('__USERNAME__', userName);
+  const answer = messages[randomWithLimit(messages.length)].replace('__USERNAME__', userName);
 
-    message.channel.send(answer);
+  message.channel.send(answer);
 };
 
 module.exports = { aliases, help, main };
