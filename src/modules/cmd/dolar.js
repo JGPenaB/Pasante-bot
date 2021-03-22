@@ -1,13 +1,13 @@
-const { Message } = require('discord.js')
+const { Message } = require('discord.js');
 
-const dolarService = require('../../services/dolarService')
+const dolarService = require('../../services/dolarService');
 
 /**
  * Lista de alias válidos para el comando
  *
  * @return { Array<string> }
  */
-const aliases = () => ['dolar']
+const aliases = () => ['dolar'];
 
 /**
  * Información sobre el comando
@@ -18,7 +18,7 @@ const help = () => ({
   usage: '!dolar',
   desc: 'Consulta la tasa de cambio actual de distintas fuentes.',
   example: '!dolar'
-})
+});
 
 /**
  * Manejador del comando
@@ -27,15 +27,13 @@ const help = () => ({
  */
 const main = async (message) => {
   let exchanges = await dolarService.getExchangeRates().catch((error) => {
-    console.log('Error en cmd dolar', error)
-    message.channel.send(
-      'MonitorDolar dejó de funcionar... O me bloquearon, no sé.'
-    )
-  })
+    console.log('Error en cmd dolar', error);
+    message.channel.send('MonitorDolar dejó de funcionar... O me bloquearon, no sé.');
+  });
 
   //Caso extremo
   if (!exchanges.length) {
-    return message.channel.send('No pude extraer nada de MonitorDolar.')
+    return message.channel.send('No pude extraer nada de MonitorDolar.');
   }
 
   exchanges = exchanges.map((exchange) => {
@@ -43,8 +41,8 @@ const main = async (message) => {
       name: exchange.title,
       value: `**${dolarService.formatNumber(exchange.value)} VES**`,
       inline: false
-    }
-  })
+    };
+  });
 
   message.channel.send('Mano, tuve que usar VPN y todo para ver esta vaina:', {
     embed: {
@@ -52,7 +50,7 @@ const main = async (message) => {
       title: 'Tasas de conversión del momento',
       fields: exchanges
     }
-  })
-}
+  });
+};
 
-module.exports = { aliases, help, main }
+module.exports = { aliases, help, main };

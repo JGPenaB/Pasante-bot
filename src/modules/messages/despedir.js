@@ -10,11 +10,7 @@ const messages = {
       '¡¿AH?!',
       'OHASD7F 98HGD FI8HA0 DFHAD 90A8YF A9SF7DYH 8UYDH0A SDG8OUA FUG DHF9ASODSD UF'
     ],
-    [
-      'Bueno, adiós. Ojala se mueran.',
-      'Es humillante que Bayke siga aqui y me boten es a mi',
-      'Marditos.'
-    ],
+    ['Bueno, adiós. Ojala se mueran.', 'Es humillante que Bayke siga aqui y me boten es a mi', 'Marditos.'],
     [
       '¿Pero qué razón tan estúpida es esa para despedirme?',
       '**__USERNAME__** hace peores cosas y sigue aquí.',
@@ -47,6 +43,6 @@ const messages = {
     'Buenas, soy el pasante Nro. #__NUMEROPASANTE__. Espero que mi estadía sea una experiencia positiva para todos.',
     'Buenas, soy el nuevo pasante del server. Estoy muy ansioso de trabajar con ustedes.'
   ]
-}
+};
 
-module.exports = messages
+module.exports = messages;

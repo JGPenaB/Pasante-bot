@@ -4,6 +4,6 @@ const messages = [
   'Aquí tiene la imagen que pidió.',
   'El primer resultado en Bing es este.',
   'Laureano Marquez buscó e investigó, y llegó a la conclusión que esta es la mierda que buscas.'
-]
+];
 
-module.exports = messages
+module.exports = messages;

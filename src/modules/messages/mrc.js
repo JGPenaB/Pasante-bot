@@ -10,6 +10,6 @@ const messages = [
   '**__USERNAME__** muchacho marico.',
   'A **__USERNAME__** le gustan los garrotes.',
   'A **__USERNAME__** le limpian las cañerias a diario.'
-]
+];
 
-module.exports = messages
+module.exports = messages;

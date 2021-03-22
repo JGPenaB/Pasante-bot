@@ -8,6 +8,6 @@ const messages = [
   'Siri, dame la información de',
   'Te conseguí todo acerca de',
   'Aqui tienes la info de'
-]
+];
 
-module.exports = messages
+module.exports = messages;

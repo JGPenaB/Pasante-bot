@@ -5,6 +5,6 @@ const messages = [
   'El comando tiene estas instrucciones.',
   'El betulio es así manaurem.',
   'Así es como se hace la vaina, menor.'
-]
+];
 
-module.exports = messages
+module.exports = messages;

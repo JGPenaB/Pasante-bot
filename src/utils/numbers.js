@@ -1,6 +1,5 @@
 // Todas las funciones relacionadas con numeros.
 
-
 /**
  * Genera un número aleatorio entre 0 y el límite
  *
@@ -8,7 +7,7 @@
  *
  * @return { number }
  */
-const randomWithLimit = (limit) => Math.floor(Math.random() * limit)
+const randomWithLimit = (limit) => Math.floor(Math.random() * limit);
 
 /**
  * Restringe a 2 decimales y coloca un separador de miles
@@ -17,6 +16,6 @@ const randomWithLimit = (limit) => Math.floor(Math.random() * limit)
  *
  * @return { string }
  */
-const decimalFix = (num) => (Math.round(num * 100) / 100).toLocaleString()
+const decimalFix = (num) => (Math.round(num * 100) / 100).toLocaleString();
 
-module.exports = { randomWithLimit, decimalFix }
+module.exports = { randomWithLimit, decimalFix };

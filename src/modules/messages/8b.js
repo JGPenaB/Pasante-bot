@@ -20,6 +20,6 @@ const messages = [
   'Mis fuentes me dicen que no',
   'Las perspectivas no son buenas',
   'Muy dudoso'
-]
+];
 
-module.exports = messages
+module.exports = messages;

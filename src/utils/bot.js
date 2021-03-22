@@ -1,6 +1,6 @@
-const { Message } = require('discord.js')
+const { Message } = require('discord.js');
 
-const flow = require('./flow')
+const flow = require('./flow');
 
 /**
  * Detiene la ejecución por el tiempo dado
@@ -11,13 +11,13 @@ const flow = require('./flow')
  * @return { void }
  */
 const simulateTyping = async (event, message) => {
-  event.channel.startTyping()
+  event.channel.startTyping();
 
-  await flow.sleep(message.length * 40)
+  await flow.sleep(message.length * 40);
 
-  event.channel.stopTyping()
+  event.channel.stopTyping();
 
-  event.channel.send(message)
-}
+  event.channel.send(message);
+};
 
-module.exports = { simulateTyping }
+module.exports = { simulateTyping };

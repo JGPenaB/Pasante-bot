@@ -22,6 +22,6 @@ const generateEmbed = (recommendation, commandUsage) => ({
     url:
       'https://www.bkconnection.com/system/refinery/blog/posts/thumbnails/000/003/323/post_detail/family-friendly-app-store.gif?1432824720'
   }
-})
+});
 
-module.exports = generateEmbed
+module.exports = generateEmbed;
