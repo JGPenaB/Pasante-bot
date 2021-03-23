@@ -1,6 +1,6 @@
-const https = require('https');
 const request = require('request');
 const cheerio = require('cheerio');
+const botUtils = require('../../utils/bot');
 const { Message } = require('discord.js');
 
 /**
@@ -28,7 +28,12 @@ const help = () => ({
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-  const query = encodeURI(message.content.substring(message.content.search(' ') + 1, message.content.length));
+  const query = botUtils.getParams(message.content);
+
+  if (query === undefined){
+    return message.channel.send('Necesito que me digas lo que debo buscar.');
+  }
+
   const url = `https://api.stackexchange.com/2.2/similar?pagesize=1&order=desc&sort=relevance&title=${query}&site=stackoverflow&key=${process.env.SO_KEY}`;
 
   request({ uri: url, gzip: true }, (err, res, body) => {
@@ -39,7 +44,7 @@ const main = async (message) => {
 
     const jsonData = JSON.parse(body);
 
-    if (jsonData?.items?.length < 1) {
+    if (jsonData.items.length < 1) {
       return message.channel.send('No pude encontrar nada en Stack Overflow.');
     }
 
@@ -50,36 +55,34 @@ const main = async (message) => {
       );
     }
 
-    https.get(jsonData.items[0].link, (resp) => {
-      let finalData = '';
+    request({ uri: jsonData.items[0].link, gzip: true }, (err, res, body) => {
 
-      resp.on('data', (chunk) => {
-        finalData += chunk;
-      });
+      if (err || res.statusCode !== 200) {
+        console.log(res.statusCode);
+        return message.channel.send('No pude encontrar nada en Stack Overflow.');
+      }
 
-      resp.on('end', () => {
-        let $ = cheerio.load(finalData);
-        let pred = $('.answercell').first().text();
-        let FinalText = pred.substring(0, pred.search('share'));
+      let $ = cheerio.load(body);
+      let pred = $('.answercell').first().text();
+      let FinalText = pred.substring(0, pred.indexOf('Share')).trim();
 
-        //Para evitar errores con el embed
-        if (FinalText.length > 1020) {
-          FinalText = FinalText.substring(0, 1020) + '...';
+      //Para evitar errores con el embed
+      if (FinalText.length > 1020) {
+        FinalText = FinalText.substring(0, 1020) + '...';
+      }
+
+      message.channel.send({
+        embed: {
+          color: 16749596,
+          title: jsonData.items[0].title,
+          url: jsonData.items[0].link,
+          fields: [
+            {
+              name: 'Respuesta',
+              value: FinalText.trim()
+            }
+          ]
         }
-
-        message.channel.send({
-          embed: {
-            color: 16749596,
-            title: jsonData.items[0].title,
-            url: jsonData.items[0].link,
-            fields: [
-              {
-                name: 'Respuesta',
-                value: FinalText.trim()
-              }
-            ]
-          }
-        });
       });
     });
   });
