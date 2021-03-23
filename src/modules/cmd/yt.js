@@ -29,7 +29,7 @@ const main = async (message) => {
   const query = botUtils.getParams(message.content);
   const regexp = new RegExp(/(watch\?v=)([^\?\s*&"'>]+)/g);
 
-  if (query === undefined){
+  if (query == undefined) {
     return message.channel.send('No puedo buscar un vídeo si no me dices qué buscar');
   }
 

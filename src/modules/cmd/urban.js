@@ -1,5 +1,6 @@
 const { Message } = require('discord.js');
 const request = require('request');
+const botUtils = require('../../utils/bot');
 
 /**
  * Lista de alias válidos para el comando
@@ -25,10 +26,10 @@ const help = () => ({
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-  const query = message.content.split(' ');
+  const query = botUtils.getParams(message.content);
 
   // Si el query está vacio
-  if (query[1] == null) {
+  if (query == undefined) {
     return message.channel.send({
       embed: {
         color: 5396735,
@@ -42,7 +43,7 @@ const main = async (message) => {
     });
   }
 
-  const url = `https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=${query[1]}`;
+  const url = `https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=${encodeURI(query)}`;
 
   request(
     {

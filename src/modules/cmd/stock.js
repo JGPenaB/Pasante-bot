@@ -2,6 +2,8 @@ const { Message } = require('discord.js');
 const axios = require('axios');
 const { decimalFix, randomWithLimit } = require('../../utils/numbers');
 const messages = require('../messages/stock');
+const botUtils = require('../../utils/bot');
+
 /**
  * Lista de alias válidos para el comando
  * @return { Array<string> }
@@ -23,7 +25,7 @@ const help = () => ({
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-  const query = message.content.substring(7).replace(/\s/g, '');
+  const query = (botUtils.getParams(message.content) ?? '').replace(/\s/g, '');
 
   if (query.length < 1) {
     return message.channel.send('Ingresa el simbolo de tu stock favorita, TSLA para Tesla');

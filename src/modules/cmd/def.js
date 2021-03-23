@@ -26,7 +26,6 @@ const help = () => ({
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-  console.log(message.content);
   const axios = require('axios');
   const cheerio = require('cheerio');
   let query = botUtils.getParams(message.content);

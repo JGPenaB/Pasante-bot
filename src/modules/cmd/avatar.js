@@ -1,4 +1,5 @@
 const { Message } = require('discord.js');
+const botUtils = require('../../utils/bot');
 
 /**
  * Lista de alias válidos para el comando
@@ -24,8 +25,7 @@ const help = () => ({
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-  const prefix = process.env.PREFIX;
-  const args = message.content.substring(prefix.length + 7);
+  const username = botUtils.getParams(message.content);
   let members = message.guild.members.cache.map((member) => member.user.username.toLowerCase());
 
   const alias = message.guild.members.cache
@@ -41,11 +41,11 @@ const main = async (message) => {
   if (message.mentions.users.first()) {
     user = message.mentions.users.first();
     mensaje = `El avatar del panita mencionado: ${user.username}`;
-  } else if (args && members.indexOf(args.toLowerCase()) > -1) {
+  } else if (username && members.indexOf(username.toLowerCase()) > -1) {
     user = message.guild.members.cache.filter((member) => {
       return (
-        member.user.username.toLowerCase() == args.toLowerCase() ||
-        (member.nickname && member.nickname.toLowerCase() == args.toLowerCase())
+        member.user.username.toLowerCase() == username.toLowerCase() ||
+        (member.nickname && member.nickname.toLowerCase() == username.toLowerCase())
       );
     });
     user = user.values().next().value.user;

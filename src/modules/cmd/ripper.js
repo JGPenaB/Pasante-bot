@@ -6,6 +6,7 @@ const rimraf = require('rimraf');
 const { exec } = require('child_process');
 const { Message } = require('discord.js');
 const http = require('http');
+const botUtils = require('../../utils/bot');
 
 /**
  * Lista de alias válidos para el comando
@@ -31,9 +32,7 @@ const help = () => ({
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-  const prefix = process.env.PREFIX;
-  const args = message.content.substring(prefix.length).split(' ');
-  const url = args[1];
+  const url = botUtils.getParams(message.content);
   var info;
 
   function recursiveDownload(urlArray, nameArray, i, path) {

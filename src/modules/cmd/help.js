@@ -1,4 +1,5 @@
 const { Message } = require('discord.js');
+const botUtils = require('../../utils/bot');
 
 const messages = require('../messages/help');
 
@@ -27,6 +28,7 @@ const help = () => ({
  */
 const main = (message, _, commands) => {
   const subcmd = message.content.substring(1).split(' ')[1];
+  // const subcmd = botUtils.getParams(message.content);
 
   if (!subcmd) {
     let cmdlist = '';

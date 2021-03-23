@@ -1,6 +1,7 @@
 const { Message } = require('discord.js');
 const request = require('request');
 const cheerio = require('cheerio');
+const botUtils = require('../../utils/bot');
 
 const messages = require('../messages/search');
 
@@ -30,8 +31,15 @@ const help = () => ({
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-  const query = encodeURI(message.content.substring(8));
-  let url = `https://www.bing.com/images/search?q=${query}`;
+  let query = botUtils.getParams(message.content);
+
+  if (query == undefined) {
+    return message.channel.send(`Coño que noooo verga ENTIENDE. Escribe algo nojoda.`);
+  } else {
+    query = encodeURI(query);
+  }
+
+  const url = `https://www.bing.com/images/search?q=${query}`;
 
   if (message.channel.nsfw === true) {
     url += '&safesearch=off';

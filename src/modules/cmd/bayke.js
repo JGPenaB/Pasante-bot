@@ -1,4 +1,5 @@
 const { Message } = require('discord.js');
+const botUtils = require('../../utils/bot');
 
 const generateEmbed = require('../messages/embed');
 
@@ -26,12 +27,11 @@ const help = () => ({
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-  const pos = message.content.search(' ');
-  const query = message.content.substring(pos + 1);
+  const query = botUtils.getParams(message.content);
 
   const images = ['boing', 'ditto', 'dvd', 'laserman', 'spin', 'thanos'];
 
-  if (!query || pos === -1 || images.indexOf(query) === -1) {
+  if (!query || images.indexOf(query) === -1) {
     return message.channel.send({
       embed: generateEmbed(
         'ingresar el nombre del meme CORRECTAMENTE OK?.',

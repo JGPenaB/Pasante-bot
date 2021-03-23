@@ -20,7 +20,7 @@ logger.add(new logger.transports.Console(), {
 
 logger.level = 'debug';
 
-client.once('ready', () => console.log('Connected to discord'));
+client.once('ready', () => console.log('\nYa estoy enchufado en la mierda.'));
 
 client.login(process.env.TOKEN);
 
@@ -33,8 +33,8 @@ client.on('message', (message) => {
   const cmd = message.content.substring(prefix.length).split(' ')[0].toLowerCase();
 
   if (commands.commandMap.hasOwnProperty(cmd)) {
-    message.content = message.content.replace(cmd,commands.aliasMap[cmd]);
-    return commands.commandMap[cmd].main(message, member.displayName, commands);
+    message.content = message.content.replace(cmd, commands.aliasMap[cmd]);
+    return commands.commandMap[cmd].main(message, member.displayName, commands.commandMap);
   }
 
   message.channel.send('¿Disculpa? No te entendí muy bien. Intenta esto:```cs\n !ayuda ```');
