@@ -1,4 +1,5 @@
 const { Message } = require('discord.js');
+const botUtils = require('../../utils/bot');
 
 /**
  * Lista de alias válidos para el comando
@@ -25,11 +26,14 @@ const help = () => ({
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
+  console.log(message.content);
   const axios = require('axios');
   const cheerio = require('cheerio');
-  const query = message.content.substring(message.content.search(' ') + 1, message.content.length);
+  let query = botUtils.getParams(message.content);
 
-  if (message.content === query) return message.channel.send('Inserta un término para buscar.');
+  if (query === undefined) return message.channel.send('Inserta un término para buscar.');
+
+  query = encodeURI(query);
 
   const { data } = await axios
     .get(`https://en.wikipedia.org/w/api.php?action=opensearch&search=${query}`)

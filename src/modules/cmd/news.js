@@ -1,4 +1,5 @@
 const { Message } = require('discord.js');
+const botUtils = require('../../utils/bot');
 const axios = require('axios');
 
 /**
@@ -6,7 +7,7 @@ const axios = require('axios');
  *
  * @return { Array<string> }
  */
-const aliases = () => ['noticias', 'news', 'artículos', 'articles'];
+const aliases = () => ['news', 'noticias', 'articulos', 'articles'];
 
 /**
  * Información sobre el comando
@@ -17,7 +18,7 @@ const help = () => ({
   usage: '!noticias {query}',
   desc: 'Trae noticias relevantes en base al query.',
   example:
-    "Busca un artículo con la palabra 'porgramación' en el título:\n!noticias programación\n\nPuedes mezclar palabras claves usando AND, OR y NOT:\n!noticias crypto AND (Ethereum OR litecoin) NOT bitcoin"
+    "Busca un artículo con la palabra 'programación' en el título:\n!noticias programación\n\nPuedes mezclar palabras claves usando AND, OR y NOT:\n!noticias crypto AND (Ethereum OR litecoin) NOT bitcoin"
 });
 
 /**
@@ -26,13 +27,17 @@ const help = () => ({
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-  const query = encodeURI(message.content.substring(message.content.search(' ') + 1, message.content.length));
+  let query = botUtils.getParams(message.content);
   const date = new Date();
+
+  if (query === undefined){
+    return message.channel.send('No puedo realizar la búsqueda si no me dices qué buscar.');
+  }
 
   const { data } = await axios
     .get(
       `
-        http://newsapi.org/v2/everything?qInTitle=${query}&from=${date.toISOString()}pageSize=5&sortBy=publishedAt&language=en&apiKey=${
+        http://newsapi.org/v2/everything?qInTitle=${encodeURI(query)}&from=${date.toISOString()}pageSize=5&sortBy=publishedAt&language=en&apiKey=${
         process.env.NEWSKEY
       }`
     )

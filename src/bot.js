@@ -32,8 +32,9 @@ client.on('message', (message) => {
   const member = message.guild.member(message.author);
   const cmd = message.content.substring(prefix.length).split(' ')[0].toLowerCase();
 
-  if (commands.hasOwnProperty(cmd)) {
-    return commands[cmd].main(message, member.displayName, commands);
+  if (commands.commandMap.hasOwnProperty(cmd)) {
+    message.content = message.content.replace(cmd,commands.aliasMap[cmd]);
+    return commands.commandMap[cmd].main(message, member.displayName, commands);
   }
 
   message.channel.send('¿Disculpa? No te entendí muy bien. Intenta esto:```cs\n !ayuda ```');

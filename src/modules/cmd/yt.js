@@ -1,4 +1,5 @@
 const { Message } = require('discord.js');
+const botUtils = require('../../utils/bot');
 const axios = require('axios');
 
 /**
@@ -6,7 +7,7 @@ const axios = require('axios');
  *
  * @return { Array<string> }
  */
-const aliases = () => ['youtube', 'yt'];
+const aliases = () => ['yt', 'youtube'];
 
 /**
  * Información sobre el comando
@@ -25,8 +26,12 @@ const help = () => ({
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-  const query = message.content.substring(message.content.search(' ') + 1, message.content.length);
+  const query = botUtils.getParams(message.content);
   const regexp = new RegExp(/(watch\?v=)([^\?\s*&"'>]+)/g);
+
+  if (query === undefined){
+    return message.channel.send('No puedo buscar un vídeo si no me dices qué buscar');
+  }
 
   const { data } = await axios.get(`https://www.youtube.com/results?search_query=${query}`).catch((error) => {
     console.log('Error en cmd yt', error);

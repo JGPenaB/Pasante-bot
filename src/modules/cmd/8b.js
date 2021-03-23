@@ -1,7 +1,6 @@
 const { Message } = require('discord.js');
-
+const botUtils = require('../../utils/bot');
 const { randomWithLimit } = require('../../utils/numbers');
-
 const generateEmbed = require('../messages/embed');
 const messages = require('../messages/8b');
 
@@ -30,10 +29,9 @@ const help = () => ({
  * @param { string } userName Nombre del usuario que triggereó el evento
  */
 const main = (message, userName) => {
-  const pos = message.content.search(' ');
-  const query = message.content.substring(pos + 1);
+  const query = botUtils.getParams(message.content);
 
-  if (!query || pos === -1) {
+  if (query === undefined) {
     return message.channel.send({
       embed: generateEmbed('ingresar una pregunta para poder usar el comando !8ball.', '!8ball {pregunta}')
     });

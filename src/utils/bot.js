@@ -20,4 +20,22 @@ const simulateTyping = async (event, message) => {
   event.channel.send(message);
 };
 
-module.exports = { simulateTyping };
+/**
+ * Obtiene los parámetros de un comando
+ *
+ * @param { String } message El mensaje del cual extraer los parámetros
+ *
+ * @return { String }
+ */
+const getParams = (message) => {
+  const pos = message.indexOf(' ');
+  let result;
+
+  if(pos !== -1){
+    result = message.substring(pos + 1).trim();
+  }
+
+  return result;
+};
+
+module.exports = { simulateTyping, getParams };

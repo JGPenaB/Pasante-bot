@@ -9,7 +9,7 @@ const messages = require('../messages/search');
  *
  * @return { Array<string> }
  */
-const aliases = () => ['search'];
+const aliases = () => ['search', 'busqueda'];
 
 /**
  * Información sobre el comando
