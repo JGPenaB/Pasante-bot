@@ -56,10 +56,11 @@ const main = async (message) => {
       embed: {
         color: quote.change > 0 ? 3141900 : 16711680,
         title: quote.companyName,
-        fields: quote.isUSMarketOpen
-          ? fieldsArr
-          : [...fieldsArr, { name: 'Precio off-market', value: `$${decimalFix(quote.iexRealtimePrice)}` }],
-        url: `https://finance.yahoo.com/quote/${query}`,
+        fields:
+          (!quote.isUSMarketOpen && quote.iexRealtimePrice)
+            ? [...fieldsArr, { name: 'Precio off-market', value: `$${decimalFix(quote.iexRealtimePrice)}` }]
+            : fieldsArr,
+        url: `https://iextrading.com/apps/stocks/${query}`,
         footer: { text: `Bolsa ${quote.isUSMarketOpen ? 'abierta' : 'cerrada'}` }
       }
     });
