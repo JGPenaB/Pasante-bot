@@ -31,7 +31,7 @@ const getParams = (message) => {
   const pos = message.indexOf(' ');
   let result;
 
-  if(pos !== -1){
+  if (pos !== -1) {
     result = message.substring(pos + 1).trim();
   }
 

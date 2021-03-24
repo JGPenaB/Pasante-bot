@@ -30,7 +30,7 @@ const help = () => ({
 const main = async (message) => {
   const query = botUtils.getParams(message.content);
 
-  if (query === undefined){
+  if (query === undefined) {
     return message.channel.send('Necesito que me digas lo que debo buscar.');
   }
 
@@ -56,7 +56,6 @@ const main = async (message) => {
     }
 
     request({ uri: jsonData.items[0].link, gzip: true }, (err, res, body) => {
-
       if (err || res.statusCode !== 200) {
         console.log(res.statusCode);
         return message.channel.send('No pude encontrar nada en Stack Overflow.');

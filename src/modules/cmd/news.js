@@ -30,16 +30,16 @@ const main = async (message) => {
   let query = botUtils.getParams(message.content);
   const date = new Date();
 
-  if (query === undefined){
+  if (query === undefined) {
     return message.channel.send('No puedo realizar la búsqueda si no me dices qué buscar.');
   }
 
   const { data } = await axios
     .get(
       `
-        http://newsapi.org/v2/everything?qInTitle=${encodeURI(query)}&from=${date.toISOString()}pageSize=5&sortBy=publishedAt&language=en&apiKey=${
-        process.env.NEWSKEY
-      }`
+        http://newsapi.org/v2/everything?qInTitle=${encodeURI(
+          query
+        )}&from=${date.toISOString()}pageSize=5&sortBy=publishedAt&language=en&apiKey=${process.env.NEWSKEY}`
     )
     .catch((error) => {
       console.log('error en cmd news, GET newsapi', error);

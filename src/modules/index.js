@@ -20,10 +20,9 @@ fs.readdirSync(directory)
     let aliasControl;
 
     Object.keys(aliases).forEach((alias, index) => {
-
       if (!index) {
         aliasControl = aliases[alias];
-        console.log('Usando "'+aliasControl+'" como alias de control')
+        console.log('Usando "' + aliasControl + '" como alias de control');
       }
 
       console.log('Cargando alias de ' + file + ': ' + aliases[alias]);
@@ -36,4 +35,4 @@ fs.readdirSync(directory)
     });
   });
 
-module.exports = {commandMap, aliasMap};
+module.exports = { commandMap, aliasMap };
