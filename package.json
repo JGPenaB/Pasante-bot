@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node src/bot.js",
     "dev": "nodemon src/bot.js",
-    "format":"prettier --write \"./**/*.js\""
+    "format": "prettier --write \"./**/*.js\""
   },
   "dependencies": {
     "axios": "^0.21.0",

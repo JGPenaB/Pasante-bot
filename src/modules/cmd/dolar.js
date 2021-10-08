@@ -39,7 +39,7 @@ const main = async (message) => {
   exchanges = exchanges.map((exchange) => {
     return {
       name: exchange.title,
-      value: `**${dolarService.formatNumber(exchange.value)} VES**`,
+      value: `**${dolarService.formatNumber(exchange.value)} VED**`,
       inline: false
     };
   });

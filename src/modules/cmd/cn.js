@@ -16,9 +16,9 @@ const aliases = () => ['cambio', 'cn', 'cmb'];
  */
 const help = () => ({
   usage: '!cambio {B o D} {monto}',
-  desc: 'Convierte USD a VES (o vice versa) usando distintas tasas de cambio.',
+  desc: 'Convierte USD a VED (o vice versa) usando distintas tasas de cambio.',
   example:
-    'Si quiero convertir $10 a Bolívares Soberanos (VES):\n!cambio d 10\n\nSi quiero convertir 500 Bolívares Soberanos a Dólar (USD):\n!cambio b 500'
+    'Si quiero convertir $10 a Bolívares Soberanos (VED):\n!cambio d 10\n\nSi quiero convertir 500 Bolívares Soberanos a Dólar (USD):\n!cambio b 500'
 });
 
 /**
@@ -38,9 +38,9 @@ const main = async (message) => {
     );
   }
 
-  let title = 'Cambio de USD a VES';
+  let title = 'Cambio de USD a VED';
   let from = '$';
-  let to = 'VES';
+  let to = 'VED';
   const exchange = [];
 
   const exchangeRates = await dolarService.getExchangeRates().catch(() => {
@@ -54,8 +54,8 @@ const main = async (message) => {
     exchange.push(amount * dolarToday);
     exchange.push(amount * airTM);
   } else {
-    title = 'Cambio de VES a USD';
-    from = 'VES';
+    title = 'Cambio de VED a USD';
+    from = 'VED';
     to = '$';
 
     exchange.push(amount / dolarToday);
@@ -70,13 +70,13 @@ const main = async (message) => {
       title,
       fields: [
         {
-          name: `Tasa DolarToday (${dolarService.formatNumber(dolarToday)} VES):`,
+          name: `Tasa DolarToday (${dolarService.formatNumber(dolarToday)} VED):`,
           value: `**${from} ${dolarService.formatNumber(amount)}** => **${dolarService.formatNumber(
             exchange[0]
           )} ${to}**`
         },
         {
-          name: `Tasa AirTM (${dolarService.formatNumber(airTM)} VES):`,
+          name: `Tasa AirTM (${dolarService.formatNumber(airTM)} VED):`,
           value: `**${from} ${dolarService.formatNumber(amount)}** => **${dolarService.formatNumber(
             exchange[1]
           )} ${to}**`
