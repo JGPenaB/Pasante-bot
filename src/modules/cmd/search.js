@@ -39,7 +39,7 @@ const main = async (message) => {
     query = encodeURI(query);
   }
 
-  const url = `https://www.bing.com/images/search?q=${query}`;
+  let url = `https://www.bing.com/images/search?q=${query}`;
 
   if (message.channel.nsfw === true) {
     url += '&safesearch=off';
@@ -66,6 +66,21 @@ const main = async (message) => {
     let links = [].filter.call($('img'), (el) => {
       return el.attribs.src != null && el.attribs.src.indexOf('bing.net/th/id/OIP') != -1;
     });
+
+    if (links.length == 0) {
+      return message.channel.send({
+        embed: {
+          color: 5396735,
+          footer: {
+            text: 'Ma-marico no encontre nada loco'
+          },
+          image: {
+            url: 'https://pbs.twimg.com/profile_images/3154875175/a9ae20484550484c7958e364380a5913_400x400.jpeg'
+          }
+        }
+      });
+    }
+
     let link = links[0].attribs.src;
 
     // Quita los parámetros que recortan la img
