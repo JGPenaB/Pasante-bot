@@ -18,4 +18,13 @@ const randomWithLimit = (limit) => Math.floor(Math.random() * limit);
  */
 const decimalFix = (num) => (Math.round(num * 100) / 100).toLocaleString();
 
-module.exports = { randomWithLimit, decimalFix };
+/**
+ * Formatea un número y lo pone bonito
+ *
+ * @param { number } formattingNumber
+ *
+ * @return { number }
+ */
+const formatNumber = (formattingNumber) => new Intl.NumberFormat().format(formattingNumber);
+
+module.exports = { randomWithLimit, decimalFix, formatNumber };

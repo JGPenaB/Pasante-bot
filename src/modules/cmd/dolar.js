@@ -1,6 +1,7 @@
 const { Message } = require('discord.js');
 
 const dolarService = require('../../services/dolarService');
+const { formatNumber } = require('../../utils/numbers');
 
 /**
  * Lista de alias válidos para el comando
@@ -31,7 +32,7 @@ const main = async (message) => {
     message.channel.send('MonitorDolar dejó de funcionar... O me bloquearon, no sé.');
   });
 
-  //Caso extremo
+  // Caso extremo
   if (!exchanges.length) {
     return message.channel.send('No pude extraer nada de MonitorDolar.');
   }
@@ -39,7 +40,7 @@ const main = async (message) => {
   exchanges = exchanges.map((exchange) => {
     return {
       name: exchange.title,
-      value: `**${dolarService.formatNumber(exchange.value)} VED**`,
+      value: `**${formatNumber(exchange.value)} VED**`,
       inline: false
     };
   });
