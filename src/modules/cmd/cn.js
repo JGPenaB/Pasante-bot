@@ -20,7 +20,7 @@ const help = () => ({
   usage: '!cambio {B o D o P} {monto}',
   desc: 'Convierte USD o CLP o VED a USD/CLP/VED (sin incluir moneda origen) usando distintas tasas de cambio.',
   example:
-    'Si quiero convertir 10 Dolares Americanos a VED y CLP:\n!cambio d 10\n\nSi quiero convertir 500 Bolívares Soberanos a USD y CLP:\n!cambio b 500\n\nSi quiero convertir 800 Pesos Chilenos a USD y VED:\n!cambio p 800'
+    'Si quiero convertir 10 Dolares Americanos a VED y CLP:\n!cambio d 10\n\nSi quiero convertir 500 Bolívares a USD y CLP:\n!cambio b 500\n\nSi quiero convertir 800 Pesos Chilenos a USD y VED:\n!cambio p 800'
 });
 
 /**
