@@ -27,17 +27,26 @@
 
 ## Instalación
 
+### Dependencias
+
 * Requiere Node.js >= 14.15
 
-Primero instala las dependencias necesarias:
+Instala las dependencias necesarias:
 
 ```
 npm install
 ```
 
-Luego, crea un archivo .env que contenga la estructura del archivo `.env.example` y coloca el token de tu bot (para obtener un token, [sigue estos pasos](https://github.com/Chikachi/DiscordIntegration/wiki/How-to-get-a-token-and-channel-ID-for-Discord)):
+### Entorno
+
+Crea un archivo `.env` con el siguiente comando:
 ```
-TOKEN=<tu token>
+cp .env.example .env
+```
+
+Luego, asigna el valor del token de tu bot a la variable `TOKEN`. Para obtener el token de tu bot de discord [sigue estos pasos](https://github.com/Chikachi/DiscordIntegration/wiki/How-to-get-a-token-and-channel-ID-for-Discord)):
+```
+TOKEN=DISCORD_TOKEN
 ```
 
 Y de último, para ejecutarlo, usa el siguiente comando:
