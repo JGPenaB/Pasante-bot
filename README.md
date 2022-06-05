@@ -49,7 +49,9 @@ Luego, asigna el valor del token de tu bot a la variable `TOKEN`. Para obtener e
 TOKEN=DISCORD_TOKEN
 ```
 
-Y de último, para ejecutarlo, usa el siguiente comando:
+### Ejecución
+
+Para inicializar el bot, utiliza el siguiente comando:
 
 ```
  npm start
