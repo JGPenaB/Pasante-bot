@@ -44,7 +44,7 @@ Crea un archivo `.env` con el siguiente comando:
 cp .env.example .env
 ```
 
-Luego, asigna el valor del token de tu bot a la variable `TOKEN`. Para obtener el token de tu bot de discord [sigue estos pasos](https://github.com/Chikachi/DiscordIntegration/wiki/How-to-get-a-token-and-channel-ID-for-Discord)):
+Luego, asigna el valor del token de tu bot a la variable `TOKEN` (Para obtener el token de tu bot de discord [sigue estos pasos](https://github.com/Chikachi/DiscordIntegration/wiki/How-to-get-a-token-and-channel-ID-for-Discord)):
 ```
 TOKEN=DISCORD_TOKEN
 ```
