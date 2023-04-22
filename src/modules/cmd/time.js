@@ -61,6 +61,10 @@ const main = async (message) => {
         {
           name: ':flag_cl: Chile',
           value: formatDate(date, 'America/Santiago')
+        },
+        {
+          name: ':flag_es: España',
+          value: formatDate(date, 'Europe/Madrid')
         }
       ]
     }
