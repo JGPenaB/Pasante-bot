@@ -9,23 +9,21 @@ const { formatNumber } = require('../utils/numbers');
  */
 const getExchangeRates = async (useRegex = false) => {
   const list = [];
-  const regexTitles = new RegExp(/^(dolar today|airtm)$/, 'i');
+  const regexTitles = new RegExp(/(dolar\s{0,}today|bcv|airtm)/, 'gi');
 
-  await axios.get(`https://monitordolarvenezuela.com/inicio-amp`, 
-  { headers: {
-    "User-Agent": 
-    "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Mobile Safari/537.36"
-    }
-  }).then((dolar) => {
+  await axios.get(`https://monitordolarvenezuela.com/`).then((dolar) => {
     let $ = cheerio.load(dolar.data);
 
-    //Extrae el valor desde la version mobile del sitio, que no la han actualizado
-    $('.box-prices').each((index, el) => {
-      let title = $("div", el).first().text();
-      let price = $("div", el).first().next().text();
+    //MonitorDolar nunca ganará
+    $('h4').each((index, el) => {
+      let title = $(el).first().text();
+      let price = $(el).first().next().next().next().text();
       let shouldPush = true;
 
+      price = price.replace('Bs = ', '');
       price = price.replace(/\./g, '').replace(',', '.');
+
+      title = title.replace('@','');
       
       if (useRegex && !regexTitles.test(title)) {
         shouldPush = false
