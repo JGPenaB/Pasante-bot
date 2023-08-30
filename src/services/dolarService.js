@@ -15,7 +15,7 @@ const getExchangeRates = async (useRegex = false) => {
     let $ = cheerio.load(dolar.data);
 
     //MonitorDolar nunca ganará
-    $('h4').each((index, el) => {
+    $('h2').each((index, el) => {
       let title = $(el).first().text();
       let price = $(el).first().next().next().next().text();
       let shouldPush = true;
