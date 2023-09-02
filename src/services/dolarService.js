@@ -9,18 +9,19 @@ const { formatNumber } = require('../utils/numbers');
  */
 const getExchangeRates = async (useRegex = false) => {
   const list = [];
-  const regexTitles = new RegExp(/(dolar\s{0,}today|bcv|airtm)/, 'gi');
+  const regexTitles = new RegExp(/(dolar\s{0,}today|bcv|airtm|binance)/, 'gi');
 
   await axios.get(`https://monitordolarvenezuela.com/`).then((dolar) => {
     let $ = cheerio.load(dolar.data);
 
     //MonitorDolar nunca ganará
-    $('h2').each((index, el) => {
+    $('h3').each((index, el) => {
       let title = $(el).first().text();
       let price = $(el).first().next().next().next().text();
+     
       let shouldPush = true;
 
-      price = price.replace('Bs = ', '');
+      price = price.replace(/\S{1,}\s=\s{1,}/i, '');
       price = price.replace(/\./g, '').replace(',', '.');
 
       title = title.replace('@','');
@@ -30,7 +31,7 @@ const getExchangeRates = async (useRegex = false) => {
       }
 
       // Guarda el "valor" convertido para realizar operaciones matemáticas
-      if (!isNaN(price) && shouldPush) {
+      if (price && !isNaN(price) && shouldPush) {
         list.push({ title, rate: formatNumber(Number(price)), value: price, nationalCurrency: 'VED' })
       };
     });
