@@ -46,6 +46,9 @@ const getExchangeRates = async (useRegex = false) => {
     };
   });
 
+  //Closing browser
+  await page.close();
+  await browser.close();
   return list;
 };
 
