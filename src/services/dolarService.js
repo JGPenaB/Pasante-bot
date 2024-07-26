@@ -15,7 +15,7 @@ const getExchangeRates = async (useRegex = false) => {
   //MonitorDolar nunca ganará
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto('https://monitordolarvenezuela.com/');
+  await page.goto('https://monitordolarvenezuela.com/', {timeout: 60000, waitUntil: 'networkidle2'});
   await page.waitForSelector('h3', { timeout: 5000 });
 
   const body = await page.evaluate(() => {
