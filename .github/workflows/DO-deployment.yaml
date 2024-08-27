@@ -13,4 +13,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           key: ${{ secrets.SSH_KEY }}
           username: ${{ secrets.SSH_USERNAME }}
-          script: ls
+          script: |
+          cd /Pasante_bot/
+          git pull origin master
+          forever restart 0
