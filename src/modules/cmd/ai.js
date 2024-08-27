@@ -14,7 +14,7 @@ const aliases = () => ['ai'];
  */
 const help = () => ({
   usage: '!ai {query}',
-  desc: 'test 2',
+  desc: 'test',
   example: 'test'
 });
 
