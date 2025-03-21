@@ -27,11 +27,15 @@ const getExchangeRates = async (useRegex = false) => {
   //MonitorDolar nunca ganará
   $('h3').each((index, el) => {
     let title = $(el).first().text();
-    let price = $(el).first().next().next().next().text();
-    
+    let price = $(el).first().next().text();
     let shouldPush = true;
 
-    price = price.replace(/\S{1,}\s=\s{1,}/i, '');
+    //MonitorDolar nunca ganará
+    price = price.match(/([0-9]+\,[0-9]{2})/i);
+    if (!price) {
+      return;
+    }
+    price = price[0];
     price = price.replace(/\./g, '').replace(',', '.');
 
     title = title.replace('@','');
