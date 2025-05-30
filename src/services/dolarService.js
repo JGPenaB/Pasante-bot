@@ -13,7 +13,7 @@ const getExchangeRates = async (useRegex = false) => {
   const regexTitles = new RegExp(/(dolar\s{0,}today|bcv|airtm|binance)/, 'gi');
 
   //MonitorDolar nunca ganará
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ ignoreHTTPSErrors: true });
   const page = await browser.newPage();
   await page.goto('https://monitordolarvenezuela.com/', {timeout: 60000, waitUntil: 'networkidle2'});
   await page.waitForSelector('h3', { timeout: 5000 });
