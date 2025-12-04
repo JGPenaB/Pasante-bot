@@ -10,13 +10,13 @@ const { formatNumber } = require('../utils/numbers');
  */
 const getExchangeRates = async (useRegex = false) => {
   const list = [];
-  const regexTitles = new RegExp(/(dolar\s{0,}today|bcv|airtm|binance)/, 'gi');
+  const regexTitles = new RegExp(/(dolar\s{0,}today|bcv|airtm|binance|monitor|promedio)/, 'gi');
 
   //MonitorDolar nunca ganará
-  const browser = await puppeteer.launch({ ignoreHTTPSErrors: true });
+  const browser = await puppeteer.launch({ headless: false, ignoreHTTPSErrors: true });
   const page = await browser.newPage();
-  await page.goto('https://monitordolarvenezuela.com/', {timeout: 60000, waitUntil: 'networkidle2'});
-  await page.waitForSelector('h3', { timeout: 5000 });
+  await page.goto('https://exchangemonitor.net/dolar-venezuela', {timeout: 60000, waitUntil: 'networkidle2'});
+  await page.waitForSelector('.rate-container', { timeout: 5000 });
 
   const body = await page.evaluate(() => {
     return document.querySelector('html').innerHTML;
@@ -24,21 +24,18 @@ const getExchangeRates = async (useRegex = false) => {
 
   let $ = cheerio.load(body);
 
-  //MonitorDolar nunca ganará
-  $('h3').each((index, el) => {
-    let title = $(el).first().text();
-    let price = $(el).first().next().text();
+  //MonitorDolar perdió la batalla, hora de ver ExchangeMonitor
+  $('.rate-container').each((index, el) => {
+
+    let text = $(el).first().text().match(/\S+/gi);
+
+    let condition = text[1] !== "VES";
+
+    let title = `${text[0].replace(/\s+/gi, "")}${condition ? " "+text[1].replace(/\s+/gi, "") : ""}`
+    let price = `${text[3 + condition]}`
     let shouldPush = true;
-
-    //MonitorDolar nunca ganará
-    price = price.match(/([0-9]+\,[0-9]{2})/i);
-    if (!price) {
-      return;
-    }
-    price = price[0];
-    price = price.replace(/\./g, '').replace(',', '.');
-
-    title = title.replace('@','');
+    price = price.replace(',', '.');
+    title = title.trim();
     
     if (useRegex && !regexTitles.test(title)) {
       shouldPush = false

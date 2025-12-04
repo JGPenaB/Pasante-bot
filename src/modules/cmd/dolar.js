@@ -27,7 +27,7 @@ const help = () => ({
  * @param { Message } message Evento completo del mensaje
  */
 const main = async (message) => {
-  let exchanges = await dolarService.getExchangeRates().catch((error) => {
+  let exchanges = await dolarService.getExchangeRates(true).catch((error) => {
     console.log('Error en cmd dolar', error);
     message.channel.send('MonitorDolar dejó de funcionar... O me bloquearon, no sé.');
   });
