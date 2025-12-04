@@ -2,6 +2,7 @@
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 const { formatNumber } = require('../utils/numbers');
+const chromium = require('chromium');
 
 /**
  * Obtiene las tasas de los dólares
@@ -13,7 +14,12 @@ const getExchangeRates = async (useRegex = false) => {
   const regexTitles = new RegExp(/(dolar\s{0,}today|bcv|airtm|binance|monitor|promedio)/, 'gi');
 
   //MonitorDolar nunca ganará
-  const browser = await puppeteer.launch({ headless: false, ignoreHTTPSErrors: true });
+  const browser = await puppeteer.launch({
+    headless: false,
+    ignoreHTTPSErrors: true,
+    executablePath: chromium.path,
+    args: ["--no-sandbox", "--disabled-setupid-sandbox"]
+  });
   const page = await browser.newPage();
   await page.goto('https://exchangemonitor.net/dolar-venezuela', {timeout: 60000, waitUntil: 'networkidle2'});
   await page.waitForSelector('.rate-container', { timeout: 5000 });
@@ -37,7 +43,7 @@ const getExchangeRates = async (useRegex = false) => {
     price = price.replace(',', '.');
     title = title.trim();
     
-    if (useRegex && !regexTitles.test(title)) {
+    if ((useRegex && !regexTitles.test(title)) || list.length > 5) {
       shouldPush = false
     }
 
